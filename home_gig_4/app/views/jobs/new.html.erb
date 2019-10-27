@@ -1,0 +1,32 @@
+
+<%= form_with scope: :job, url: jobs_path, local: true do |form| %>
+
+    <% [:notice, :warning, :error].each do |key| %>
+        <% if flash[key] %>
+            < div class="<%= key %>" id="flash"> <%= flash[key] %> </div>
+        <% end %>
+    <% end %>
+
+    <p>
+      <%= form.label :title %><br>
+      <%= form.text_field :title %>
+    </p>
+
+    <p>
+      <%= form.label :description %><br>
+      <%= form.text_area :description %>
+    </p>
+
+    <p>
+        <%= form.label :price %><br>
+        <%= form.text_field :price %>
+    </p>
+
+    <p>
+      <%= form.submit %>
+    </p>
+
+<% end %>
+
+<%= link_to 'Back', jobs_path %>
+

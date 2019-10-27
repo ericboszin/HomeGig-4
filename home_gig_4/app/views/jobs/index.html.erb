@@ -1,0 +1,22 @@
+<h1>Listing Jobs</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Status</th>
+    <th></th>
+  </tr>
+
+  <% @jobs.each do |job| %>
+    <tr>
+      <td><%= job.title %></td>
+      <td><%= job.description %></td>
+      <td><%= job.price %></td>
+      <td><%= job.status %></td>
+      <td><%= link_to 'Show', job_path(job) %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to "Add Job", new_job_path %>
