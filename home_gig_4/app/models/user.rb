@@ -4,7 +4,11 @@ class User < ApplicationRecord
   has_many :bids, through: :jobs
   has_many :reviews, through: :jobs
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  # :lockable, :timeoutable, :trackable and :omniauthable
+  devise :confirmable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+	protected def confimation_required?	
+		false
+	end
 end

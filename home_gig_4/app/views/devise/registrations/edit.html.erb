@@ -22,6 +22,16 @@
   </div>
 
   <div class="field">
+    <%= f.label :country %><br />
+    <%= f.country_select :country %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone, autofocus: true %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
