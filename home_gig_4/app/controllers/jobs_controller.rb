@@ -19,12 +19,24 @@ class JobsController < ApplicationController
 
     def create
         @job = current_user.jobs.build(job_params)
+        @job.status = "available"
 
         if @job.save
             redirect_to @job
         else
             flash[:warning]= "Error: Could not create job"
             render 'new'
+        end
+    end
+
+    def status
+        @job = Job.find(params[:status])
+
+        if @job.status(job_params)
+            redirect_to @job
+        else
+            flash[:warning]= "Error: Could not find job with status #{:status}"
+            render 'show'
         end
     end
 
@@ -42,7 +54,8 @@ class JobsController < ApplicationController
         @job = Job.find(params[:id])
         user = User.find(@job.user_id)
         if current_user == user
-          @job.destroy
+            @job.status = "cancelled"
+            @job.destroy
         else
           flash[:warning]= "Error: user not authorized to delete job"
         end
@@ -51,7 +64,7 @@ class JobsController < ApplicationController
 
     private
         def job_params
-            params.require(:job).permit(:title, :description, :price)
+            params.require(:job).permit(:title, :description, :price, :status)
         end
 
 end

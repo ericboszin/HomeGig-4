@@ -14,6 +14,8 @@
     <th>Price</th>
     <th>Status</th>
     <th></th>
+    <th></th>
+    <th></th>
   </tr>
 
   <% @jobs.each do |job| %>
@@ -23,6 +25,7 @@
       <td><%= job.price %></td>
       <td><%= job.status %></td>
       <td><%= link_to 'Show', job_path(job) %></td>
+      <td><%= link_to 'Edit', edit_job_path(job) %></td>
       <td><%= link_to 'Delete', job_path(job),
               method: :delete,
               data: { confirm: 'Are you sure?' } %></td>

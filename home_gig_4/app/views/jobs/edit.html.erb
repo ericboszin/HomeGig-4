@@ -23,7 +23,7 @@
                 <div id="error_explanation">
                     <%= pluralize(@job.errors.count, "error") %> prohibited this review from being saved:
                 <ul>
-                    <% @review.errors.full_messages.each do |msg| %>
+                    <% @job.errors.full_messages.each do |msg| %>
                     <li><%= msg %></li>
                     <% end %>
                 </ul>
@@ -32,7 +32,7 @@
 
             <p>
             <%= form.label :title %><br>
-            <%= form.text_field :title %>
+            <%= form.text_area :title %>
             </p>
 
             <p>
@@ -43,6 +43,11 @@
             <p>
                 <%= form.label :price %><br>
                 <%= form.text_field :price %>
+            </p>
+
+            <p class="field">
+                <%= form.label :status %><br />
+                <%= form.select(:status, Job.statuses.keys.map {|status| [status.titleize, status]})%>
             </p>
 
             <p>
