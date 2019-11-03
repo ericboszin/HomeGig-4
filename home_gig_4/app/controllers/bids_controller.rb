@@ -1,24 +1,25 @@
 class BidsController < ApplicationController
+  before_action :get_job
   before_action :authenticate_user!, except: [:index, :show]
+
   def index
-    @bids = Bid.all
+    @bids = @job.bids
   end
 
   def show
-    @bid = Bid.find(params[:id])
+    @bid = @job.bids.find(params[:id])
   end
 
   def edit
-    @bid = Bid.find(params[:id])
+    @bid = @job.bids.find(params[:id])
   end
 
   def new
-    @bid = Bid.new
+    @bid = @job.bids.new
   end
 
   def create
     status = '0'
-    @job = Job.find(params[:job_id])
     @bid = @job.bids.create(bid_params)
     @bid.user_id = current_user.id
     if @bid.save
@@ -30,7 +31,7 @@ class BidsController < ApplicationController
   end
 
   def update
-    @bid = Bid.find(params[:id])
+    @bid = @job.bids.find(params[:id])
 
     if @bid.update(bid_params)
       redirect_to @bid
@@ -40,10 +41,9 @@ class BidsController < ApplicationController
   end
 
   def destroy
-    @job = Job.find(params[:job_id])
     @bid = @job.bids.find(params[:id])
-    user = User.find(@bid.user_id)
-    if current_user == user
+    @user = User.find(@bid.user_id)
+    if current_user == @user
       @bid.destroy
     else
       flash[:warning]= "Error: user not authorized to delete bid"
@@ -53,6 +53,10 @@ class BidsController < ApplicationController
 
   private
     def bid_params
-      params.require(:bid).permit(:description, :job, :amount)
+      params.require(:bid).permit(:description, :job_id, :amount)
+    end
+
+    def get_job
+      @job = Job.find(params[:job_id])
     end
 end

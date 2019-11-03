@@ -17,7 +17,7 @@
         <![endif]-->
         <h1>New bid</h1>
 
-        <%= form_with scope: :bid, url: bids_path, local: true do |form| %>
+        <%= form_with(model: [@job, @bid], local: true) do |form| %>
             <% if @bid.errors.any? %>
                 <div id="error_explanation">
                     <%= pluralize(@bid.errors.count, "error") %> prohibited this bid from being saved:
@@ -43,7 +43,7 @@
             <%= form.submit %>
             </p>
         <% end %>
-        <%= link_to 'Back', bids_path %>
+        <%= link_to 'Back', job_bids_path(@job) %>
         
         <script src="" async defer></script>
     </body>
