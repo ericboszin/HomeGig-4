@@ -20,6 +20,7 @@ class BidsController < ApplicationController
     status = '0'
     @job = Job.find(params[:job_id])
     @bid = @job.bids.create(bid_params)
+    @bid.user_id = current_user.id
     if @bid.save
       redirect_to job_path(@job)
     else
@@ -41,7 +42,7 @@ class BidsController < ApplicationController
   def destroy
     @job = Job.find(params[:job_id])
     @bid = @job.bids.find(params[:id])
-    user = User.find(@job.user_id)
+    user = User.find(@bid.user_id)
     if current_user == user
       @bid.destroy
     else
