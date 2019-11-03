@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_03_003635) do
+ActiveRecord::Schema.define(version: 2019_11_03_005913) do
+
+  create_table "bids", force: :cascade do |t|
+    t.text "description"
+    t.integer "job_id"
+    t.integer "user_id"
+    t.float "amount"
+    t.integer "status"
+    t.string "starting_date"
+    t.string "duration"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["job_id"], name: "index_bids_on_job_id"
+    t.index ["user_id"], name: "index_bids_on_user_id"
+  end
 
   create_table "jobs", force: :cascade do |t|
     t.string "title"
@@ -19,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_11_03_003635) do
     t.text "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -51,5 +66,7 @@ ActiveRecord::Schema.define(version: 2019_11_03_003635) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bids", "jobs"
+  add_foreign_key "bids", "users"
   add_foreign_key "reviews", "jobs"
 end

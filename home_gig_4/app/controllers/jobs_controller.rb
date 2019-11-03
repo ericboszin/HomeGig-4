@@ -1,4 +1,6 @@
 class JobsController < ApplicationController
+    before_action :authenticate_user!, except: [:index, :show]
+
     def index
         @jobs = Job.all
     end
@@ -8,7 +10,7 @@ class JobsController < ApplicationController
     end
 
     def new
-        @job = current_user.job.build
+        @job = current_user.jobs.build 
     end
 
     def edit
@@ -16,7 +18,7 @@ class JobsController < ApplicationController
     end
 
     def create
-        @job = Job.new(job_params)
+        @job = current_user.jobs.build(job_params)
 
         if @job.save
             redirect_to @job
@@ -38,8 +40,12 @@ class JobsController < ApplicationController
 
     def destroy
         @job = Job.find(params[:id])
-        @job.destroy
-       
+        user = User.find(@job.user_id)
+        if current_user == user
+          @job.destroy
+        else
+          flash[:warning]= "Error: user not authorized to delete"
+        end
         redirect_to jobs_path
     end
 
