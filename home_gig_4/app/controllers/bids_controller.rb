@@ -1,26 +1,28 @@
 class BidsController < ApplicationController
+  before_action :get_job
+
   def index
-    @bids = Bid.all
+    @bids = @job.bids
   end
 
   def show
-    @bid = Bid.find(params[:id])
+    @bid = @job.bids.find(params[:id])
   end
 
   def edit
-    @bid = Bid.find(params[:id])
+    @bid = @job.bids.find(params[:id])
   end
 
   def new
-    @bid = Bid.new
+    @bid = @job.bids.new
   end
 
   def create
     status = '0'
-    @bid = Bid.new(bid_params)
+    @bid = @job.bids.new(bid_params)
 
     if @bid.save
-      redirect_to @bid
+      redirect_to @job
     else
       flash[:warning] = "Error: Could not create Bid"
       render 'new'
@@ -28,7 +30,7 @@ class BidsController < ApplicationController
   end
 
   def update
-    @bid = Bid.find(params[:id])
+    @bid = @job.bids.find(params[:id])
 
     if @bid.update(bid_params)
       redirect_to @bid
@@ -38,7 +40,7 @@ class BidsController < ApplicationController
   end
 
   def destroy
-    @bid = Bid.find(params[:id])
+    @bid = @job.bids.find(params[:id])
     @bid.destroy
 
     redirect_to bids_path
@@ -46,6 +48,10 @@ class BidsController < ApplicationController
 
   private
     def bid_params
-      params.require(:bid).permit(:description, :job, :amount)
+      params.require(:bid).permit(:description, :job_id, :amount)
+    end
+
+    def get_job
+      @job = Job.find(params[:job_id])
     end
 end

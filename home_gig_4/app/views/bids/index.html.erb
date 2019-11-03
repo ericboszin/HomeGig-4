@@ -17,7 +17,7 @@
     <![endif]-->
     <h1>Listing reviews</h1>
     <%= link_to 'Bids', controller: 'bids' %>
-    <%= link_to "Add Bid", new_bid_path %>
+    <%= link_to "Add Bid", new_job_bid_path(@job) %>
 
     <table>
       <tr>
@@ -27,19 +27,22 @@
 
       <% @bids.each do |bid| %>
         <tr>
-          <td><td/>
-          <td><td/>
+          <td></td>
+          <td></td>
+          <td><%= bid.job.title%></td>
+          <td><%= bid.job.description%></td>
           <td><%= bid.description %></td>
           <td><%= bid.float %></td>
-          <td><td/>
-          <td><%= link_to 'Edit', edit_bid_path(bid) %></td>
-          <td><%= link_to 'Delete', bid_path(bid),
+          <td></td>
+          <td><%= link_to 'Show Job', [@job] %></td>
+          <td><%= link_to 'Edit', edit_job_bid_path(@job, bid) %></td>
+          <td><%= link_to 'Delete Bid', [@job, bid],
               method: :delete,
               data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </table>
-    <%= link_to 'Back', bids_path %>
+    <%= link_to 'Back', job_path(@job) %>
     
     <script src="" async defer></script>
   </body>

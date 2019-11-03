@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  get 'jobs/index'
-  get 'reviews/index'
-  get 'bid/index'
+  # get 'jobs/index'
+  # get 'reviews/index'
 
-  resources :jobs 
+  resources :jobs do
+    resources :bids
+  end
   resources :reviews
-  resources :bids
+  
+ 
 
   root 'jobs#index'
 end
