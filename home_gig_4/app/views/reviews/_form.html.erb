@@ -1,0 +1,13 @@
+<%= form_with(model: [ @job, @job.reviews.build ], local: true) do |form| %>
+  <p>
+    <%= form.label :text %><br>
+    <%= form.text_field :text %>
+  </p>
+  <p>
+    <%= form.label :rating %><br>
+    <%= form.text_area :rating %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

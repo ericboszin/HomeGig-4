@@ -24,7 +24,7 @@ class BidsController < ApplicationController
     if @bid.save
       redirect_to job_path(@job)
     else
-      flash[:warning] = "Error: Could not create Bid"
+      flash[:warning] = "Error: Could not create bid"
       redirect_to job_path(@job)
     end
   end

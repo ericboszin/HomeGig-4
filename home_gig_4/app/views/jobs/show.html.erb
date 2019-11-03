@@ -25,6 +25,13 @@
 <h2>Add a Bid:</h2>
 <%= render 'bids/form' %>
 
+<h2>Review</h2>
+<%= render @job.reviews %>
+
+<h2>Add a Review:</h2>
+<%= render 'reviews/form' %>
+
+
 
 <%= link_to 'Edit', edit_job_path(@job) %>
 <%= link_to 'All Jobs', jobs_path %>

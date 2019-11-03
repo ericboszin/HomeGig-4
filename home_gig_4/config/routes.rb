@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :jobs do
   	resources :bids
-  	#resources :reviews
+  	resources :reviews
   end
 
   root 'jobs#index'

@@ -1,0 +1,13 @@
+<p>
+  <strong>Text:</strong>
+  <%= review.text %>
+</p>
+ 
+<p>
+  <strong>Rating:</strong>
+  <%= review.rating %>
+</p>
+
+<%= link_to 'Delete Review', [review.job, review],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
