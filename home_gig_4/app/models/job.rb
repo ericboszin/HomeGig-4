@@ -4,6 +4,6 @@ class Job < ApplicationRecord
     has_many :bids, dependent: :destroy
     has_many :reviews, dependent: :destroy
     belongs_to :user
-    enum status: { avilable: "available", started: "started", cancelled: "cancelled", completed: "completed" }
+    enum status: { available: "available", started: "started", cancelled: "cancelled", completed: "completed" }
     validates :status, presence: true
 end
