@@ -1,7 +1,7 @@
 class BidsController < ApplicationController
   before_action :get_job
   before_action :authenticate_user!, except: [:index, :show]
-  
+
   def index
     @bids = @job.bids
   end
@@ -42,8 +42,8 @@ class BidsController < ApplicationController
 
   def destroy
     @bid = @job.bids.find(params[:id])
-    user = User.find(@bid.user_id)
-    if current_user == user
+    @user = User.find(@bid.user_id)
+    if current_user == @user
       @bid.destroy
     else
       flash[:warning]= "Error: user not authorized to delete bid"
