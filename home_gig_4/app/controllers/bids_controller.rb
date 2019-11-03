@@ -1,6 +1,7 @@
 class BidsController < ApplicationController
   before_action :get_job
-
+  before_action :authenticate_user!, except: [:index, :show]
+  
   def index
     @bids = @job.bids
   end
@@ -19,13 +20,13 @@ class BidsController < ApplicationController
 
   def create
     status = '0'
-    @bid = @job.bids.new(bid_params)
-
+    @bid = @job.bids.create(bid_params)
+    @bid.user_id = current_user.id
     if @bid.save
-      redirect_to @job
+      redirect_to job_path(@job)
     else
-      flash[:warning] = "Error: Could not create Bid"
-      render 'new'
+      flash[:warning] = "Error: Could not create bid"
+      redirect_to job_path(@job)
     end
   end
 
@@ -41,9 +42,13 @@ class BidsController < ApplicationController
 
   def destroy
     @bid = @job.bids.find(params[:id])
-    @bid.destroy
-
-    redirect_to bids_path
+    user = User.find(@bid.user_id)
+    if current_user == user
+      @bid.destroy
+    else
+      flash[:warning]= "Error: user not authorized to delete bid"
+    end
+    redirect_to job_path(@job)
   end
 
   private
