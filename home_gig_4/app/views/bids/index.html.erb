@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bids</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <h1>Listing reviews</h1>
+    <%= link_to 'Bids', controller: 'bids' %>
+    <%= link_to "Add Bid", new_bid_path %>
+
+    <table>
+      <tr>
+        <th>Job</th>
+        <th>Contractor</th>
+      </tr>
+
+      <% @bids.each do |bid| %>
+        <tr>
+          <td><td/>
+          <td><td/>
+          <td><%= bid.description %></td>
+          <td><%= bid.float %></td>
+          <td><td/>
+          <td><%= link_to 'Edit', edit_bid_path(bid) %></td>
+          <td><%= link_to 'Delete', bid_path(bid),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </table>
+    <%= link_to 'Back', bids_path %>
+    
+    <script src="" async defer></script>
+  </body>
+</html>

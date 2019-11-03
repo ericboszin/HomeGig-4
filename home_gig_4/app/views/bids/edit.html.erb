@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Edit bid</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <h1>Edit bid<h1/>
+
+        <%= form_with(model: @bid, local: true) do |form| %>
+            <% if @bid.errors.any? %>
+                <div id="error_explanation">
+                    <%= pluralize(@bid.errors.count, "error") %> prohibited this bid from being saved:
+                <ul>
+                    <% @bid.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                    <% end %>
+                </ul>
+                </div>
+            <% end %>
+
+             <p>
+            <%= form.label :description %><br>
+            <%= form.text_field :description %>
+            </p>
+        
+            <p>
+            <%= form.label :amount %><br>
+            <%= form.text_area :amount %>
+            </p>
+        
+        
+            <p>
+            <%= form.submit %>
+            </p>
+        <% end %>
+        <%= link_to 'Back', bids_path %>
+        
+        <script src="" async defer></script>
+    </body>
+</html>
