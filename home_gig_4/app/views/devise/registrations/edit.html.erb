@@ -59,6 +59,11 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+  <div class="field">
+    <%= f.label "About Me" %><br />
+    <%= f.text_area :aboutme, autofocus: true, :cols => 30, :rows => 10 %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
