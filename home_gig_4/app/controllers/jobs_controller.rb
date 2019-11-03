@@ -44,7 +44,7 @@ class JobsController < ApplicationController
         if current_user == user
           @job.destroy
         else
-          flash[:warning]= "Error: user not authorized to delete"
+          flash[:warning]= "Error: user not authorized to delete job"
         end
         redirect_to jobs_path
     end

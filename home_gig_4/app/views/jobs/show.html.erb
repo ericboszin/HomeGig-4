@@ -1,3 +1,4 @@
+<h1>Job</h1>
 <p>
   <strong>Title:</strong>
   <%= @job.title %>
@@ -18,4 +19,12 @@
   <%= @job.status %>
 </p>
 
+<h2>Bids</h2>
+<%= render @job.bids %>
+
+<h2>Add a Bid:</h2>
+<%= render 'bids/form' %>
+
+
+<%= link_to 'Edit', edit_job_path(@job) %>
 <%= link_to 'All Jobs', jobs_path %>

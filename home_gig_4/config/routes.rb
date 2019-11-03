@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   get 'reviews/index'
   get 'bid/index'
 
-  resources :jobs 
-  resources :reviews
-  resources :bids
+  resources :jobs do
+  	resources :bids
+  	#resources :reviews
+  end
 
   root 'jobs#index'
 end
