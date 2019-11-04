@@ -25,11 +25,13 @@
 <h2>Add a Bid:</h2>
 <%= render 'bids/form' %>
 
-<h2>Review</h2>
-<%= render @job.reviews %>
+<% if @job.status == "completed" %>
+  <h2>Review</h2>
+  <%= render @job.reviews %>
 
-<h2>Add a Review:</h2>
-<%= render 'reviews/form' %>
+  <h2>Add a Review:</h2>
+  <%= render 'reviews/form' %>
+<% end %>
 
 
 
