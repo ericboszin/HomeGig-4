@@ -3,9 +3,9 @@
     <%= form.label :text %><br>
     <%= form.text_field :text %>
   </p>
-  <p>
-    <%= form.label :rating %><br>
-    <%= form.text_area :rating %>
+  <p class="field">
+    <%= form.label :rating %><br />
+    <%= form.select(:rating, Review.ratings.values.map {|rating| [rating, rating]})%>
   </p>
   <p>
     <%= form.submit %>
