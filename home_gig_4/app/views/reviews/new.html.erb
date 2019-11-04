@@ -15,7 +15,7 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <h1>New review<h1/>
+        <h1>New review</h1>
 
         <%= form_with scope: :review, url: reviews_path, local: true do |form| %>
             <% if @review.errors.any? %>
@@ -33,10 +33,10 @@
             <%= form.label :comment %><br>
             <%= form.text_field :text %>
             </p>
-        
-            <p>
-            <%= form.label :rating %><br>
-            <%= form.text_area :rating %>
+
+            <p class="field">
+                <%= form.label :rating %><br>
+                <%= form.select(:rating, Review.ratings.values.map {|rating| [rating, rating]})%>
             </p>
         
             <p>
