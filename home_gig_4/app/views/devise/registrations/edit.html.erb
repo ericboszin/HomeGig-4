@@ -18,7 +18,17 @@
 
   <div class="field">
     <%= f.label :birthday %><br />
-    <%= f.date_select :birthday, autofocus: true %>
+    <%= f.date_select :birthday, autofocus: true, :start_year => 1900 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :country %><br />
+    <%= f.country_select :country %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone, autofocus: true %>
   </div>
 
   <div class="field">
@@ -47,6 +57,11 @@
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "About Me" %><br />
+    <%= f.text_area :aboutme, autofocus: true, :cols => 30, :rows => 10 %>
   </div>
 
   <div class="actions">

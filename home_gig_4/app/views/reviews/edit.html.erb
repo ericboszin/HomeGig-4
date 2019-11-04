@@ -35,9 +35,9 @@
             <%= form.text_field :text %>
             </p>
         
-            <p>
-            <%= form.label :rating %><br>
-            <%= form.text_area :rating %>
+            <p class="field">
+                <%= form.label :rating %><br />
+                <%= form.select(:rating, Review.ratings.keys.map {|rating| [rating.titleize, rating]})%>
             </p>
         
             <p>
