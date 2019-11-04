@@ -51,6 +51,34 @@ class BidsController < ApplicationController
     redirect_to job_path(@job)
   end
 
+  def accept
+    @job = Job.find(params[:id])
+    user = User.find(@job.user_id)
+    if current_user == user
+      @job.status = 'started'
+      @job.bids.each do |_bid|
+
+      end
+    else
+        flash[:warning]= "Error: user not authorized to accept bid"
+    end
+    redirect_to jobs_path
+  end
+
+  def reject
+    @job = Job.find(params[:id])
+    user = User.find(@job.user_id)
+    if current_user == user
+      #@job.status = 'started'
+      #
+    else
+        flash[:warning]= "Error: user not authorized to accept bid"
+    end
+    redirect_to jobs_path
+  end
+
+end
+
   private
     def bid_params
       params.require(:bid).permit(:description, :job_id, :amount)
