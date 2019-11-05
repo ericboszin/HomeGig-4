@@ -6,8 +6,20 @@ class ApplicationController < ActionController::Base
     protected
 
         def configure_permitted_parameters
-            devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password)}
+            devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :first_name, :last_name, :birthday, :aboutme, :role, :country, :phone)}
 
-            devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :current_password)}
+            devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :current_password, :first_name, :last_name, :birthday, :aboutme, :role, :country, :phone)}
         end
+
+        def after_sign_in_path_for(resource)
+  			if current_user.role == "owner"
+  				return home_owner_path
+  			elsif current_user.role == "worker"
+  				return home_worker_path
+  			else
+  				puts current_user.role
+  				return root_path
+  			end
+
+  		end
 end

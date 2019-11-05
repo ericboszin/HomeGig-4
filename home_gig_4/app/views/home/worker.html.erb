@@ -1,0 +1,29 @@
+<%= link_to 'Home', home_worker_path %>
+<%= link_to 'Explore Jobs', jobs_explore_path %>
+<%= link_to 'Edit Profile', edit_user_registration_path %>
+<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+
+<h1>Listing reviews</h1>
+<table>
+  <tr>
+    <th>Job</th>
+    <th>Contractor</th>
+  </tr>
+
+  <% @bids.each do |bid| %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><%= bid.job.title%></td>
+      <td><%= bid.job.description%></td>
+      <td><%= bid.description %></td>
+      <td><%= bid.amount %></td>
+      <td></td>
+      <td><%= link_to 'Show Job', [bid.job] %></td>
+      <td><%= link_to 'Edit', edit_job_bid_path(bid.job, bid) %></td>
+      <td><%= link_to 'Delete Bid', [bid.job, bid],
+          method: :delete,
+          data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>

@@ -62,6 +62,10 @@ class JobsController < ApplicationController
         redirect_to jobs_path
     end
 
+    def explore
+        @jobs = Job.all
+    end
+
     private
         def job_params
             params.require(:job).permit(:title, :description, :price, :status)
