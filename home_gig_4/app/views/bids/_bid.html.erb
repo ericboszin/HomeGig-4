@@ -8,6 +8,8 @@
   <%= bid.amount %>
 </p>
 
-<%= link_to 'Delete Bid', [bid.job, bid],
-               method: :delete,
-               data: { confirm: 'Are you sure?' } %>
+<% if current_user == User.find(bid.user_id) %>
+  <%= link_to 'Delete Bid', [bid.job, bid],
+                 method: :delete,
+                 data: { confirm: 'Are you sure?' } %>
+<% end %>
