@@ -66,15 +66,19 @@ class JobsController < ApplicationController
         @job = Job.find(params[:id])
         user = User.find(@job.user_id)
         if current_user == user
-          @job.status = 'started'
-          @job.bids.each do |_bid|
+            @job.status = 'started'
+            @job.bids.each do |_bid|
             puts _bid.selected
-          end
+            end
         else
             flash[:warning]= "Error: user not authorized to accept bid"
         end
         redirect_to jobs_path
-      end
+    end
+
+    def explore
+        @jobs = Job.all
+    end
 
     private
         def job_params

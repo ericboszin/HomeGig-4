@@ -1,7 +1,9 @@
-<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+<%= link_to 'Home', home_worker_path %>
+<%= link_to 'Explore Jobs', jobs_explore_path %>
 <%= link_to 'Edit Profile', edit_user_registration_path %>
+<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
 
-<h1>Listing Jobs</h1>
+<h1>New Jobs</h1>
 <table>
   <tr>
     <th>Title</th>
@@ -20,11 +22,5 @@
       <td><%= job.price %></td>
       <td><%= job.status %></td>
       <td><%= link_to 'Show', job_path(job) %></td>
-      <td><%= link_to 'Edit', edit_job_path(job) %></td>
-      <td><%= link_to 'Delete', job_path(job),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
   <% end %>
 </table>
-<%= link_to "Add Job", new_job_path %>
