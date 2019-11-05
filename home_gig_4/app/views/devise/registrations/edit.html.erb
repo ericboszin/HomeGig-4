@@ -8,32 +8,32 @@
 
   <div class="field">
       <%= f.label :first_name %><br />
-      <%= f.text_field :first_name, autofocus: true %>
+      <%= f.text_field :first_name, autofocus: true, value: current_user.first_name  %>
   </div>
 
   <div class="field">
     <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true %>
+    <%= f.text_field :last_name, autofocus: true, value: current_user.last_name %>
   </div>
 
   <div class="field">
     <%= f.label :birthday %><br />
-    <%= f.date_select :birthday, autofocus: true, :start_year => 1900 %>
+    <%= f.date_select :birthday, autofocus: true, :start_year => 1900, value: current_user.birthday %>
   </div>
 
   <div class="field">
     <%= f.label :country %><br />
-    <%= f.country_select :country %>
+    <%= f.country_select :country%>
   </div>
 
   <div class="field">
     <%= f.label :phone %><br />
-    <%= f.text_field :phone, autofocus: true %>
+    <%= f.text_field :phone, autofocus: true, value: current_user.phone %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, value: current_user.email %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -61,7 +61,7 @@
 
   <div class="field">
     <%= f.label "About Me" %><br />
-    <%= f.text_area :aboutme, autofocus: true, :cols => 30, :rows => 10 %>
+    <%= f.text_area :aboutme, autofocus: true, :cols => 30, :rows => 10, value: current_user.aboutme %>
   </div>
 
   <div class="actions">
