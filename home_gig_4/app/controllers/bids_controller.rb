@@ -15,7 +15,11 @@ class BidsController < ApplicationController
   end
 
   def new
-    @bid = @job.bids.new
+    if @job.user_id == current_user
+      flash[:warning] = "Error: Can't bid for your job"
+    else
+      @bid = @job.bids.new
+    end
   end
 
   def create
@@ -49,6 +53,17 @@ class BidsController < ApplicationController
       flash[:warning]= "Error: user not authorized to delete bid"
     end
     redirect_to job_path(@job)
+  end
+
+  def reject
+    @job = Job.find(params[:id])
+    user = User.find(@job.user_id)
+    if current_user == user
+      @bid.destroy
+    else
+        flash[:warning]= "Error: user not authorized to reject bid"
+    end
+    redirect_to jobs_path
   end
 
   private
