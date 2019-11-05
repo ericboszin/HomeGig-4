@@ -22,8 +22,10 @@
 <h2>Bids</h2>
 <%= render @job.bids %>
 
+<% if current_user != User.find(@job.user_id) %>
 <h2>Add a Bid:</h2>
 <%= render 'bids/form' %>
+<% end %>
 
 <% if @job.status == "completed" %>
   <h2>Review</h2>
@@ -36,4 +38,4 @@
 
 
 <%= link_to 'Edit', edit_job_path(@job) %>
-<%= link_to 'All Jobs', jobs_path %>
+<%= link_to 'Back', :back %>
