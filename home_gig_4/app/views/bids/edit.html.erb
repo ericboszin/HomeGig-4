@@ -18,17 +18,22 @@
 
         <h1>Edit bid</h1>
 
-        <%= form_with(model: [@job, bid], local: true), do |form| %>
-            <% if bid.errors.any? %>
+        <%= form_with(model: [@job, @bid], local: true) do |form| %>
+            <% if @bid.errors.any? %>
                 <div id="error_explanation">
-                    <%= pluralize(bid.errors.count, "error") %> prohibited this bid from being saved:
+                    <%= pluralize(@bid.errors.count, "error") %> prohibited this bid from being saved:
                 <ul>
-                    <% bid.errors.full_messages.each do |msg| %>
+                    <% @bid.errors.full_messages.each do |msg| %>
                     <li><%= msg %></li>
                     <% end %>
                 </ul>
                 </div>
             <% end %>
+
+            <p>
+              <%= form.label :selected %>
+              <%= form.check_box :selected %>
+            </p>
 
             <p>
             <%= form.label :description %><br>

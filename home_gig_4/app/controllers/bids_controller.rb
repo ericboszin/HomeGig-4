@@ -26,6 +26,7 @@ class BidsController < ApplicationController
     status = '0'
     @bid = @job.bids.create(bid_params)
     @bid.user_id = current_user.id
+    @bid.selected = 0
     if @bid.save
       redirect_to job_path(@job)
     else
@@ -68,7 +69,7 @@ class BidsController < ApplicationController
 
   private
     def bid_params
-      params.require(:bid).permit(:description, :job_id, :amount)
+      params.require(:bid).permit(:description, :job_id, :amount, :starting_date, :duration)
     end
 
     def get_job

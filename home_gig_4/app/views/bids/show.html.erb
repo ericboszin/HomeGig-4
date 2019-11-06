@@ -18,12 +18,17 @@
 
     <p>
       <strong>Description:</strong>
-      <%= @bid.text %>
+      <%= @bid.description %>
     </p>
 
     <p>
       <strong>Amount</strong>
       <%= @bid.amount %>
+    </p>
+
+     <p>
+      <strong>Is Bid Selected</strong>
+      <%= @bid.selected %>
     </p>
 
     <p>
@@ -35,9 +40,13 @@
       <strong>Duration</strong>
       <%= @bid.duration %>
     </p>
-
+    <% if current_user == User.find(@bid.user_id) %>
+      <%= link_to 'Delete Bid', [@bid.job, @bid],
+                 method: :delete,
+                 data: { confirm: 'Are you sure?' } %>
+      <% end %>
     <%= link_to 'All bids', job_bids_path(@job) %>
-    
+
     <script src="" async defer></script>
   </body>
 </html>

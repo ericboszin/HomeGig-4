@@ -16,20 +16,9 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <h1>List of All Bids</h1>
-    <h2> <%= @job.title %></h2>
-    <p> <%= @job.description %> </p>
+    <h2> Job Title: <%= @job.title %></h2>
+    <p> Job Description: <%= @job.description %> </p>
 
-    <%= form_with(model: @job, local: true) do |form| %>
-      <% if @job.errors.any? %>
-          <div id="error_explanation">
-              <%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:
-          <ul>
-              <% @job.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-              <% end %>
-          </ul>
-          </div>
-      <% end %>
       <table>
         <tr>
           <th>Select</th>
@@ -37,12 +26,19 @@
           <th>Bid Amount</th>
           <th></th>
         </tr>
-
-        <% @job.bids.each do |bid| %>
+        <%= form_with(model: [@job], local: true) do |form| %>
+          <% @job.bids.each do |bid| %>
           <tr>
-            <td><%= check_box_tag(bid.selected) %></td>
-            <td><%= bid.description %></td>
-            <td><%= bid.amount %></td>
+            <td>
+              <%= form.label bid.id %>
+              <%= form.check_box bid.selected %>
+            </td>
+            <td>
+              <%= bid.description %>
+            </td>
+            <td>
+              <%= bid.amount %>
+            </td>
             <% if false %>
             <td><%= link_to 'Show Job', [@job] %></td>
             <td><%= link_to 'Edit', edit_job_bid_path(@job, bid) %></td>
@@ -51,12 +47,13 @@
                 method: :reject,
                 data: { confirm: 'Are you sure?' } %></td>
           </tr>
-        <% end %>
       </table>
-      <p>
-        <%= form.submit %>
-      </p>
-      <%end%>
+        <% end %>
+          <p>
+            <%= form.submit %>
+            </p>
+          <% end %>
+
     <%= link_to 'Back', job_path(@job) %>
     
     <script src="" async defer></script>

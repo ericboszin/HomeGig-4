@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_03_160222) do
+ActiveRecord::Schema.define(version: 2019_11_05_200338) do
 
   create_table "bids", force: :cascade do |t|
     t.string "description"
@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(version: 2019_11_03_160222) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.integer "selected"
+    t.string "starting_date"
+    t.integer "duration"
     t.index ["job_id"], name: "index_bids_on_job_id"
   end
 
@@ -60,7 +63,6 @@ ActiveRecord::Schema.define(version: 2019_11_03_160222) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
