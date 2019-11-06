@@ -22,7 +22,7 @@ class JobsController < ApplicationController
         @job.status = "available"
 
         if @job.save
-            redirect_to @job
+            redirect_to jobs_path
         else
             flash[:warning]= "Error: Could not create job"
             render 'new'
@@ -42,7 +42,6 @@ class JobsController < ApplicationController
 
     def update
         @job = Job.find(params[:id])
-        @job.accept_bids
         if @job.update(job_params)
           redirect_to @job
         else
@@ -58,20 +57,6 @@ class JobsController < ApplicationController
             @job.destroy
         else
           flash[:warning]= "Error: user not authorized to delete job"
-        end
-        redirect_to jobs_path
-    end
-
-    def accept_bids
-        @job = Job.find(params[:id])
-        user = User.find(@job.user_id)
-        if current_user == user
-            @job.status = 'started'
-            @job.bids.each do |_bid|
-            puts _bid.selected
-            end
-        else
-            flash[:warning]= "Error: user not authorized to accept bid"
         end
         redirect_to jobs_path
     end

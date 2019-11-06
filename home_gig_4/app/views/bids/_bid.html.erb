@@ -1,15 +1,23 @@
-<p>
-  <strong>Description:</strong>
-  <%= bid.description %>
-</p>
- 
-<p>
-  <strong>Amount:</strong>
-  <%= bid.amount %>
-</p>
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Amount</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
 
-<% if current_user == User.find(bid.user_id) %>
-  <%= link_to 'Delete Bid', [bid.job, bid],
-                 method: :delete,
-                 data: { confirm: 'Are you sure?' } %>
-<% end %>
+  <% @job.bids.each do |bid| %>
+    <tr>
+      <td><%= bid.description %></td>
+      <td><%= bid.amount %></td>
+      <% if current_user == User.find(bid.user_id) %>
+        <td><%= link_to 'Delete Bid', [bid.job, bid],
+          method: :delete,
+          data: { confirm: 'Are you sure?' } %></td>
+      <% else %>
+        <td><%= link_to 'Accept Bid' %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

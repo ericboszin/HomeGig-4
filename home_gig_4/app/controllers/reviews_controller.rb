@@ -18,13 +18,17 @@ class ReviewsController < ApplicationController
     
   def create
     @job = Job.find(params[:job_id])
-    @review = @job.reviews.create(review_params)
-    @review.user_id = current_user.id
-    if @review.save
-      redirect_to job_path(@job)
-    else
-      flash[:warning] = "Error: Could not create review"
-      redirect_to job_path(@job)
+    if @job.status == "completed"
+      @review = @job.reviews.create(review_params)
+      @review.user_id = current_user.id
+      if @review.save
+        redirect_to job_path(@job)
+      else
+        flash[:warning] = "Error: Could not create review"
+        redirect_to job_path(@job)
+      end
+    else 
+      flash[:warning]= "Error: cannot review a job that has not been completed."
     end
   end
 

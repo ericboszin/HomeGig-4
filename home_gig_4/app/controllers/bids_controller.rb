@@ -23,9 +23,9 @@ class BidsController < ApplicationController
   end
 
   def create
-    status = '0'
     @bid = @job.bids.create(bid_params)
     @bid.user_id = current_user.id
+    @bid.accepted = false;
     if @bid.save
       redirect_to job_path(@job)
     else
@@ -65,6 +65,19 @@ class BidsController < ApplicationController
     end
     redirect_to jobs_path
   end
+
+  def accept
+    @job = Job.find(params[:id])
+    @bid = @job.bids.find(params[:id])
+    user = User.find(@job.user_id)
+    if current_user == user
+        @job.status = "started"
+        @bid.accepted = true;
+    else
+        flash[:warning]= "Error: user not authorized to accept bid"
+    end
+    redirect_to jobs_path
+end
 
   private
     def bid_params
