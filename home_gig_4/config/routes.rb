@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   # get 'reviews/index'
 
   resources :jobs do
-  	resources :bids
+  	resources :bids do
+  	  patch 'accept'
+    end
+    patch 'accept_bids'
   	resources :reviews
   end
 

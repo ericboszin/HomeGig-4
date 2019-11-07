@@ -1,15 +1,30 @@
-<p>
-  <strong>Description:</strong>
-  <%= bid.description %>
-</p>
- 
-<p>
-  <strong>Amount:</strong>
-  <%= bid.amount %>
-</p>
-
-<% if current_user == User.find(bid.user_id) %>
-  <%= link_to 'Delete Bid', [bid.job, bid],
-                 method: :delete,
-                 data: { confirm: 'Are you sure?' } %>
-<% end %>
+      <table>
+        <tr>
+          <th>Bid Description</th>
+          <th>Bid Amount</th>
+          <th></th>
+        </tr>
+              <% @job.bids.each do |bid| %>
+              <tr>
+                <td>
+                  <%= bid.description %>
+                </td>
+                <td>
+              <%= bid.amount %>
+            </td>
+            <% if false %>
+            <td><%= link_to 'Show Job', [@job] %></td>
+            <td><%= link_to 'Edit', edit_job_bid_path(@job, bid) %></td>
+            <% end %>
+            <% if bid.selected == 0 %>
+            <td><%= link_to 'Accept Bid', job_bid_accept_path(@job, bid), :method => :patch %></td>
+            <td><%= link_to 'Reject Bid', [@job, bid],
+                method: :reject,
+                data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+            <% if bid.selected == 1 %>
+            <td>Bid has already been accepted</td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
