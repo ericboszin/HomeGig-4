@@ -28,12 +28,13 @@
 <%= render 'bids/form' %>
 <% end %>
 
-<% if @job.status == "completed" %>
-  <h2>Review</h2>
+<% if @job.status == "completed"%>
+  <h2>Reviews</h2>
   <%= render @job.reviews %>
-
-  <h2>Add a Review:</h2>
-  <%= render 'reviews/form' %>
+  <% if current_user == User.find(@job.user_id) %>
+    <h2>Add a Review:</h2>
+    <%= render 'reviews/form' %>
+  <%end%>
 <% end %>
 
 

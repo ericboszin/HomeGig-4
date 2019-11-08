@@ -42,9 +42,11 @@ class JobsController < ApplicationController
 
     def update
         @job = Job.find(params[:id])
-        puts "HELLLOOO"
-        puts params
-        puts "END"
+        if @job.update(job_params)
+          redirect_to @job
+        else
+          render 'edit'
+        end
     end
 
     def destroy

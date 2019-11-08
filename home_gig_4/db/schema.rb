@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_05_200338) do
+ActiveRecord::Schema.define(version: 2019_11_08_163856) do
 
   create_table "bids", force: :cascade do |t|
     t.string "description"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2019_11_05_200338) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.integer "worker_id"
     t.index ["job_id"], name: "index_reviews_on_job_id"
   end
 
