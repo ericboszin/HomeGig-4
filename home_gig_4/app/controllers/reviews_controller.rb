@@ -1,23 +1,28 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :get_job
+
   def index
-    @reviews = Review.all
+    @reviews = @job.reviews
   end
 
   def show
-    @review = Review.find(params[:id])
+    @review = @job.reviews.find(params[:id])
   end
 
   def new
-    @review = Review.new
+    if @job.user_id != current_user
+      flash[:warning] = "Error: Can't review your own work"
+    else
+      @review = @job.reviews.new
+    end
   end
 
   def edit
-    @review = Review.find(params[:id])
+    @review = @job.reviews.find(params[:id])
   end
     
   def create
-    @job = Job.find(params[:job_id])
     if @job.status == "completed"
       @review = @job.reviews.create(review_params)
       @review.user_id = current_user.id
@@ -33,16 +38,16 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    @review = Review.find(params[:id])
+    @review = @job.reviews.find(params[:id])
     if @review.update(review_params)
-        redirect_to @review
+      redirect_to job_path(@job)
     else
-        render 'edit'
+      flash[:warning] = "Error: Could update review"
+      render 'edit'
     end
   end
 
   def destroy
-    @job = Job.find(params[:job_id])
     @review = @job.reviews.find(params[:id])
     user = User.find(@review.user_id)
     if current_user == user
@@ -56,5 +61,9 @@ class ReviewsController < ApplicationController
   private
     def review_params
       params.require(:review).permit(:text, :rating, :worker_id)
+    end
+
+    def get_job
+      @job = Job.find(params[:job_id])
     end
 end

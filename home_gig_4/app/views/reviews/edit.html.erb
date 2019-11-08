@@ -16,35 +16,26 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <h1>Edit review<h1/>
+        <h1>Edit review</h1>
 
-        <%= form_with(model: @review, local: true) do |form| %>
-            <% if @review.errors.any? %>
-                <div id="error_explanation">
-                    <%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:
-                <ul>
-                    <% @review.errors.full_messages.each do |msg| %>
-                    <li><%= msg %></li>
-                    <% end %>
-                </ul>
-                </div>
-            <% end %>
-
+        <%= form_with(model: [ @job, @review ], local: true) do |form| %>
             <p>
-            <%= form.label :comment %><br>
-            <%= form.text_field :text %>
+                <%= form.label :worker_id %><br>
+                <%= form.text_field :worker_id, :readonly=>true%>
             </p>
-        
+            <p>
+              <%= form.label :text %><br>
+              <%= form.text_field :text %>
+            </p>
             <p class="field">
-                <%= form.label :rating %><br />
-                <%= form.select(:rating, Review.ratings.keys.map {|rating| [rating.titleize, rating]})%>
+              <%= form.label :rating %><br />
+              <%= form.select(:rating, Review.ratings.values.map {|rating| [rating, rating]})%>
             </p>
-        
             <p>
-            <%= form.submit %>
+              <%= form.submit %>
             </p>
         <% end %>
-        <%= link_to 'Back', reviews_path %>
+        <%= link_to 'Back', [@job] %>
         
         <script src="" async defer></script>
     </body>

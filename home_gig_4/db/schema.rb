@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_11_08_163856) do
-=======
-ActiveRecord::Schema.define(version: 2019_11_08_152958) do
->>>>>>> ce2a61c371a8c0872016e604f9f918e3ed8dc042
 
   create_table "bids", force: :cascade do |t|
     t.string "description"
@@ -68,7 +64,6 @@ ActiveRecord::Schema.define(version: 2019_11_08_152958) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
     t.string "skill"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

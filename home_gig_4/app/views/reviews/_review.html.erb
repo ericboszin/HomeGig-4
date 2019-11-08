@@ -13,8 +13,8 @@
   <%= review.rating %>
 </p>
 <% if current_user == User.find(@job.user_id) %>
-<%= link_to 'Update Review', edit_job_review_path(review) %>
+<%= link_to 'Edit Review', edit_job_review_path(@job, review) %>
 <%= link_to 'Delete Review', [review.job, review],
-               method: :delete,
-               data: { confirm: 'Are you sure?' } %>
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
 <%end%>
