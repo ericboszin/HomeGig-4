@@ -8,7 +8,7 @@ class User < ApplicationRecord
   devise :confirmable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-	protected def confimation_required?	
+	protected def confirmation_required?	
 		false
 	end
 end

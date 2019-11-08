@@ -31,6 +31,8 @@
     <%= f.text_field :phone, autofocus: true, value: current_user.phone %>
   </div>
 
+
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, value: current_user.email %>
@@ -57,6 +59,11 @@
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Skills" %><br />
+    <%= f.text_area :skill, autofocus: true, :cols => 30, :rows => 10, value: current_user.skill %>
   </div>
 
   <div class="field">
