@@ -1,0 +1,41 @@
+<h1>User Profile</h1>
+
+<%= link_to 'Edit Profile', edit_user_registration_path %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.first_name %>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <strong>Birthday:</strong>
+  <%= @user.birthday %>
+  
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @user.country %>
+</p>
+
+<p>
+  <strong>Phone Number:</strong>
+  <%= @user.phone %>
+</p>
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Skills:</strong>
+  <%= @user.skill %>
+</p>
+
+<p>
+  <strong>About Me:</strong>
+  <%= @user.aboutme %>
+</p>
+
+<%= link_to "Back", :back %>
