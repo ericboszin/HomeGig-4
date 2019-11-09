@@ -70,7 +70,7 @@ class JobsController < ApplicationController
                 if (_bid.selected == 1) #Bid was selected
 
                 else #Bid wasn't selected
-                    _bid.destroy
+                    #_bid.destroy
                 end
              @job.save
             end
@@ -78,6 +78,18 @@ class JobsController < ApplicationController
             flash[:warning]= "Error: user not authorized to accept bid"
         end
         redirect_to jobs_path
+    end
+
+    def cost
+        @job = Job.find(params[:job_id])
+        costs =  0
+        @job.bids.each do |_bid|
+            if (_bid.selected == 1)
+                costs += _bid.amount
+            end
+        end
+        puts costs
+        head :ok
     end
 
     def explore

@@ -1,63 +1,134 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Bids</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
-  </head>
-  <body>
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <h1>List of All Bids</h1>
-    <h2> Job Title: <%= @job.title %></h2>
-    <p> Job Description: <%= @job.description %> </p>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bids</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+</head>
+<body>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a>
+  to improve your experience.</p>
+<![endif]-->
+<h1>List of All Bids</h1>
+<h2> Job Title: <%= @job.title %></h2>
+<p> Job Description: <%= @job.description %> </p>
 
-      <table>
-        <tr>
-          <th>Bid Description</th>
-          <th>Bid Amount</th>
-          <th></th>
-        </tr>
-              <% @job.bids.each do |bid| %>
-              <tr>
-                <td>
-                  <%= bid.description %>
-                </td>
-                <td>
-              <%= bid.amount %>
-            </td>
-            <% if false %>
-            <td><%= link_to 'Show Job', [@job] %></td>
-            <td><%= link_to 'Edit', edit_job_bid_path(@job, bid) %></td>
-            <% end %>
-            <% if bid.selected == 0 %>
-            <td><%= link_to 'Accept Bid', job_bid_accept_path(@job, bid), :method => :patch, data: { confirm: 'Are you sure?' } %></td>
-            <td><%= link_to 'Reject Bid', [@job, bid],
-                method: :reject,
-                data: { confirm: 'Are you sure?' } %></td>
-            <% end %>
-            <% if bid.selected == 1 %>
-            <td>Bid has already been accepted</td>
-            <td><%= link_to 'Revert', [@job, bid],
-                method: :reject,
-                data: { confirm: 'Are you sure?' } %></td>
-            <% end %>
-          </tr>
+<table>
+  <caption>Pending Bids</caption>
+  <tr>
+    <th>Bidder</th>
+    <th>Bid Description</th>
+    <th>Bid Amount</th>
+    <th>Duration</th>
+    <th>Start Date</th>
+    <th></th>
+  </tr>
+  <% @job.bids.each do |bid| %>
+    <% if bid.selected == 0 %>
+      <tr>
+        <td>
+          <% current = User.find(@job.user_id) %>
+          <%= current.first_name %> <%= current.last_name %>
+        </td>
+        <td>
+          <%= bid.description %>
+        </td>
+        <td>
+          <%= bid.amount %>
+        </td>
+        <td>
+          <%= bid.duration %> days
+        </td>
+        <td>
+          <%= bid.starting_date %>
+        </td>
+        <% if false %>
+          <td><%= link_to 'Show Job', [@job] %></td>
+          <td><%= link_to 'Edit', edit_job_bid_path(@job, bid) %></td>
         <% end %>
-      </table>
+        <% if bid.selected == 0 %>
+          <td><%= link_to 'Accept Bid', job_bid_accept_path(@job, bid), :method => :patch, data: {confirm: 'Are you sure?'} %></td>
+          <td><%= link_to 'Reject Bid', [@job, bid],
+                          method: :reject,
+                          data: {confirm: 'Are you sure?'} %></td>
+        <% end %>
+        <% if bid.selected == 1 %>
+          <td>Bid has already been accepted</td>
+          <td><%= link_to 'Revert', [@job, bid],
+                          method: :reject,
+                          data: {confirm: 'Are you sure?'} %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+<br><br>
+<table>
+  <caption>Accepted Bids</caption>
+  <tr>
+    <th>Bidder</th>
+    <th>Bid Description</th>
+    <th>Bid Amount</th>
+    <th>Duration</th>
+    <th>Start Date</th>
+    <th></th>
+  </tr>
+  <% @job.bids.each do |bid| %>
+    <% if bid.selected == 1 %>
+      <tr>
+        <td>
+          <% current = User.find(@job.user_id) %>
+          <%= current.first_name %> <%= current.last_name %>
+        </td>
+        <td>
+          <%= bid.description %>
+        </td>
+        <td>
+          <%= bid.amount %>
+        </td>
+        <td>
+          <%= bid.duration %> days
+        </td>
+        <td>
+          <%= bid.starting_date %>
+        </td>
+        <% if false %>
+          <td><%= link_to 'Show Job', [@job] %></td>
+          <td><%= link_to 'Edit', edit_job_bid_path(@job, bid) %></td>
+        <% end %>
+        <% if bid.selected == 0 %>
+          <td><%= link_to 'Accept Bid', job_bid_accept_path(@job, bid), :method => :patch, data: {confirm: 'Are you sure?'} %></td>
+          <td><%= link_to 'Reject Bid', [@job, bid],
+                          method: :reject,
+                          data: {confirm: 'Are you sure?'} %></td>
+        <% end %>
+        <% if bid.selected == 1 %>
+          <td>Bid has already been accepted</td>
+          <td><%= link_to 'Revert', [@job, bid],
+                          method: :reject,
+                          data: {confirm: 'Are you sure?'} %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
 
-    <%= button_to 'Confirm Accepted Bids', job_accept_bids_path(@job), :method => :patch, data: { confirm: 'Are you sure?'} %>
+<%= button_to 'Confirm Accepted Bids', job_accept_bids_path(@job), :method => :patch, data: {confirm: 'Are you sure?'} %>
 
 
-    <%= link_to 'Back', job_path(@job) %>
-    
-    <script src="" async defer></script>
-  </body>
+<%= link_to 'Back', job_path(@job) %>
+
+<script src="" async defer></script>
+</body>
 </html>

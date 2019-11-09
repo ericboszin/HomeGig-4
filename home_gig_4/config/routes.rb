@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   	  patch 'accept'
     end
     patch 'accept_bids'
+    get 'cost'
   	resources :reviews
   end
 
