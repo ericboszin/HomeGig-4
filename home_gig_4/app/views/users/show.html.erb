@@ -1,5 +1,9 @@
 <h1>User Profile</h1>
 
+
+<% if user_signed_in? %>
+
+
 <%= link_to 'Edit Profile', edit_user_registration_path %>
 
 <p>
@@ -38,4 +42,48 @@
   <%= @user.aboutme %>
 </p>
 
+<p>
+<% if @user.role == "worker" %>
+    <strong>Reviews:</strong></br>
+
+    <%# Review.where(worker_id: current_user.id).each.map{
+      |review| 
+      
+      review.text
+      review.worker_id
+
+    }  
+     
+     %>
+    
+    </br>
+    <% Review.where(worker_id: current_user.id).each do |reviews| %>
+      <strong> Job:</strong></br>
+      <%= link_to reviews.job.title, (reviews.job) %> </br>
+
+      <strong> Rating:</strong></br>
+      <%= reviews.rating %> </br>
+
+      <strong> Review Text:</strong></br>
+      <%= reviews.text %> </br>
+      </br>
+    <% end %>
+
+<% end %>
+</p>
+
+
+
 <%= link_to "Back", :back %>
+
+	
+
+
+<%else %>
+  <p>Please Sign Up or Sign In to view the content.</p>
+
+  <h2><%= link_to "Sign up", new_user_registration_path%>
+
+  <h2><%= link_to "Sign In", new_user_session_path%>
+
+<% end %>

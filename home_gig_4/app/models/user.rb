@@ -9,6 +9,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
 	protected def confirmation_required?	
-		false
+		true
 	end
 end
