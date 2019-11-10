@@ -39,7 +39,7 @@
       <tr>
         <td>
           <% current = User.find(@job.user_id) %>
-          <%= current.first_name %> <%= current.last_name %>
+          <%= link_to "#{current.first_name} #{current.last_name}", user_path(current) %>
         </td>
         <td>
           <%= bid.description %>
@@ -89,7 +89,7 @@
       <tr>
         <td>
           <% current = User.find(@job.user_id) %>
-          <%= current.first_name %> <%= current.last_name %>
+          <%= link_to "#{current.first_name} #{current.last_name}", user_path(current) %>
         </td>
         <td>
           <%= bid.description %>

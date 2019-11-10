@@ -38,7 +38,7 @@ class BidsController < ApplicationController
     @bid = @job.bids.find(params[:id])
 
     if @bid.update(bid_params)
-      redirect_to @bid
+      redirect_to job_path(@job)
     else
       render 'edit'
     end
