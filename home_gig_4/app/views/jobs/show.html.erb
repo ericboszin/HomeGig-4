@@ -5,6 +5,11 @@
 </p>
 
 <p>
+  <strong>Owner:</strong>
+  <%= link_to "Owner", User.find(@job.user_id) %>
+</p>
+
+<p>
   <strong>Description:</strong>
   <%= @job.description %>
 </p>
