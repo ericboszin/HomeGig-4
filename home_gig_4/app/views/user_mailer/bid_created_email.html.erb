@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>A bid has been created for <%= @job.title %></h1>
+    <p>
+      You have received a bid from <%= link_to @creator.first_name , (@creator) %> </br>
+ <br>
+    </p>
+    <p>
+      To see this job, just follow this link: <%= link_to "View Job" , (@job) %>.
+    </p>
+  </body>
+</html>
