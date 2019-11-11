@@ -24,5 +24,5 @@ resources :users, :only =>[:show]
 
 
 
-  root 'home#index'
+root :to => 'passthrough#index'
 end
