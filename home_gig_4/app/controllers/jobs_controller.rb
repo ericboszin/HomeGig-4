@@ -42,8 +42,11 @@ class JobsController < ApplicationController
 
     def update
         @job = Job.find(params[:id])
-        if @job.update(job_params)
-          redirect_to @job
+        if @job.status == "completed" || @job.status == "cancelled"
+            flash[:warning]= "Error: Cannot update a job that has been cancelled or completed"
+            redirect_to @job  
+        elsif @job.update(job_params)
+            redirect_to @job
         else
           render 'edit'
         end
