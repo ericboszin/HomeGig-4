@@ -29,7 +29,7 @@
   <% @job.bids.each do |_bid| %>
     <% if _bid.selected == 1 %>
       <p>
-        <% current = User.find(@job.user_id) %>
+        <% current = User.find(_bid.user_id) %>
         <%= link_to "#{current.first_name} #{current.last_name}", user_path(current) %>
       </p>
     <% end %>
