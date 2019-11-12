@@ -18,16 +18,18 @@
       <% end %>
       <% if (bid.selected == 0 && current_user == User.find(@job.user_id)) %>
           <td><%= link_to 'Accept Bid', job_bid_accept_path(@job, bid), :method => :patch, data: {confirm: 'Are you sure?'} %></td>
-          <td><%= link_to 'Reject Bid', [@job, bid],
-                          method: :reject,
-                          data: {confirm: 'Are you sure?'} %></td>
+          <td><%= link_to 'Reject Bid', job_bid_reject_path(@job, bid), method: :delete, data: {confirm: 'Are you sure?'} %></td>
         <% end %>
-        <% if (bid.selected == 1 && current_user == User.find(@job.user_id)) %>
+      <% if (bid.selected == 1 && current_user == User.find(@job.user_id)) %>
+        <% if @job.status == 'completed' %>
+          <td>Bid has been fulfilled</td>
+        <% else %>
           <td>Bid has already been accepted</td>
-          <td><%= link_to 'Revert', [@job, bid],
-                          method: :reject,
+          <td><%= link_to 'Revert', job_bid_reject_path(@job, bid),
+                          method: :delete,
                           data: {confirm: 'Are you sure?'} %></td>
         <% end %>
+      <% end %>
     </tr>
   <% end %>
 </table>

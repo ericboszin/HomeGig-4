@@ -80,6 +80,40 @@ class JobsController < ApplicationController
         redirect_to jobs_path
     end
 
+    def complete_job
+        @job = Job.find(params[:job_id])
+        user = User.find(@job.user_id)
+        if current_user == user
+            @job.status = 'completed'
+            @job.bids.each do |_bid|
+                if (_bid.selected == 1) #Bid was selected
+
+                else #Bid wasn't selected
+                    _bid.destroy
+                end
+             @job.save
+            end
+        else
+            flash[:warning]= "Error: user not authorized to accept bid"
+        end
+        redirect_to jobs_path
+    end
+
+    def cancel_job
+        @job = Job.find(params[:job_id])
+        user = User.find(@job.user_id)
+        if current_user == user
+            @job.status = 'cancelled'
+            @job.bids.each do |_bid|
+                    _bid.destroy
+             @job.save
+            end
+        else
+            flash[:warning]= "Error: user not authorized to accept bid"
+        end
+        redirect_to jobs_path
+    end
+
     def cost
         @job = Job.find(params[:job_id])
         costs =  0

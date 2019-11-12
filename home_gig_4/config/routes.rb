@@ -15,8 +15,11 @@ resources :users, :only =>[:show]
   resources :jobs do
   	resources :bids do
   	  patch 'accept'
+      delete 'reject'
     end
+    patch 'complete_job'
     patch 'accept_bids'
+    patch 'cancel_job'
     get 'cost'
   	resources :reviews
   end
