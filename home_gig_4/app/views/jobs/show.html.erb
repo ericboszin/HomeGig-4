@@ -6,7 +6,8 @@
 
 <p>
   <strong>Owner:</strong>
-  <%= link_to "Owner", User.find(@job.user_id) %>
+  <% job_owner = User.find(@job.user_id) %>
+  <%= link_to "#{job_owner.first_name} #{job_owner.last_name}", user_path(@job.user_id) %>
 </p>
 
 <p>
@@ -23,7 +24,6 @@
   <strong>Status:</strong>
   <%= @job.status %>
 </p>
-
 <% if @job.status == 'started' || @job.status == 'completed' %>
   <h2>Workers</h2>
   <% @job.bids.each do |_bid| %>
@@ -36,28 +36,72 @@
   <% end %>
 <% end %>
 
+<% user_bid = false %>
 <h2>Bids</h2>
 <p> <%= link_to 'View All bids', job_bids_path(@job) %></p>
-<%= render @job.bids %>
+<table>
+  <tr>
+    <th>Bid Description</th>
+    <th>Bid Amount</th>
+    <th>Worker</th>
+    <th></th>
+  </tr>
+  <% @job.bids.each do |bid| %>
+    <tr>
+      <td>
+        <%= bid.description %>
+      </td>
+      <td>
+        <%= bid.amount %>
+      </td>
+      <td>
+        <% worker = User.find(bid.user_id) %>
+        <% if worker == current_user %>
+          <% user_bid = true %>
+        <% end %>
+        <%= link_to "#{worker.first_name} #{worker.last_name}", user_path(worker) %>
+      </td>
+      <% if current_user == User.find(bid.user_id) %>
+        <td><%= link_to 'Edit Bid', edit_job_bid_path(@job, bid) %></td>
+      <% end %>
+      <% if (bid.selected == 0 && current_user == User.find(@job.user_id)) %>
+        <td><%= link_to 'Accept Bid', job_bid_accept_path(@job, bid), :method => :patch, data: {confirm: 'Are you sure?'} %></td>
+        <td><%= link_to 'Reject Bid', job_bid_reject_path(@job, bid), method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      <% end %>
+      <% if (bid.selected == 1 && current_user == User.find(@job.user_id)) %>
+        <% if @job.status == 'completed' %>
+          <td>Bid has been fulfilled</td>
+        <% else %>
+          <td>Bid has already been accepted</td>
+          <td><%= link_to 'Revert', job_bid_reject_path(@job, bid),
+                          method: :delete,
+                          data: {confirm: 'Are you sure?'} %></td>
+        <% end %>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
 
-<% if (current_user != User.find(@job.user_id) && (@job.status != 'completed' || @job.status != 'cancelled')) %>
+<% if (current_user != User.find(@job.user_id) && (@job.status != 'completed' || @job.status != 'cancelled') && !user_bid) %>
   <h2>Add a Bid:</h2>
   <%= render 'bids/form' %>
 <% end %>
 
-<% if @job.status == "completed" %>
-  <h2>Reviews</h2>
-  <%= render @job.reviews %>
-  <% if current_user == User.find(@job.user_id) %>
+
+<% if current_user == User.find(@job.user_id) %>
+  <% if @job.status == "completed" %>
+    <h2>Reviews</h2>
+    <%= render @job.reviews %>
     <h2>Add a Review:</h2>
     <%= render 'reviews/form' %>
   <% end %>
+
+  <% if (@job.status != 'completed' && @job.status != 'cancelled') %>
+    <%= button_to 'Complete Job', job_complete_job_path(@job), :method => :patch, data: {confirm: 'Are you sure?'} %>
+    <%= button_to 'Cancel Job', job_cancel_job_path(@job), :method => :patch, data: {confirm: 'Are you sure you want to cancel job?'} %>
+  <% end %>
+  <%= link_to 'Edit', edit_job_path(@job) %>
+
 <% end %>
 
-<% if (@job.status != 'completed' && @job.status != 'cancelled') %>
-  <%= button_to 'Complete Job', job_complete_job_path(@job), :method => :patch, data: {confirm: 'Are you sure?'} %>
-  <%= button_to 'Cancel Job', job_cancel_job_path(@job), :method => :patch, data: {confirm: 'Are you sure you want to cancel job?'} %>
-<% elsif @job.status == 'completed' %>
-<% end %>
-<%= link_to 'Edit', edit_job_path(@job) %>
 <%= link_to 'Back', jobs_path %>
