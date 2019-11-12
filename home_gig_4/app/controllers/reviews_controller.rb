@@ -26,6 +26,7 @@ class ReviewsController < ApplicationController
     if @job.status == "completed"
       @review = @job.reviews.create(review_params)
       @review.user_id = current_user.id
+      @bid.update(reviewed: true)
       if @review.save
         redirect_to job_path(@job)
       else
@@ -51,6 +52,7 @@ class ReviewsController < ApplicationController
     @review = @job.reviews.find(params[:id])
     user = User.find(@review.user_id)
     if current_user == user
+      @bid.update(reviewed: false)
       @review.destroy
     else
       flash[:warning]= "Error: user not authorized to delete review"
@@ -65,5 +67,6 @@ class ReviewsController < ApplicationController
 
     def get_job
       @job = Job.find(params[:job_id])
+      @bid = @job.bids.where(id = params[:worker_id])
     end
 end

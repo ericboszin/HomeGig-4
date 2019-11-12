@@ -33,6 +33,7 @@ class BidsController < ApplicationController
     @bid = @job.bids.create(bid_params)
     @bid.user_id = current_user.id
     @bid.selected = 0
+    @bid.reviewed = false
     already = false
     @job.bids.each do |bid|
       if bid.user_id == current_user

@@ -2,7 +2,9 @@
   <p class="field">
     <%= form.label :worker_id %><br>
     <%= form.select(:worker_id, @job.bids.map {|bid| 
-      [User.find(bid.user_id).first_name + " " + User.find(bid.user_id).last_name, bid.user_id]
+      if !bid.reviewed
+        [User.find(bid.user_id).first_name + " " + User.find(bid.user_id).last_name, bid.user_id]
+      end
     })%>
   </p>
   <p>
