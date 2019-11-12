@@ -7,6 +7,12 @@
 <%= link_to 'Edit Profile', edit_user_registration_path %>
 
 <p>
+  <strong>Notification:</strong>
+  <%= @user.notification %>
+  
+</p>
+
+<p>
   <strong>Name:</strong>
   <%= @user.first_name %>
   <%= @user.last_name %>

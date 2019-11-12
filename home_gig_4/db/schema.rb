@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_08_163856) do
+ActiveRecord::Schema.define(version: 2019_11_12_164226) do
 
   create_table "bids", force: :cascade do |t|
     t.string "description"
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(version: 2019_11_08_163856) do
     t.index ["job_id"], name: "index_reviews_on_job_id"
   end
 
+  create_table "settings", force: :cascade do |t|
+    t.string "var", null: false
+    t.text "value"
+    t.string "target_type", null: false
+    t.integer "target_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["target_type", "target_id", "var"], name: "index_settings_on_target_type_and_target_id_and_var", unique: true
+    t.index ["target_type", "target_id"], name: "index_settings_on_target_type_and_target_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -66,6 +77,7 @@ ActiveRecord::Schema.define(version: 2019_11_08_163856) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.string "skill"
+    t.boolean "notification"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

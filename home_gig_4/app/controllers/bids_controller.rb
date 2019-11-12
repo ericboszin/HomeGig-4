@@ -41,7 +41,9 @@ class BidsController < ApplicationController
       end
     end
     if @bid.save && !already
-      UserMailer.with(user: User.find(@job.user_id), job: @job, creator: User.find(current_user.id)).bid_created_email.deliver_now
+      if User.find(@job.user_id).notification 
+        UserMailer.with(user: User.find(@job.user_id), job: @job, creator: User.find(current_user.id)).bid_created_email.deliver_now
+      end
       redirect_to job_path(@job)
     else
       flash[:warning] = "Error: Could not create bid"
@@ -97,8 +99,9 @@ class BidsController < ApplicationController
     if current_user == user
       @bid.selected = 1
       @bid.save
-      UserMailer.with(user: User.find(@bid.user_id), job: @job, owner: User.find(current_user.id)).bid_accepted_email.deliver_now
-
+      if User.find(@bid.user_id)
+        UserMailer.with(user: User.find(@bid.user_id), job: @job, owner: User.find(current_user.id)).bid_accepted_email.deliver_now
+      end
     else
       flash[:warning] = "Error: user not authorized to accept bid"
     end
