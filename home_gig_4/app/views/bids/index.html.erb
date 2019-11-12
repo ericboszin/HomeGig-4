@@ -105,8 +105,8 @@
         <% end %>
         <% if (bid.selected == 1 && current_user == User.find(@job.user_id)) %>
           <td>Bid has already been accepted</td>
-          <td><%= link_to 'Revert', job_bid_reject_path(@job, bid),
-                          method: :delete,
+          <td><%= link_to 'Revert', job_bid_revert_bid_path(@job, bid),
+                          method: :patch,
                           data: {confirm: 'Are you sure?'} %></td>
         <% end %>
       </tr>

@@ -94,12 +94,24 @@ class BidsController < ApplicationController
     @job = Job.find(params[:job_id])
     @bid = @job.bids.find(params[:bid_id])
     user = User.find(@job.user_id)
-    puts @bid
     if current_user == user
       @bid.selected = 1
       @bid.save
       UserMailer.with(user: User.find(@bid.user_id), job: @job, owner: User.find(current_user.id)).bid_accepted_email.deliver_now
 
+    else
+      flash[:warning] = "Error: user not authorized to accept bid"
+    end
+    redirect_to job_bids_path
+  end
+
+  def revert_bid
+    @job = Job.find(params[:job_id])
+    @bid = @job.bids.find(params[:bid_id])
+    user = User.find(@job.user_id)
+    if current_user == user
+      @bid.selected = 0
+      @bid.save
     else
       flash[:warning] = "Error: user not authorized to accept bid"
     end
@@ -115,4 +127,5 @@ class BidsController < ApplicationController
   def get_job
     @job = Job.find(params[:job_id])
   end
+
 end

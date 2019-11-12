@@ -16,6 +16,7 @@ resources :users, :only =>[:show]
   	resources :bids do
   	  patch 'accept'
       delete 'reject'
+      patch 'revert_bid'
     end
     patch 'complete_job'
     patch 'accept_bids'
