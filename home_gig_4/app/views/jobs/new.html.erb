@@ -1,6 +1,5 @@
 
 <%= form_with scope: :job, url: jobs_path, local: true do |form| %>
-
     <% [:notice, :warning, :error].each do |key| %>
         <% if flash[key] %>
             <%= flash[key] %>
@@ -10,6 +9,7 @@
     <p>
       <%= form.label :title %><br>
       <%= form.text_field :title %>
+      <%= current_user.role %>
     </p>
 
     <p>

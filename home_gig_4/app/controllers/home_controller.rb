@@ -11,6 +11,7 @@ class HomeController < ApplicationController
   end
 
   def admin
+    @reports = Report.all
   end
 
 end
