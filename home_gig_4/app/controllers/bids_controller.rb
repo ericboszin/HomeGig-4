@@ -30,7 +30,10 @@ class BidsController < ApplicationController
   end
 
   def create
-    if @job.status == "cancelled" || @job.status == "completed"
+    if current_user.role != "worker"
+      flash[:warning]= "Error: owners cannot bid on jobs"
+      redirect_to job_path(@job)
+    elsif @job.status == "cancelled" || @job.status == "completed"
       flash[:warning] = "Error: Cannot bid on a completed or cancelled job"
       redirect_to job_path(@job)
     else

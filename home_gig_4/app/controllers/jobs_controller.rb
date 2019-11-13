@@ -18,99 +18,118 @@ class JobsController < ApplicationController
     end
 
     def create
-        @job = current_user.jobs.build(job_params)
-        @job.status = "available"
+        if current_user.role == "owner"
+            @job = current_user.jobs.build(job_params)
+            @job.status = "available"
 
-        if @job.save
+            if @job.save
+                redirect_to jobs_path
+            else
+                flash[:warning]= "Error: Could not create job"
+                render 'new'
+            end
+        else
+            flash[:warning]= "Error: workers cannot create jobs"
             redirect_to jobs_path
-        else
-            flash[:warning]= "Error: Could not create job"
-            render 'new'
-        end
-    end
-
-    def status
-        @job = Job.find(params[:status])
-
-        if @job.status(job_params)
-            redirect_to @job
-        else
-            flash[:warning]= "Error: Could not find job with status #{:status}"
-            render 'show'
         end
     end
 
     def update
-        @job = Job.find(params[:id])
-        if @job.status == "completed" || @job.status == "cancelled"
-            flash[:warning]= "Error: Cannot update a job that has been cancelled or completed"
-            redirect_to @job  
-        elsif @job.update(job_params)
-            redirect_to @job
+        if current_user.role == "owner"
+            @job = Job.find(params[:id])
+            if @job.status == "completed" || @job.status == "cancelled"
+                flash[:warning]= "Error: Cannot update a job that has been cancelled or completed"
+                redirect_to @job  
+            elsif @job.update(job_params)
+                redirect_to @job
+            else
+            render 'edit'
+            end
         else
-          render 'edit'
+            flash[:warning]= "Error: workers cannot update jobs"
+            redirect_to jobs_path
         end
     end
 
     def destroy
-        @job = Job.find(params[:id])
-        user = User.find(@job.user_id)
-        if current_user == user
-            @job.status = "cancelled"
-            @job.destroy
+        if current_user.role == "owner"
+            @job = Job.find(params[:id])
+            @user = User.find(@job.user_id)
+            if current_user == @user
+                @job.status = "cancelled"
+                @job.destroy
+            else
+            flash[:warning]= "Error: user not authorized to delete job"
+            end
+            redirect_to jobs_path
         else
-          flash[:warning]= "Error: user not authorized to delete job"
+            flash[:warning]= "Error: workers cannot update jobs"
+            redirect_to jobs_path
         end
-        redirect_to jobs_path
     end
 
     def accept_bids
-        @job = Job.find(params[:job_id])
-        @user = User.find(@job.user_id)
-        if @job.status == "cancelled" || @job.status == "completed"
-            flash[:warning] = "Error: Cannot bid on a completed or cancelled job"
-            redirect_to jobs_path
-        else
-            if current_user == @user
-                @job.status = "started"
-                @job.save
+        if current_user.role == "owner"
+            @job = Job.find(params[:job_id])
+            @user = User.find(@job.user_id)
+            if @job.status == "cancelled" || @job.status == "completed"
+                flash[:warning] = "Error: Cannot bid on a completed or cancelled job"
+                redirect_to jobs_path
             else
-                flash[:warning]= "Error: user not authorized to accept bid"
+                if current_user == @user
+                    @job.status = "started"
+                    @job.save
+                else
+                    flash[:warning]= "Error: user not authorized to accept bid"
+                end
+                redirect_to jobs_path
             end
+        else
+            flash[:warning]= "Error: workers cannot accept bids"
             redirect_to jobs_path
         end
     end
 
     def complete_job
-        @job = Job.find(params[:job_id])
-        user = User.find(@job.user_id)
-        if current_user == user
-            @job.status = 'completed'
-            @job.bids.each do |bid|
-                if bid.selected == 0
-                    bid.destroy
+        if current_user.role == "owner"
+            @job = Job.find(params[:job_id])
+            @user = User.find(@job.user_id)
+            if current_user == @user
+                @job.status = 'completed'
+                @job.bids.each do |bid|
+                    if bid.selected == 0
+                        bid.destroy
+                    end
                 end
+                @job.save
+            else
+                flash[:warning]= "Error: user not authorized to accept bid"
             end
-            @job.save
+            redirect_to jobs_path
         else
-            flash[:warning]= "Error: user not authorized to accept bid"
+            flash[:warning]= "Error: workers cannot complete jobs"
+            redirect_to jobs_path
         end
-        redirect_to jobs_path
     end
 
     def cancel_job
-        @job = Job.find(params[:job_id])
-        user = User.find(@job.user_id)
-        if current_user == user
-            @job.status = 'cancelled'
-            @job.bids.each do |_bid|
-                    _bid.destroy
-             @job.save
+        if current_user.role == "owner"
+            @job = Job.find(params[:job_id])
+            @user = User.find(@job.user_id)
+            if current_user == @user
+                @job.status = 'cancelled'
+                @job.bids.each do |_bid|
+                        _bid.destroy
+                @job.save
+                end
+            else
+                flash[:warning]= "Error: user not authorized to accept bid"
             end
+            redirect_to jobs_path
         else
-            flash[:warning]= "Error: user not authorized to accept bid"
+            flash[:warning]= "Error: workers cannot cancel jobs"
+            redirect_to jobs_path
         end
-        redirect_to jobs_path
     end
 
     def cost
@@ -133,5 +152,4 @@ class JobsController < ApplicationController
         def job_params
             params.require(:job).permit(:title, :description, :price, :status)
         end
-
 end
