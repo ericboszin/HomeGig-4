@@ -66,21 +66,19 @@ class JobsController < ApplicationController
 
     def accept_bids
         @job = Job.find(params[:job_id])
-        user = User.find(@job.user_id)
-        if current_user == user
-            @job.status = 'started'
-            @job.bids.each do |_bid|
-                if (_bid.selected == 1) #Bid was selected
-
-                else #Bid wasn't selected
-                    #_bid.destroy
-                end
-             @job.save
-            end
+        @user = User.find(@job.user_id)
+        if @job.status == "cancelled" || @job.status == "completed"
+            flash[:warning] = "Error: Cannot bid on a completed or cancelled job"
+            redirect_to jobs_path
         else
-            flash[:warning]= "Error: user not authorized to accept bid"
+            if current_user == @user
+                @job.status = "started"
+                @job.save
+            else
+                flash[:warning]= "Error: user not authorized to accept bid"
+            end
+            redirect_to jobs_path
         end
-        redirect_to jobs_path
     end
 
     def complete_job
@@ -88,14 +86,12 @@ class JobsController < ApplicationController
         user = User.find(@job.user_id)
         if current_user == user
             @job.status = 'completed'
-            @job.bids.each do |_bid|
-                if (_bid.selected == 1) #Bid was selected
-
-                else #Bid wasn't selected
-                    _bid.destroy
+            @job.bids.each do |bid|
+                if bid.selected == 0
+                    bid.destroy
                 end
-             @job.save
             end
+            @job.save
         else
             flash[:warning]= "Error: user not authorized to accept bid"
         end
