@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>You have successfully edited a job!</h1>
+    <p>
+      You have succesffully edited the job: <%= @job.title %>
+ <br>
+    </p>
+    <p>
+      To see this job, follow this link: <%= link_to "View Job" , (@job) %>.
+    </p>
+  </body>
+</html>

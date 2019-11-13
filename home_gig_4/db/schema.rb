@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 2019_11_13_012623) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.string "skill"
-    #t.boolean "notifications"
+    t.boolean "notifications"
     t.boolean "notification"
     t.boolean "admin", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

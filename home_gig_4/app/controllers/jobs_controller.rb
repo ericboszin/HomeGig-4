@@ -23,6 +23,9 @@ class JobsController < ApplicationController
             @job.status = "available"
 
             if @job.save
+                if current_user.notification
+                    UserMailer.with(user: User.find(current_user.user_id), job: @job).job_created_email.deliver_now
+                end
                 redirect_to jobs_path
             else
                 flash[:warning]= "Error: Could not create job"
