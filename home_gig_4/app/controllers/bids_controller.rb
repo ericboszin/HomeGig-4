@@ -68,6 +68,10 @@ class BidsController < ApplicationController
         flash[:warning] = "Error: you cannot edit a bid that is not yours"
         redirect_to job_path(@job)
       elsif @bid.update(bid_params)
+
+        if current_user.notification
+            UserMailer.with(user: User.find(@job.user_id), job: @job).job_edited_email.deliver_now
+        end
         redirect_to job_path(@job)
       else
         render 'edit'

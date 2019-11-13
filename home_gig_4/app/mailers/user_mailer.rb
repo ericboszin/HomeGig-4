@@ -38,7 +38,7 @@ default from: 'notifications@homegig.io'
     @user = params[:user]
     @job = params[:job]
     @bidder = params[:bidder]
-    mail(to: @bid.email, subject: 'A job you bid for has been started.')
+    mail(to: @bidder.email, subject: 'A job you bid for has been started.')
   end
 
   def job_completed_email
@@ -52,8 +52,6 @@ default from: 'notifications@homegig.io'
     @job = params[:job]
     mail(to: @user.email, subject: 'A job you bid for has been cancelled.')
   end
-
-end
 
 
 end

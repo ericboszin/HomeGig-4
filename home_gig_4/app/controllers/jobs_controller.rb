@@ -24,7 +24,7 @@ class JobsController < ApplicationController
 
             if @job.save
                 if current_user.notification
-                    UserMailer.with(user: User.find(current_user.user_id), job: @job).job_created_email.deliver_now
+                    UserMailer.with(user: User.find(@job.user_id), job: @job).job_created_email.deliver_now
                 end
                 redirect_to jobs_path
             else
@@ -82,6 +82,19 @@ class JobsController < ApplicationController
                 if current_user == @user
                     @job.status = "started"
                     @job.save
+                @job.bids.each do |_bid|
+                    if (_bid.selected == 1) #Bid was selected
+                        bidder = User.find(_bid.user_id)
+                        if bidder.notification
+                                    
+                        UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: bidder).job_started_email.deliver_now
+                        end    
+                    else #Bid wasn't selected
+                        #_bid.destroy
+                    end
+                        @job.save
+                end
+                
                 else
                     flash[:warning]= "Error: user not authorized to accept bid"
                 end
