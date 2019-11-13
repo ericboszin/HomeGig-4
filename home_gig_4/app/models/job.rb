@@ -6,4 +6,7 @@ class Job < ApplicationRecord
     belongs_to :user
     enum status: { available: "available", started: "started", cancelled: "cancelled", completed: "completed" }
     validates :status, presence: true
+    validates :title, presence: true
+    validates :description, presence: true
+    validates :price, presence: true
 end
