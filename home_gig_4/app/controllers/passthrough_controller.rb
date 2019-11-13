@@ -3,7 +3,7 @@ class PassthroughController < ApplicationController
   def index
   	if user_signed_in?
 	    case current_user.role
-	    	when 'worker'
+	      when 'worker'
 	        redirect_to :controller => 'home', :action => 'worker'
 	      when 'owner'
 	        redirect_to :controller => 'home', :action => 'owner'

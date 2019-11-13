@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  enum role: [:admin, :owner, :worker]
+  enum role: [:owner, :worker]
   has_many :jobs, dependent: :destroy
   has_many :bids, through: :jobs
   has_many :reviews, through: :jobs
