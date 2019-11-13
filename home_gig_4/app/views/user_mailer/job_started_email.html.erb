@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>A job you bid for has been started</h1>
+    <p>
+      You are now a part of a job in progress: <%= @job.title %>
+ <br>
+    </p>
+    <p>
+      To see this job, follow this link: <%= link_to "View Job" , (@job) %>.
+    </p>
+  </body>
+</html>
