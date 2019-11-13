@@ -1,9 +1,19 @@
-<%= link_to 'Sign up', new_user_registration_path %>
-
-<%= link_to 'Sign in', new_user_session_path %>
-
-<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-
-<% if user_signed_in? %>
-	<%= link_to("Profile", user_path(current_user)) %>
-<% end %>
+<div class="welcome text-center">
+  <div class="container">
+    <div class="row justify-content-center">
+  	  <div class="col-9 ">
+        <h1> Welcome to homeGig! </h1>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+  	  <div class="col-4">
+  	    <a class="btn btn-primary btn-block" href="/d/users/sign_up" role="button">
+  	      Sign Up
+  	    </a>
+  	    <a class="btn btn-primary btn-block" href="/d/users/sign_in" role="button">
+  	      Sign In
+  	    </a>
+      </div>
+    </div>
+  </div>
+</div>
