@@ -24,8 +24,9 @@
 <h2> Job Title: <%= @job.title %></h2>
 <p> Job Description: <%= @job.description %> </p>
 
+
+<h3>Pending Bids</h3>
 <table>
-  <caption>Pending Bids</caption>
   <tr>
     <th>Bidder</th>
     <th>Bid Description</th>
@@ -38,7 +39,7 @@
     <% if bid.selected == 0 %>
       <tr>
         <td>
-          <% current = User.find(@job.user_id) %>
+          <% current = User.find(bid.user_id) %>
           <%= link_to "#{current.first_name} #{current.last_name}", user_path(current) %>
         </td>
         <td>
@@ -66,8 +67,9 @@
   <% end %>
 </table>
 <br><br>
+
+<h3>Accepted Bids</h3>
 <table>
-  <caption>Accepted Bids</caption>
   <tr>
     <th>Bidder</th>
     <th>Bid Description</th>
@@ -80,7 +82,7 @@
     <% if bid.selected == 1 %>
       <tr>
         <td>
-          <% current = User.find(@job.user_id) %>
+          <% current = User.find(bid.user_id) %>
           <%= link_to "#{current.first_name} #{current.last_name}", user_path(current) %>
         </td>
         <td>

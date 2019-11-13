@@ -8,7 +8,7 @@
 
 user = User.new
 user.email = 'adm@admin.com'
-user.password = '123456'
+user.password = '123123'
 user.password_confirmation = '123123'
 user.admin = true
 user.skip_confirmation!

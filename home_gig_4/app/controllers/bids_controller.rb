@@ -1,6 +1,7 @@
 class BidsController < ApplicationController
   before_action :get_job
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :job_owner, only: [:index]
 
   def index
     @bids = @job.bids
@@ -19,7 +20,7 @@ class BidsController < ApplicationController
     @job.bids.each do |bid|
       if bid.user_id == current_user
         flash[:warning] = "Error: You've already bid on this job"
-        redirect_to job_bid_path(@job, bid)
+        already = true
       end
     end
     if (@job.user_id == current_user || already)
@@ -30,7 +31,10 @@ class BidsController < ApplicationController
   end
 
   def create
-    if @job.status == "cancelled" || @job.status == "completed"
+    if current_user.role != "worker"
+      flash[:warning]= "Error: owners cannot bid on jobs"
+      redirect_to job_path(@job)
+    elsif @job.status == "cancelled" || @job.status == "completed"
       flash[:warning] = "Error: Cannot bid on a completed or cancelled job"
       redirect_to job_path(@job)
     else
@@ -46,7 +50,7 @@ class BidsController < ApplicationController
         end
       end
       if @bid.save && !already
-        if User.find(@job.user_id).notification 
+        if User.find(@job.user_id).notification
           UserMailer.with(user: User.find(@job.user_id), job: @job, creator: User.find(current_user.id)).bid_created_email.deliver_now
         end
         redirect_to job_path(@job)
@@ -148,6 +152,12 @@ class BidsController < ApplicationController
 
   def get_job
     @job = Job.find(params[:job_id])
+  end
+
+  def job_owner
+    if @job.user_id != current_user.id
+      redirect_to job_path(@job)
+    end
   end
 
 end
