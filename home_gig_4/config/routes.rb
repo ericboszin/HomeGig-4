@@ -25,6 +25,8 @@ resources :users, :only =>[:show]
   	resources :reviews
   end
 
+  resources :reports
+
 
 
 

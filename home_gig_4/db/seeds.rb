@@ -9,7 +9,7 @@
 user = User.new
 user.email = 'adm@admin.com'
 user.password = '123456'
-user.password_confirmation = '123456'
+user.password_confirmation = '123123'
 user.admin = true
 user.skip_confirmation!
 user.save!
@@ -18,6 +18,7 @@ user = User.new
 user.email = 'test1@test.com'
 user.password = '123123'
 user.password_confirmation = '123123'
+user.role = :owner
 user.skip_confirmation!
 user.save!
 
@@ -25,6 +26,7 @@ user = User.new
 user.email = 'test2@test.com'
 user.password = '123123'
 user.password_confirmation = '123123'
+user.role = :worker
 user.skip_confirmation!
 user.save!
 
@@ -32,6 +34,7 @@ user = User.new
 user.email = 'test3@test.com'
 user.password = '123123'
 user.password_confirmation = '123123'
+user.role = :owner
 user.skip_confirmation!
 user.save!
 

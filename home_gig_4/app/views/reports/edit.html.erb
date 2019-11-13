@@ -1,0 +1,25 @@
+<%= form_with(model: @report, local: true) do |form| %>
+
+    <% [:notice, :warning, :error].each do |key| %>
+        <% if flash[key] %>
+            <%= flash[key] %>
+        <% end %>
+    <% end %>
+
+    <p>
+      <%= form.label :title %><br>
+      <%= form.text_field :title %>
+    </p>
+
+    <p>
+      <%= form.label :description %><br>
+      <%= form.text_area :description %>
+    </p>
+
+    <p>
+      <%= form.submit %>
+    </p>
+
+<% end %>
+
+

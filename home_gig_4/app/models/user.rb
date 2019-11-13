@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   enum role: [:owner, :worker]
   has_many :jobs, dependent: :destroy
+  has_many :reports, dependent: :destroy
   has_many :bids, through: :jobs
   has_many :reviews, through: :jobs
   # Include default devise modules. Others available are:
