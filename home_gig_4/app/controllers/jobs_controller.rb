@@ -81,20 +81,23 @@ class JobsController < ApplicationController
             else
                 if current_user == @user
                     @job.status = "started"
-                    @job.save
-                @job.bids.each do |_bid|
-                    if (_bid.selected == 1) #Bid was selected
-                        bidder = User.find(_bid.user_id)
-                        if bidder.notification
-                                    
-                        UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: bidder).job_started_email.deliver_now
-                        end    
-                    else #Bid wasn't selected
-                        #_bid.destroy
+                    @job.bids.each do |_bid|
+                        
+                        if (_bid.selected == 1) #Bid was selected
+                        
+
+                            @bidder = User.find(_bid.user_id)
+                            if @bidder.notification
+                                                 
+   
+                                UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_started_email.deliver_now
+                            end    
+                        else #Bid wasn't selected
+                            #_bid.destroy
+                        end
+                           
                     end
-                        @job.save
-                end
-                
+                    @job.save 
                 else
                     flash[:warning]= "Error: user not authorized to accept bid"
                 end
@@ -112,8 +115,18 @@ class JobsController < ApplicationController
             @user = User.find(@job.user_id)
             if current_user == @user
                 @job.status = 'completed'
-                @job.bids.each do |bid|
-                    if bid.selected == 0
+                @job.bids.each do |_bid|
+                    if (_bid.selected == 1) #Bid was selected
+                        
+
+                        @bidder = User.find(_bid.user_id)
+                        if @bidder.notification
+                                                 
+   
+                                UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_completed_email.deliver_now
+                        end
+
+                    else
                         bid.destroy
                     end
                 end
@@ -135,6 +148,19 @@ class JobsController < ApplicationController
             if current_user == @user
                 @job.status = 'cancelled'
                 @job.bids.each do |_bid|
+
+
+                    if (_bid.selected == 1) #Bid was selected
+                        
+
+                        @bidder = User.find(_bid.user_id)
+                        if @bidder.notification
+                                                 
+   
+                                UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_cancelled_email.deliver_now
+                        end
+                    end
+
                         _bid.destroy
                 @job.save
                 end

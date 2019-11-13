@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>A job you bid for has been completed</h1>
+    <p>
+      This job has been marked complete by the owner: <%= @job.title %>
+ <br>
+    </p>
+    <p>
+      To see this job, follow this link: <%= link_to "View Job" , (@job) %>.
+    </p>
+  </body>
+</html>
