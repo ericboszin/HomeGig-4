@@ -12,6 +12,12 @@
   
 </p>
 
+
+<p>
+  <strong>Account Type:</strong>
+  <%= @user.role %>
+</p>
+
 <p>
   <strong>Name:</strong>
   <%= @user.first_name %>
@@ -63,7 +69,7 @@
      %>
     
     </br>
-    <% Review.where(worker_id: current_user.id).each do |reviews| %>
+    <% Review.where(worker_id: @user.id).each do |reviews| %>
       <strong> Job:</strong></br>
       <%= link_to reviews.job.title, (reviews.job) %> </br>
 

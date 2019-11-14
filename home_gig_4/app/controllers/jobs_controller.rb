@@ -161,7 +161,7 @@ class JobsController < ApplicationController
                         end
                     end
 
-                        _bid.destroy
+                _bid.destroy
                 @job.save
                 end
             else

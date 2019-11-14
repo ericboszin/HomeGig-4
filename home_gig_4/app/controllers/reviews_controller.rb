@@ -27,7 +27,18 @@ class ReviewsController < ApplicationController
       @review = @job.reviews.create(review_params)
       @review.user_id = current_user.id
       @bid.update(reviewed: true)
+      
       if @review.save
+        @owner = User.find(current_user.id)
+        @worker = User.find(@review.worker_id) 
+        if @owner.notification
+          
+          UserMailer.with(owner: @owner, job: @job, review: @review, worker: User.find(@review.worker_id)).review_posted_email.deliver_now
+        end  
+        if @worker.notification
+          UserMailer.with(owner: @owner, job: @job, review: @review, worker: User.find(@review.worker_id)).review_received_email.deliver_now
+        end
+        
         redirect_to job_path(@job)
       else
         flash[:warning] = "Error: Could not create review"
@@ -41,6 +52,11 @@ class ReviewsController < ApplicationController
   def update
     @review = @job.reviews.find(params[:id])
     if @review.update(review_params)
+        @owner = User.find(current_user.id)
+
+        if @owner.notification
+          UserMailer.with(owner: @owner, job: @job, review: @review, worker: User.find(@review.worker_id)).review_edited_email.deliver_now
+        end
       redirect_to job_path(@job)
     else
       flash[:warning] = "Error: Could update review"

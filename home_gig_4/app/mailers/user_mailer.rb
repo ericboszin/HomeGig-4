@@ -54,5 +54,28 @@ default from: 'notifications@homegig.io'
     mail(to: @bidder.email, subject: 'A job you bid for has been cancelled.')
   end
 
+  def review_posted_email
+    @owner = params[:owner]
+    @job = params[:job]
+    @worker = params[:worker]
+    @review = params[:review]
+    mail(to: @owner.email, subject: 'You have successfully posted a review.')
+  end
+
+  def review_edited_email
+    @owner = params[:owner]
+    @job = params[:job]
+    @worker = params[:worker]
+    @review = params[:review]
+    mail(to: @owner.email, subject: 'You have successfully edited a review.')
+  end
+
+    def review_received_email
+    @owner = params[:owner]
+    @job = params[:job]
+    @worker = params[:worker]
+    @review = params[:review]
+    mail(to: @worker.email, subject: 'An owner has left you a review.')
+  end
 
 end
