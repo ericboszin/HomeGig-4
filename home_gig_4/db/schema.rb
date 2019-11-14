@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_13_012623) do
+ActiveRecord::Schema.define(version: 2019_11_14_024036) do
 
   create_table "bids", force: :cascade do |t|
     t.string "description"
@@ -56,14 +56,20 @@ ActiveRecord::Schema.define(version: 2019_11_13_012623) do
   end
 
   create_table "settings", force: :cascade do |t|
-    t.string "var", null: false
-    t.text "value"
-    t.string "target_type", null: false
-    t.integer "target_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["target_type", "target_id", "var"], name: "index_settings_on_target_type_and_target_id_and_var", unique: true
-    t.index ["target_type", "target_id"], name: "index_settings_on_target_type_and_target_id"
+    t.integer "user_id"
+    t.boolean "bid_created", default: false
+    t.boolean "bid_accepted", default: false
+    t.boolean "job_created", default: false
+    t.boolean "job_edited", default: false
+    t.boolean "job_deleted", default: false
+    t.boolean "job_started", default: false
+    t.boolean "job_completed", default: false
+    t.boolean "job_cancelled", default: false
+    t.boolean "review_posted", default: false
+    t.boolean "review_edited", default: false
+    t.boolean "review_received", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -84,9 +90,7 @@ ActiveRecord::Schema.define(version: 2019_11_13_012623) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
     t.string "skill"
-    t.boolean "notifications"
     t.boolean "notification"
     t.boolean "admin", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

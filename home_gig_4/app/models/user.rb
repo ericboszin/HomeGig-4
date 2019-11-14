@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :bids, through: :jobs
   has_many :reviews, through: :jobs
+  has_one :settings
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable, :trackable and :omniauthable
   devise :confirmable, :database_authenticatable, :registerable,
