@@ -22,6 +22,13 @@ default from: 'notifications@homegig.io'
     mail(to: @user.email, subject: 'Your bid has been accepted.')
   end
 
+  def bid_reverted_email
+    @user = params[:user]
+    @job = params[:job]
+    @owner = params[:owner]
+    mail(to: @user.email, subject: 'Your accepted bid has been reverted.')
+  end
+
   def job_created_email
     @user = params[:user]
     @job = params[:job]

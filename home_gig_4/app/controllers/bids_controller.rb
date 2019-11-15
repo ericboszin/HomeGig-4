@@ -141,7 +141,12 @@ class BidsController < ApplicationController
       redirect_to job_bids_path
     elsif current_user == @user
       @bid.selected = 0
+
       @bid.save
+      
+      if User.find(@bid.user_id).setting.bid_reverted
+        UserMailer.with(user: User.find(@bid.user_id), job: @job, owner: User.find(current_user.id)).bid_reverted_email.deliver_now
+      end
       redirect_to job_bids_path
     else
       flash[:warning] = "Error: user not authorized to accept bid"

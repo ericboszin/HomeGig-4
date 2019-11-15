@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_14_024036) do
+ActiveRecord::Schema.define(version: 2019_11_15_024250) do
 
   create_table "bids", force: :cascade do |t|
     t.string "description"
@@ -55,24 +55,23 @@ ActiveRecord::Schema.define(version: 2019_11_14_024036) do
     t.index ["job_id"], name: "index_reviews_on_job_id"
   end
 
-
   create_table "settings", force: :cascade do |t|
     t.integer "user_id"
-    t.boolean "bid_created", default: false
-    t.boolean "bid_accepted", default: false
-    t.boolean "job_created", default: false
-    t.boolean "job_edited", default: false
-    t.boolean "job_deleted", default: false
-    t.boolean "job_started", default: false
-    t.boolean "job_completed", default: false
-    t.boolean "job_cancelled", default: false
-    t.boolean "review_posted", default: false
-    t.boolean "review_edited", default: false
-    t.boolean "review_received", default: false
+    t.boolean "bid_created", default: true
+    t.boolean "bid_accepted", default: true
+    t.boolean "job_created", default: true
+    t.boolean "job_edited", default: true
+    t.boolean "job_deleted", default: true
+    t.boolean "job_started", default: true
+    t.boolean "job_completed", default: true
+    t.boolean "job_cancelled", default: true
+    t.boolean "review_posted", default: true
+    t.boolean "review_edited", default: true
+    t.boolean "review_received", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "bid_reverted", default: true
   end
-
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
