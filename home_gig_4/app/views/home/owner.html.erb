@@ -3,7 +3,7 @@
   <%= link_to("Profile", user_path(current_user)) %>
 <% end %>
 <%= link_to 'Reports', reports_path %> 
-<%= link_to 'Settings', setting_path(current_user)%>
+
 <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
 
 <h1>Listing Jobs</h1>

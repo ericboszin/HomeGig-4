@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :bids, through: :jobs
   has_many :reviews, through: :jobs
-  has_one :setting
+  has_one :setting, dependent: :destroy
 
   after_create :init_setting
   # Include default devise modules. Others available are:
