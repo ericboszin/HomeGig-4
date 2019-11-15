@@ -26,7 +26,7 @@ resources :users, :only =>[:show]
   end
 
   resources :reports
-
+  resources :settings
 
 
 

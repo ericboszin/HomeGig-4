@@ -4,7 +4,9 @@ class User < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :bids, through: :jobs
   has_many :reviews, through: :jobs
-  has_one :settings
+  has_one :setting
+
+  after_create :init_setting
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable, :trackable and :omniauthable
   devise :confirmable, :database_authenticatable, :registerable,
@@ -20,5 +22,9 @@ class User < ApplicationRecord
   def country_name
     countryfull = ISO3166::Country[country]
     countryfull.translations[I18n.locale.to_s] || countryfull.name
+  end
+
+  def init_setting
+    self.create_setting(:user_id => self.id)
   end
 end
