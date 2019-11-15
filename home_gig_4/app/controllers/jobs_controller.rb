@@ -82,20 +82,12 @@ class JobsController < ApplicationController
                 if current_user == @user
                     @job.status = "started"
                     @job.bids.each do |_bid|
-                        
                         if (_bid.selected == 1) #Bid was selected
-                        
-
                             @bidder = User.find(_bid.user_id)
                             if @bidder.notification
-                                                 
-   
                                 UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_started_email.deliver_now
-                            end    
-                        else #Bid wasn't selected
-                            #_bid.destroy
+                            end
                         end
-                           
                     end
                     @job.save 
                 else
@@ -117,17 +109,12 @@ class JobsController < ApplicationController
                 @job.status = 'completed'
                 @job.bids.each do |_bid|
                     if (_bid.selected == 1) #Bid was selected
-                        
-
                         @bidder = User.find(_bid.user_id)
                         if @bidder.notification
-                                                 
-   
-                                UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_completed_email.deliver_now
+                            UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_completed_email.deliver_now
                         end
-
                     else
-                        bid.destroy
+                        _bid.destroy
                     end
                 end
                 @job.save
@@ -148,22 +135,16 @@ class JobsController < ApplicationController
             if current_user == @user
                 @job.status = 'cancelled'
                 @job.bids.each do |_bid|
-
-
                     if (_bid.selected == 1) #Bid was selected
-                        
-
                         @bidder = User.find(_bid.user_id)
                         if @bidder.notification
-                                                 
-   
-                                UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_cancelled_email.deliver_now
+                            UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_cancelled_email.deliver_now
                         end
+                    else
+                        _bid.destroy
                     end
-
-                _bid.destroy
-                @job.save
                 end
+                @job.save
             else
                 flash[:warning]= "Error: user not authorized to accept bid"
             end
