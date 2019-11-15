@@ -1,69 +1,79 @@
-<h2>Register</h2>
+<div class="welcome text-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-9 ">
+        <h2>Sign up</h2>
+      </div>
+    </div>
+  <div class="row justify-content-center">
+    <div class="col-9 ">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="field">
+            <%= f.label :role %><br />
+            <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]})%>
+        </div>
 
-  <div class="field">
-      <%= f.label :role %><br />
-      <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]})%>
+        <div class="field">
+            <%= f.label :first_name %><br />
+            <%= f.text_field :first_name, autofocus: true %>
+        </div>
+
+        <div class="field">
+          <%= f.label :last_name %><br />
+          <%= f.text_field :last_name, autofocus: true %>
+        </div>
+
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :birthday %><br />
+          <%= f.date_select :birthday, autofocus: true, :start_year => 1920, :end_year => 2002 %>
+        </div>
+
+        <div class="field">
+          <%= f.label :country %><br />
+          <%= f.country_select :country %>
+        </div>
+
+        <div class="field">
+          <%= f.label :phone %><br />
+          <%= f.text_field :phone, autofocus: true %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :skill %><br />
+          <%= f.select :skill, [['virtual assistant',1], ['writing and editing',2], ['graphic design',3], ['spreadsheets',4], ['accounting and bookkeeping',5], ['customer servcie',6], ['sales',7], ['social media marketing',8], ['e-commerce',9], ['web development',10], ['web design', 11]] %>
+        </div>
+
+        <div class="field">
+          <%= f.label "About Me" %><br />
+        <%= f.text_area :aboutme, autofocus: true, :cols => 30, :rows => 10 %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Sign up" %>
+        </div>
+      <% end %>
+
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
-
-  <div class="field">
-      <%= f.label :first_name %><br />
-      <%= f.text_field :first_name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :birthday %><br />
-    <%= f.date_select :birthday, autofocus: true, :start_year => 1900  %>
-  </div>
-
-  <div class="field">
-    <%= f.label :country %><br />
-    <%= f.country_select :country %>
-  </div>
-
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Skill" %><br />
-   <%= f.text_area :skill, autofocus: true, :cols => 30, :rows => 10 %>
-  </div>
-
-  <div class="field">
-    <%= f.label "About Me" %><br />
-   <%= f.text_area :aboutme, autofocus: true, :cols => 30, :rows => 10 %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
