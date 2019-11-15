@@ -1,22 +1,22 @@
-<p>
-  <strong>User:</strong>
-  <%= User.find(review.worker_id).first_name + " " + User.find(review.worker_id).last_name%>
-</p>
-
-<p>
-  <strong>Text:</strong>
-  <%= review.text %>
-</p>
- 
-<p>
-  <strong>Rating:</strong>
-  <%= review.rating %>
-</p>
-<% if current_user == User.find(@job.user_id) %>
-<p><%= link_to 'Edit Review', edit_job_review_path(@job, review) %></p>
-<p><%= link_to 'Delete Review', [review.job, review],
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></p>
-<p><%= link_to "Worker", user_path(User.find(review.worker_id)) %>
-</p>
-<%end%>
+<table>
+  <tr>
+    <th>User</th>
+    <th>Comments</th>
+    <th>Rating</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td><%= User.find(review.worker_id).first_name + " " + User.find(review.worker_id).last_name%></td>
+    <td><%= review.text %></td>
+    <td><%= review.rating %></td>
+    <% if current_user == User.find(@job.user_id) %>
+      <td><%= link_to 'Edit Review', edit_job_review_path(@job, review) %></td>
+      <td><%= link_to 'Delete Review', [review.job, review],
+        method: :delete,
+        data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to "Worker", user_path(User.find(review.worker_id)) %></td>
+    <% end %>
+  </tr>
+</table>

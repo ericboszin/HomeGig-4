@@ -116,6 +116,10 @@ class BidsController < ApplicationController
     @job = Job.find(params[:job_id])
     @bid = @job.bids.find(params[:bid_id])
     @user = User.find(@job.user_id)
+    if @job.status == "cancelled" || @job.status == "completed"
+      flash[:warning] = "Job has already been marked completed or it has been cancelled"
+      redirect_to job_path(@job)
+    end
     if current_user == @user
       @bid.selected = 1
       @bid.save

@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2019_11_14_024036) do
     t.index ["job_id"], name: "index_reviews_on_job_id"
   end
 
+
   create_table "settings", force: :cascade do |t|
     t.integer "user_id"
     t.boolean "bid_created", default: false
@@ -71,6 +72,7 @@ ActiveRecord::Schema.define(version: 2019_11_14_024036) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
+
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
