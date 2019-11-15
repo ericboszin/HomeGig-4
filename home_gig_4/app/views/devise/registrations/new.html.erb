@@ -1,79 +1,102 @@
-<div class="welcome text-center">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-9 ">
-        <h2>Sign up</h2>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>sign up</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="welcome text-center">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-9 ">
+            <h2>Sign up</h2>
+          </div>
+        </div>
+      <div class="row justify-content-center">
+        <div class="col-9 ">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-signup"}) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+
+            <div class="field">
+                <%= f.label "Account type:" %>
+                <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
+            </div>
+
+            <div class="field">
+                <%= f.label "First name:" %>
+                <%= f.text_field :first_name, autofocus: true %>
+            </div>
+
+            <div class="field">
+              <%= f.label "Last name:" %>
+              <%= f.text_field :last_name, autofocus: true %>
+            </div>
+
+            <div class="field">
+              <%= f.label "email:" %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "user@homegig.com" %>
+            </div>
+
+            <div class="field">
+              <%= f.label "Date of birth:" %>
+              <%= f.date_select :birthday, autofocus: true, :start_year => 1920, :end_year => 2002 %>
+            </div>
+
+            <div class="field">
+              <%= f.label "country:" %>
+              <%= f.country_select :country %>
+            </div>
+
+            <div class="field">
+              <%= f.label "Phone number:" %>
+              <%= f.text_field :phone, autofocus: true %>
+            </div>
+
+            <div class="field">
+              <%= f.label :password %>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %>
+              <%= f.password_field :password, autocomplete: "new-password", placeholder: "password" %>
+            </div>
+
+            <div class="field">
+              <%= f.label :password_confirmation %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "password" %>
+            </div>
+
+            <div class="field">
+              <%= f.label :skill %>
+              <%= f.select :skill, [['virtual assistant',1], ['writing and editing',2], ['graphic design',3], ['spreadsheets',4], ['accounting and bookkeeping',5], ['customer servcie',6], ['sales',7], ['social media marketing',8], ['e-commerce',9], ['web development',10], ['web design', 11]] %>
+            </div>
+
+            <div class="field">
+              <%= f.label "About Me" %><br />
+              <%= f.text_area :aboutme, autofocus: true, :cols => 30, :rows => 10 %>
+            </div>
+
+            <div class="actions">
+              <input class="btn btn-primary btn-block" type="submit" name="commit" value="sign up" data-disable-with="sign up">
+            </div>
+          <% end %>
+
+          <%= render "devise/shared/links" %>
+        </div>
       </div>
     </div>
-  <div class="row justify-content-center">
-    <div class="col-9 ">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
-
-        <div class="field">
-            <%= f.label "Account type:" %>
-            <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]})%>
-        </div>
-
-        <div class="field">
-            <%= f.label "First name:" %>
-            <%= f.text_field :first_name, autofocus: true %>
-        </div>
-
-        <div class="field">
-          <%= f.label "Last name:" %>
-          <%= f.text_field :last_name, autofocus: true %>
-        </div>
-
-        <div class="field">
-          <%= f.label "email:" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-        </div>
-
-        <div class="field">
-          <%= f.label "Date of birth:" %>
-          <%= f.date_select :birthday, autofocus: true, :start_year => 1920, :end_year => 2002 %>
-        </div>
-
-        <div class="field">
-          <%= f.label "country:" %>
-          <%= f.country_select :country %>
-        </div>
-
-        <div class="field">
-          <%= f.label "Phone number:" %>
-          <%= f.text_field :phone, autofocus: true %>
-        </div>
-
-        <div class="field">
-          <%= f.label :password %>
-          <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
-          <% end %>
-          <%= f.password_field :password, autocomplete: "new-password", placeholder: "password" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :password_confirmation %>
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "password" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :skill %>
-          <%= f.select :skill, [['virtual assistant',1], ['writing and editing',2], ['graphic design',3], ['spreadsheets',4], ['accounting and bookkeeping',5], ['customer servcie',6], ['sales',7], ['social media marketing',8], ['e-commerce',9], ['web development',10], ['web design', 11]] %>
-        </div>
-
-        <div class="field">
-          <%= f.label "About Me" %><br />
-        <%= f.text_area :aboutme, autofocus: true, :cols => 30, :rows => 10 %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit "Sign up" %>
-        </div>
-      <% end %>
-
-      <%= render "devise/shared/links" %>
-    </div>
-  </div>
-</div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
