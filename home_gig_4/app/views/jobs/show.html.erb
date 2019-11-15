@@ -93,6 +93,16 @@
 <% if current_user == User.find(@job.user_id) %>
   <% if @job.status == "completed" %>
     <h2>Reviews</h2>
+    <table>
+      <tr>
+        <th>User</th>
+        <th>Comments</th>
+        <th>Rating</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    
     <%= render @job.reviews %>
     <h2>Add a Review:</h2>
     <%= render 'reviews/form' %>

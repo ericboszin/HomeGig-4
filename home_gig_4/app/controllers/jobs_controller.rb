@@ -91,9 +91,7 @@ class JobsController < ApplicationController
                     @job.bids.each do |_bid|
                         if (_bid.selected == 1) #Bid was selected
                             @bidder = User.find(_bid.user_id)
-
-                            if @bidder..setting.job_started
-                                                 
+                            if @bidder.setting.job_started      
                                 UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_started_email.deliver_now
                             end
                         end
@@ -119,15 +117,8 @@ class JobsController < ApplicationController
                 @job.bids.each do |_bid|
                     if (_bid.selected == 1) #Bid was selected
                         @bidder = User.find(_bid.user_id)
-<<<<<<< HEAD
-                        if @bidder.setting.job_completed
-                                                 
-   
-                                UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_completed_email.deliver_now
-=======
                         if @bidder.notification
                             UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_completed_email.deliver_now
->>>>>>> f80a64cb450a471f4e388af88f587474569e2331
                         end
                     else
                         _bid.destroy
@@ -153,15 +144,8 @@ class JobsController < ApplicationController
                 @job.bids.each do |_bid|
                     if (_bid.selected == 1) #Bid was selected
                         @bidder = User.find(_bid.user_id)
-<<<<<<< HEAD
-                        if @bidder.setting.job_cancelled
-                                                 
-   
-                                UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_cancelled_email.deliver_now
-=======
                         if @bidder.notification
                             UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_cancelled_email.deliver_now
->>>>>>> f80a64cb450a471f4e388af88f587474569e2331
                         end
                     else
                         _bid.destroy
