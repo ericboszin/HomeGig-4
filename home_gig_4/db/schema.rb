@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_15_024250) do
+ActiveRecord::Schema.define(version: 2019_11_15_143216) do
 
   create_table "bids", force: :cascade do |t|
     t.string "description"
@@ -92,7 +92,6 @@ ActiveRecord::Schema.define(version: 2019_11_15_024250) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "skill"
-    t.boolean "notification"
     t.boolean "admin", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
