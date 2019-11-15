@@ -117,7 +117,7 @@ class JobsController < ApplicationController
                 @job.bids.each do |_bid|
                     if (_bid.selected == 1) #Bid was selected
                         @bidder = User.find(_bid.user_id)
-                        if @bidder.notification
+                        if @bidder.setting.job_completed
                             UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_completed_email.deliver_now
                         end
                     else
