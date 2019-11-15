@@ -175,7 +175,7 @@ class JobsController < ApplicationController
     end
 
     def explore
-        @jobs = Job.all
+        @jobs = Job.where(status: "available").or(Job.where(status: "started"))
     end
 
     private
