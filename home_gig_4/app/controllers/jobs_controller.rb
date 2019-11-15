@@ -23,7 +23,7 @@ class JobsController < ApplicationController
             @job.status = "available"
 
             if @job.save
-                if current_user.notification
+                if current_user.setting.job_created
                     UserMailer.with(user: User.find(@job.user_id), job: @job).job_created_email.deliver_now
                 end
                 redirect_to jobs_path
@@ -44,6 +44,9 @@ class JobsController < ApplicationController
                 flash[:warning]= "Error: Cannot update a job that has been cancelled or completed"
                 redirect_to @job  
             elsif @job.update(job_params)
+                if current_user.setting.job_edited
+                    UserMailer.with(user: User.find(@job.user_id), job: @job).job_edited_email.deliver_now
+                end
                 redirect_to @job
             else
             render 'edit'
@@ -59,6 +62,10 @@ class JobsController < ApplicationController
             @job = Job.find(params[:id])
             @user = User.find(@job.user_id)
             if current_user == @user
+
+                if current_user.setting.job_deleted
+                    UserMailer.with(user: User.find(@job.user_id), job: @job).job_deleted_email.deliver_now
+                end
                 @job.status = "cancelled"
                 @job.destroy
             else
@@ -87,7 +94,7 @@ class JobsController < ApplicationController
                         
 
                             @bidder = User.find(_bid.user_id)
-                            if @bidder.notification
+                            if @bidder..setting.job_started
                                                  
    
                                 UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_started_email.deliver_now
@@ -120,7 +127,7 @@ class JobsController < ApplicationController
                         
 
                         @bidder = User.find(_bid.user_id)
-                        if @bidder.notification
+                        if @bidder.setting.job_completed
                                                  
    
                                 UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_completed_email.deliver_now
@@ -154,7 +161,7 @@ class JobsController < ApplicationController
                         
 
                         @bidder = User.find(_bid.user_id)
-                        if @bidder.notification
+                        if @bidder.setting.job_cancelled
                                                  
    
                                 UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_cancelled_email.deliver_now

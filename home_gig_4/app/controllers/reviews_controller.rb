@@ -31,11 +31,11 @@ class ReviewsController < ApplicationController
       if @review.save
         @owner = User.find(current_user.id)
         @worker = User.find(@review.worker_id) 
-        if @owner.notification
+        if @owner.setting.review_posted
           
           UserMailer.with(owner: @owner, job: @job, review: @review, worker: User.find(@review.worker_id)).review_posted_email.deliver_now
         end  
-        if @worker.notification
+        if @worker.setting.review_received
           UserMailer.with(owner: @owner, job: @job, review: @review, worker: User.find(@review.worker_id)).review_received_email.deliver_now
         end
         
@@ -54,7 +54,7 @@ class ReviewsController < ApplicationController
     if @review.update(review_params)
         @owner = User.find(current_user.id)
 
-        if @owner.notification
+        if @owner.setting.review_edited
           UserMailer.with(owner: @owner, job: @job, review: @review, worker: User.find(@review.worker_id)).review_edited_email.deliver_now
         end
       redirect_to job_path(@job)

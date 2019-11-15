@@ -50,7 +50,7 @@ class BidsController < ApplicationController
         end
       end
       if @bid.save && !already
-        if User.find(@job.user_id).notification
+        if User.find(@job.user_id).setting.bid_created
           UserMailer.with(user: User.find(@job.user_id), job: @job, creator: User.find(current_user.id)).bid_created_email.deliver_now
         end
         redirect_to job_path(@job)
@@ -119,7 +119,7 @@ class BidsController < ApplicationController
     if current_user == @user
       @bid.selected = 1
       @bid.save
-      if User.find(@bid.user_id)
+      if User.find(@bid.user_id).setting.bid_created
         UserMailer.with(user: User.find(@bid.user_id), job: @job, owner: User.find(current_user.id)).bid_accepted_email.deliver_now
       end
     else
