@@ -11,37 +11,37 @@
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="field">
-            <%= f.label :role %><br />
+            <%= f.label "Account type:" %>
             <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]})%>
         </div>
 
         <div class="field">
-            <%= f.label :first_name %><br />
+            <%= f.label "First name:" %>
             <%= f.text_field :first_name, autofocus: true %>
         </div>
 
         <div class="field">
-          <%= f.label :last_name %><br />
+          <%= f.label "Last name:" %>
           <%= f.text_field :last_name, autofocus: true %>
         </div>
 
         <div class="field">
-          <%= f.label :email %><br />
+          <%= f.label "email:" %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
         </div>
 
         <div class="field">
-          <%= f.label :birthday %><br />
+          <%= f.label "Date of birth:" %>
           <%= f.date_select :birthday, autofocus: true, :start_year => 1920, :end_year => 2002 %>
         </div>
 
         <div class="field">
-          <%= f.label :country %><br />
+          <%= f.label "country:" %>
           <%= f.country_select :country %>
         </div>
 
         <div class="field">
-          <%= f.label :phone %><br />
+          <%= f.label "Phone number:" %>
           <%= f.text_field :phone, autofocus: true %>
         </div>
 
@@ -49,17 +49,17 @@
           <%= f.label :password %>
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
-          <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password" %>
+          <% end %>
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: "password" %>
         </div>
 
         <div class="field">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "password" %>
         </div>
 
         <div class="field">
-          <%= f.label :skill %><br />
+          <%= f.label :skill %>
           <%= f.select :skill, [['virtual assistant',1], ['writing and editing',2], ['graphic design',3], ['spreadsheets',4], ['accounting and bookkeeping',5], ['customer servcie',6], ['sales',7], ['social media marketing',8], ['e-commerce',9], ['web development',10], ['web design', 11]] %>
         </div>
 

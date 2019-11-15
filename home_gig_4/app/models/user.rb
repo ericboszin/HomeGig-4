@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :bids, through: :jobs
   has_many :reviews, through: :jobs
   has_one :setting, dependent: :destroy
+  validates :first_name, :last_name, :birthday, :country, :phone, :aboutme, :role, :skill, presence: true
 
   after_create :init_setting
   # Include default devise modules. Others available are:
