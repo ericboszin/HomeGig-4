@@ -19,25 +19,10 @@
         <h1>Notifications</h1>
 
         <%= form_with(model: [ @user, @setting ], local: true) do |form| %>
-            <p>
-                <%= form.label :bid_created %>
-                <%= form.check_box :bid_created, value: :bid_created %>
-            </p>
+            <% if current_user.role =='worker'%>
             <p>
                 <%= form.label :bid_accepted %>
                 <%= form.check_box :bid_accepted, value: :bid_accepted %>
-            </p>
-            <p>
-                <%= form.label :job_created %>
-                <%= form.check_box :job_created, value: :job_created %>
-            </p>
-            <p>
-                <%= form.label :job_edited %>
-                <%= form.check_box :job_edited, value: :job_edited %>
-            </p>
-            <p>
-                <%= form.label :job_deleted %>
-                <%= form.check_box :job_deleted, value: :job_deleted %>
             </p>
 
             <p>
@@ -55,6 +40,33 @@
             </p>
 
             <p>
+                <%= form.label :review_received %>
+                <%= form.check_box :review_received, value: :review_received %>
+            </p>
+
+            <% elsif current_user.role == 'owner' %> 
+
+            <p>
+                <%= form.label :bid_created %>
+                <%= form.check_box :bid_created, value: :bid_created %>
+            </p>
+            
+            <p>
+                <%= form.label :job_created %>
+                <%= form.check_box :job_created, value: :job_created %>
+            </p>
+            <p>
+                <%= form.label :job_edited %>
+                <%= form.check_box :job_edited, value: :job_edited %>
+            </p>
+            <p>
+                <%= form.label :job_deleted %>
+                <%= form.check_box :job_deleted, value: :job_deleted %>
+            </p>
+
+            
+
+            <p>
                 <%= form.label :review_posted %>
                 <%= form.check_box :review_posted, value: :review_posted %>
             </p>
@@ -64,11 +76,8 @@
                 <%= form.check_box :review_edited, value: :review_edited %>
             </p>
 
-            <p>
-                <%= form.label :review_received %>
-                <%= form.check_box :review_received, value: :review_received %>
-            </p>
-
+            
+            <% end %>
 
 
 
