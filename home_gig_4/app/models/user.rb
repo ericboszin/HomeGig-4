@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   enum role: [:owner, :worker]
-  enum skill: ["Virtual assistant", "Writing and editing", "Graphic design", "Spreadsheets", "Accounting and bookkeeping", "Customer servcie", "Sales", "Social media marketing", "E-commerce", "Web development", "Web design"]
+  enum skill: ["Virtual assistant", "Writing and editing", "Graphic design", "Spreadsheets", "Accounting and bookkeeping", "Customer service", "Sales", "Social media marketing", "E-commerce", "Web development", "Web design"]
   has_many :jobs, dependent: :destroy
   has_many :reports, dependent: :destroy
   has_many :bids, through: :jobs
