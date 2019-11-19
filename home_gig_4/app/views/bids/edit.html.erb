@@ -16,52 +16,62 @@
   <link rel="stylesheet" href="">
 </head>
 <body>
+<%= render "layouts/nav" %>
+<%= render "layouts/alerts" %>
+
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a>
   to improve your experience.</p>
 <![endif]-->
+<div class="container">
+  <div class="text-center mb-4">
+    <h1 class="h3 mb-3 font-weight-normal">Edit bid</h1>
+  </div>
 
-<h1>Edit bid</h1>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 justify-content-centre">
 
-<%= form_with(model: [@job, @bid], local: true) do |form| %>
-  <% if @bid.errors.any? %>
-    <div id="error_explanation">
-      <%= pluralize(@bid.errors.count, "error") %> prohibited this bid from being saved:
-      <ul>
-        <% @bid.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+      <%= bootstrap_form_with(model: [@job, @bid], local: true) do |form| %>
+        <% if @bid.errors.any? %>
+          <div id="error_explanation">
+            <%= pluralize(@bid.errors.count, "error") %> prohibited this bid from being saved:
+            <ul>
+              <% @bid.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+
+        <div class="form-group">
+          <%= form.text_area :description, help: "Please type in the work you will be doing" %>
+        </div>
+        <div class="row">
+          <div class="col mb-3">
+            <%= form.number_field :amount, prepend: "$", help: "Total payment expected at the end of the job" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col mb-3">
+            <%= form.number_field :duration, help: "Duration should be in days", append: "days" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col mb-3">
+            <%= form.date_select :starting_date, help: "Date you're expected to start working on job" %>
+          </div>
+        </div>
+
+        <div class="actions">
+          <%= button_to 'Back', job_path(@job), class: "btn btn-block btn-danger" %>
+          <br>
+          <%= form.submit class: "btn btn-block btn-primary" %>
+        </div>
+
+      <% end %>
     </div>
-  <% end %>
-
-  <p>
-    <%= form.label :description %><br>
-    <%= form.text_field :description %>
-  </p>
-
-  <p>
-    <%= form.label :amount %><br>
-    <%= form.text_area :amount %>
-  </p>
-
-  <p>
-    <%= form.label :duration %><br>
-    <%= form.text_area :duration %> days
-  </p>
-
-  <p>
-    <%= form.label :starting_date %><br>
-    <%= form.date_field :starting_date %>
-  </p>
-
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
-<%= link_to 'Show', [@job, @bid] %> |
-<%= link_to 'Back', job_bids_path(@job) %>
-
-<script src="" async defer></script>
+  </div>
+</div>
 </body>
 </html>
