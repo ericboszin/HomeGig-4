@@ -21,10 +21,10 @@ class SettingsController < ApplicationController
 		end
     end
 	def setting_owner
-			    @setting = Setting.find_by(user_id: params[:id])
-			if @setting.user_id != current_user.id
-      				redirect_to(root_path)
-      		end
+		@setting = Setting.find_by(user_id: params[:id])
+		if @setting.user_id != current_user.id
+				redirect_to(root_path)
+		end
     end
 
   def setting_params
