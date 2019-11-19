@@ -18,111 +18,162 @@
 <body>
 <%= render "layouts/nav" %>
 <%= render "layouts/alerts" %>
-<!--[if lt IE 7]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a>
-  to improve your experience.</p>
-<![endif]-->
-<h1>List of All Bids</h1>
-<h2> Job Title: <%= @job.title %></h2>
-<p> Job Description: <%= @job.description %> </p>
+<div class="container">
+  <!--[if lt IE 7]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a>
+    to improve your experience.</p>
+  <![endif]-->
+  <div class="text-center mb-4">
+    <h1 class="h3 mb-3 font-weight-normal">List of All Bids</h1>
+  </div>
+  <div class="row">
+    <div class="col-1">
+      <h2>Title:</h2>
+    </div>
+    <div class="col-11">
+      <h2><%= @job.title %></h2>
+    </div>
+  </div>
 
-
-<h3>Pending Bids</h3>
-<table>
-  <tr>
-    <th>Bidder</th>
-    <th>Bid Description</th>
-    <th>Bid Amount</th>
-    <th>Duration</th>
-    <th>Start Date</th>
-    <th></th>
-  </tr>
-  <% @job.bids.each do |bid| %>
-    <% if bid.selected == 0 %>
+  <div class="row">
+    <div class="col-1">
+      <strong>Description:</strong>
+    </div>
+    <div class="col-11 text-left" style="padding-left: 20px">
+      <%= @job.description %>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-1 text-left">
+      <strong>Price:</strong>
+    </div>
+    <div class="col-1 text-left" style="padding-left: 0px">
+      $<%= @job.price %>
+    </div>
+    <div class="col-1 text-left">
+      <strong> Status:</strong>
+    </div>
+    <div class="col-9 text-left">
+      <p class="text-capitalize"><%= @job.status %></p>
+    </div>
+  </div>
+<br>
+  <div class="row wrapper-table">
+    <h3>Pending Bids</h3>
+    <table class="table table-striped">
+      <thead>
       <tr>
-        <td>
-          <% current = User.find(bid.user_id) %>
-          <%= link_to "#{current.first_name} #{current.last_name}", user_path(current) %>
-        </td>
-        <td>
-          <%= bid.description %>
-        </td>
-        <td>
-          <%= bid.amount %>
-        </td>
-        <td>
-          <%= bid.duration %> days
-        </td>
-        <td>
-          <%= bid.starting_date %>
-        </td>
-        <% if false %>
-          <td><%= link_to 'Show Job', [@job] %></td>
-          <td><%= link_to 'Edit', edit_job_bid_path(@job, bid) %></td>
-        <% end %>
-        <% if (bid.selected == 0 && current_user == User.find(@job.user_id)) %>
-          <td><%= link_to 'Accept Bid', job_bid_accept_path(@job, bid), :method => :patch, data: {confirm: 'Are you sure?'} %></td>
-          <td><%= link_to 'Reject Bid', job_bid_reject_path(@job, bid), method: :delete, data: {confirm: 'Are you sure?'} %></td>
-        <% end %>
+        <th scope="col">Bid Description</th>
+        <th scope="col">Bid Amount</th>
+        <th scope="col">Worker</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">Duration</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
-    <% end %>
-  <% end %>
-</table>
-<br><br>
-
-<h3>Accepted Bids</h3>
-<table>
-  <tr>
-    <th>Bidder</th>
-    <th>Bid Description</th>
-    <th>Bid Amount</th>
-    <th>Duration</th>
-    <th>Start Date</th>
-    <th></th>
-  </tr>
-  <% @job.bids.each do |bid| %>
-    <% if bid.selected == 1 %>
+      </thead>
+      <tbody>
+      <% @job.bids.each do |bid| %>
+        <% if bid.selected == 0 %>
+          <tr>
+            <td>
+              <%= bid.description %>
+            </td>
+            <td>
+              <%= bid.amount %>
+            </td>
+            <td>
+              <% worker = User.find(bid.user_id) %>
+              <% if worker == current_user %>
+                <% user_bid = true %>
+              <% end %>
+              <%= link_to "#{worker.first_name} #{worker.last_name}", user_path(worker) %>
+            </td>
+            <td>
+              <%= bid.starting_date.to_date %>
+            </td>
+            <td>
+              <%= bid.duration %> days
+            </td>
+            <% if current_user == User.find(bid.user_id) %>
+              <td><%= link_to 'Edit Bid', edit_job_bid_path(@job, bid) %></td>
+            <% end %>
+            <% if (bid.selected == 0 && current_user == User.find(@job.user_id)) %>
+              <td><%= link_to 'Accept Bid', job_bid_accept_path(@job, bid), :method => :patch, data: {confirm: 'Are you sure?'} %></td>
+              <td><%= link_to 'Reject Bid', job_bid_reject_path(@job, bid), method: :delete, data: {confirm: 'Are you sure?'} %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <div class="row wrapper-table">
+    <h3>Accepted Bids</h3>
+    <table class="table table-striped">
+      <thead>
       <tr>
-        <td>
-          <% current = User.find(bid.user_id) %>
-          <%= link_to "#{current.first_name} #{current.last_name}", user_path(current) %>
-        </td>
-        <td>
-          <%= bid.description %>
-        </td>
-        <td>
-          <%= bid.amount %>
-        </td>
-        <td>
-          <%= bid.duration %> days
-        </td>
-        <td>
-          <%= bid.starting_date %>
-        </td>
-        <% if false %>
-          <td><%= link_to 'Show Job', [@job] %></td>
-          <td><%= link_to 'Edit', edit_job_bid_path(@job, bid) %></td>
-        <% end %>
-        <% if current_user == User.find(bid.user_id) %>
-          <td> <%= link_to 'Edit Bid', edit_job_bid_path(@job, bid) %> </td>
-          <td> <%= link_to 'Delete Bid', job_bid_path(@job, bid), method: :delete, data: {confirm: 'Are you sure?'} %> </td>
-        <% end %>
-        <% if (bid.selected == 1 && current_user == User.find(@job.user_id)) %>
-          <td>Bid has already been accepted</td>
-          <td><%= link_to 'Revert', job_bid_revert_bid_path(@job, bid),
-                          method: :patch,
-                          data: {confirm: 'Are you sure?'} %></td>
-        <% end %>
+        <th scope="col">Bid Description</th>
+        <th scope="col">Bid Amount</th>
+        <th scope="col">Worker</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">Duration</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
-    <% end %>
-  <% end %>
-</table>
+      </thead>
+      <tbody>
+      <% @job.bids.each do |bid| %>
+        <% if bid.selected == 1 %>
+          <tr>
+            <td>
+              <%= bid.description %>
+            </td>
+            <td>
+              <%= bid.amount %>
+            </td>
+            <td>
+              <% worker = User.find(bid.user_id) %>
+              <% if worker == current_user %>
+                <% user_bid = true %>
+              <% end %>
+              <%= link_to "#{worker.first_name} #{worker.last_name}", user_path(worker) %>
+            </td>
+            <td>
+              <%= bid.starting_date.to_date %>
+            </td>
+            <td>
+              <%= bid.duration %> days
+            </td>
+            <% if (bid.selected == 1 && current_user == User.find(@job.user_id)) %>
+              <td>Bid has already been accepted</td>
+              <td><%= link_to 'Revert', job_bid_revert_bid_path(@job, bid),
+                              method: :patch,
+                              data: {confirm: 'Are you sure?'} %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="col">
+      <% if @job.status == 'available' %>
+        <%= button_to 'Confirm Accepted Bids', job_accept_bids_path(@job), :method => :patch, data: {confirm: 'Are you sure?'}, class: "btn btn-block btn-primary" %>
+      <% end %>
+    </div>
+    <div class="col">
+      <%= button_to 'Back', job_path(@job), :method => :get, class: "btn btn-block btn-dark" %>
+    </div>
+  </div>
 
-<%= button_to 'Confirm Accepted Bids', job_accept_bids_path(@job), :method => :patch, data: {confirm: 'Are you sure?'} %>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-
-<%= link_to 'Back', job_path(@job) %>
-
-<script src="" async defer></script>
 </body>
 </html>
