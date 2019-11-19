@@ -59,17 +59,17 @@
         </div>
         <div class="row">
           <div class="col mb-3">
-            <%= form.date_select :starting_date, help: "Date you're expected to start working on job"%>
+            <%= form.date_select :starting_date, help: "Date you're expected to start working on job" %>
           </div>
         </div>
 
         <div class="actions">
-            <%= form.submit class: "btn btn-block btn-primary" %>
+          <%= button_to 'Back', job_path(@job), class: "btn btn-block btn-danger" %>
+          <br>
+          <%= form.submit class: "btn btn-block btn-primary" %>
         </div>
 
       <% end %>
-      <%= link_to 'Show', [@job, @bid] %> |
-      <%= link_to 'Back', job_bids_path(@job) %>
     </div>
   </div>
 </div>
