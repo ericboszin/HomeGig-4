@@ -45,24 +45,28 @@
         <% end %>
 
         <div class="form-group">
-          <%= form.text_field :description %>
+          <%= form.text_area :description, help: "Please type in the work you will be doing" %>
+        </div>
+        <div class="row">
+          <div class="col mb-3">
+            <%= form.number_field :amount, prepend: "$", help: "Total payment expected at the end of the job" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col mb-3">
+            <%= form.number_field :duration, help: "Duration should be in days", append: "days" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col mb-3">
+            <%= form.date_select :starting_date, help: "Date you're expected to start working on job"%>
+          </div>
         </div>
 
-        <div class="form-group">
-          <%= form.text_area :amount %>
+        <div class="actions">
+            <%= form.submit class: "btn btn-block btn-primary" %>
         </div>
 
-        <div class="form-group">
-          <%= form.text_area :duration %> days
-        </div>
-
-        <div class="form-group">
-          <%= form.date_field :starting_date %>
-        </div>
-
-        <p>
-          <%= form.submit %>
-        </p>
       <% end %>
       <%= link_to 'Show', [@job, @bid] %> |
       <%= link_to 'Back', job_bids_path(@job) %>

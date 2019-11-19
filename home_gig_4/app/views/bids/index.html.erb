@@ -41,7 +41,7 @@
     <% if bid.selected == 0 %>
       <tr>
         <td>
-          <% current = User.find(Donebid.user_id) %>
+          <% current = User.find(bid.user_id) %>
           <%= link_to "#{current.first_name} #{current.last_name}", user_path(current) %>
         </td>
         <td>
