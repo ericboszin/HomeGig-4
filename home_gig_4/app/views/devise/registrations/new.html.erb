@@ -14,14 +14,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-
-    <%= render "layouts/alerts" %>
-
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="container">
+    <div class="container mt-3">
       <div class="text-center mb-4">
         <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
       </div>
@@ -464,17 +461,17 @@
                     <label class="input-group-text" for="user_skill">Skill</label>
                   </div>
                   <select class="custom-select" name="user[skill]" id="user_skill">
-                    <option value="0">Virtual assistant</option>
-                    <option value="1">Writing and editing</option>
-                    <option value="2">Graphic design</option>
-                    <option value="3">Spreadsheets</option>
-                    <option value="4">Accounting and bookkeeping</option>
-                    <option value="5">Customer servcie</option>
-                    <option value="6">Sales</option>
-                    <option value="7">Social media marketing</option>
-                    <option value="8">E-commerce</option>
-                    <option value="9" selected="selected">Web development</option>
-                    <option value="10">Web design</option></select>
+                    <option value="Virtual assistant">Virtual assistant</option>
+                    <option value="Writing and editing">Writing and editing</option>
+                    <option value="Graphic design"></option>
+                    <option value="Spreadsheets">Spreadsheets</option>
+                    <option value="Accounting and bookkeeping">Accounting and bookkeeping</option>
+                    <option value="Customer servcie">Customer service</option>
+                    <option value="Sales">Sales</option>
+                    <option value="Social media marketing">Social media marketing</option>
+                    <option value="E-commerce">E-commerce</option>
+                    <option value="Web development" selected="selected">Web development</option>
+                    <option value="Web design">Web design</option></select>
                   </select>
                 </div>
               </div>
@@ -492,7 +489,7 @@
             </div>
 
             <div class="actions">
-              <input class="btn btn-primary btn-block" type="submit" name="commit" value="Sign up" data-disable-with="sign up">
+              <input class="btn btn-primary btn-block" type="submit" name="commit" value="Sign up" data-disable-with="Sign up">
             </div>
           <% end %>
 
