@@ -64,12 +64,11 @@
         </div>
 
         <div class="actions">
-          <%= button_to 'Back', job_path(@job), class: "btn btn-block btn-danger" %>
-          <br>
           <%= form.submit class: "btn btn-block btn-primary" %>
         </div>
-
       <% end %>
+      <br>
+      <%= button_to 'Back', job_path(@job), class: "btn btn-block btn-danger", :method => :get %>
     </div>
   </div>
 </div>
