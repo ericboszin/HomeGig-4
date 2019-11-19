@@ -1,73 +1,105 @@
-<h1>User Profile</h1>
-
-
-<% if user_signed_in? %>
-
-
-<%= link_to 'Edit Profile', edit_user_registration_path %>
-
-
-<p>
-  <strong>Account Type:</strong>
-  <%= @user.role %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @user.first_name %>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <strong>Birthday:</strong>
-  <%= @user.birthday %>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>User profile</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+  </head>
+  <body>
   
-</p>
+    <%= render "layouts/nav" %>
+    <%= render "layouts/alerts" %>
 
-<p>
-  <strong>Country:</strong>
-  <%= @user.country_name %>
-</p>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-<p>
-  <strong>Phone Number:</strong>
-  <%= @user.phone %>
-</p>
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+    <div class="container">
+      <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">User Profile</h1>
+      </div>
 
-<p>
-  <strong>Skills:</strong>
-  <%= @user.skill %>
-</p>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 justify-content-centre">
+          <% if user_signed_in? %>
+            <% if current_user.id == @user.id %>
+              <%= link_to 'Edit Profile', edit_user_registration_path %>
+            <% end %>
 
-<p>
-  <strong>About Me:</strong>
-  <%= @user.aboutme %>
-</p>
+            <p>
+              <strong>Account Type:</strong>
+              <%= @user.role %>
+            </p>
 
-<p>
-<% if @user.role == "worker" %>
-    <strong>Reviews:</strong></br>
-    </br>
-    <% Review.where(worker_id: @user.id).each do |reviews| %>
-      <strong> Job:</strong></br>
-      <%= link_to reviews.job.title, (reviews.job) %> </br>
-      <strong> Created at:</strong></br>
-      <%= reviews.created_at %> </br>
-      <strong> Rating:</strong></br>
-      <%= reviews.rating %> </br>
-      <strong> Comments:</strong></br>
-      <%= reviews.text %> </br>
-      </br>
-    <% end %>
-<% end %>
-</p>
-<%= link_to "Back", :back %>
-<%else %>
-  <p>Please Sign Up or Sign In to view the content.</p>
-  <h2><%= link_to "Sign up", new_user_registration_path%>
-  <h2><%= link_to "Sign In", new_user_session_path%>
-<% end %>
+            <p>
+              <strong>Name:</strong>
+              <%= @user.first_name %>
+              <%= @user.last_name %>
+            </p>
+
+            <p>
+              <strong>Birthday:</strong>
+              <%= @user.birthday %>
+              
+            </p>
+
+            <p>
+              <strong>Country:</strong>
+              <%= @user.country_name %>
+            </p>
+
+            <p>
+              <strong>Phone Number:</strong>
+              <%= @user.phone %>
+            </p>
+            <p>
+              <strong>Email:</strong>
+              <%= @user.email %>
+            </p>
+
+            <p>
+              <strong>Skills:</strong>
+              <%= @user.skill %>
+            </p>
+
+            <p>
+              <strong>About Me:</strong>
+              <%= @user.aboutme %>
+            </p>
+
+            <p>
+            <% if @user.role == "worker" %>
+                <strong>Reviews:</strong></br>
+                </br>
+                <% Review.where(worker_id: @user.id).each do |reviews| %>
+                  <strong> Job:</strong></br>
+                  <%= link_to reviews.job.title, (reviews.job) %> </br>
+                  <strong> Created at:</strong></br>
+                  <%= reviews.created_at %> </br>
+                  <strong> Rating:</strong></br>
+                  <%= reviews.rating %> </br>
+                  <strong> Comments:</strong></br>
+                  <%= reviews.text %> </br>
+                  </br>
+                <% end %>
+          <% end %>
+          </p>
+          <%= link_to "Back", :back %>
+          <% else %>
+            <p>Please Sign Up or Sign In to view the content.</p>
+            <h2><%= link_to "Sign up", new_user_registration_path%>
+            <h2><%= link_to "Sign In", new_user_session_path%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <script src="" async defer></script>
+  </body>
+</html>
