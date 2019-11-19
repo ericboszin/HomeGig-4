@@ -1,16 +1,55 @@
-<h2>Forgot your password?</h2>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="container">
+      <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Forgot password</h1>
+      </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 justify-content-centre">
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+            <div class="row">
+              <div class="col mb-3">
+                <label for="user_email">Email</label>
+                <input class="form-control" autofocus="autofocus" autocomplete="email" type="email" value="" name="user[email]" id="user_email">
+              </div>
+            </div>
 
-<%= render "devise/shared/links" %>
+            <div class="actions">
+              <input class="btn btn-primary btn-block" type="submit" name="commit" value="Send instructions" data-disable-with="Send instructions">
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+      <div class="text-center mb-4">
+        <%= render "devise/shared/links" %>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+
+
+
+    
+    <script src="" async defer></script>
+  </body>
+</html>
