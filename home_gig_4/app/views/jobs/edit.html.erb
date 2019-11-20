@@ -1,63 +1,80 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Edit jon</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Edit bid</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+</head>
+<body>
+<%= render "layouts/nav" %>
+<%= render "layouts/alerts" %>
 
-        <h1>Edit job</h1>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a>
+  to improve your experience.</p>
+<![endif]-->
+<div class="container">
+  <div class="text-center mb-4">
+    <h1 class="h3 mb-3 font-weight-normal">Edit job</h1>
+  </div>
 
-        <%= form_with(model: @job, local: true) do |form| %>
-            <% if @job.errors.any? %>
-                <div id="error_explanation">
-                    <%= pluralize(@job.errors.count, "error") %> prohibited this review from being saved:
-                <ul>
-                    <% @job.errors.full_messages.each do |msg| %>
-                    <li><%= msg %></li>
-                    <% end %>
-                </ul>
-                </div>
-            <% end %>
+  <%= bootstrap_form_with(model: @job, local: true) do |form| %>
+    <% if @job.errors.any? %>
+      <div id="error_explanation">
+        <%= pluralize(@job.errors.count, "error") %> prohibited this review from being saved:
+        <ul>
+          <% @job.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-            <p>
-            <%= form.label :title %><br>
-            <%= form.text_area :title %>
-            </p>
+    <div class="row">
+      <div class="col mb-3">
+        <%= form.text_field :title, label: "Job Title" %>
+      </div>
+    </div>
 
-            <p>
-            <%= form.label :description %><br>
-            <%= form.text_area :description %>
-            </p>
+    <div class="row">
+      <div class="col mb-3">
+        <%= form.text_area :description %>
+      </div>
+    </div>
 
-            <p>
-                <%= form.label :price %><br>
-                <%= form.text_field :price %>
-            </p>
+    <div class="row">
+      <div class="col mb-3">
+        <%= form.number_field :price, prepend: "$" %>
+      </div>
+    </div>
 
-            <p class="field">
-                <%= form.label :status %><br />
-                <%= form.select(:status, Job.statuses.keys.map {|status| [status.titleize, status]})%>
-            </p>
+    <div class="row">
+      <div class="col mb-3">
+        <%= form.submit class: "btn btn-block btn-success" %>
+      </div>
+    </div>
 
-            <p>
-            <%= form.submit %>
-            </p>
+  <% end %>
+  <div class="row">
+    <div class="col">
+      <%= button_to 'Cancel', jobs_path, method: :get, class: "btn btn-block btn-danger" %>
+    </div>
+  </div>
+</div>
+<script src="" async defer></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-        <% end %>
-
-        <%= link_to 'Back', @job %>
-        
-        <script src="" async defer></script>
-    </body>
+</body>
 </html>
