@@ -24,7 +24,7 @@ Things you may want to cover:
  * Install postgres on your local machine. [Get Postgres](https://postgresapp.com)
  * Install helpful tool called pgAdmin. [Get pgAdmin](https://www.pgadmin.org/download/)
  * Make sure postgres is properly installed in your machine. You can run commands such as "brew install postgresql"
-
+ * For Ubuntu, run `sudo apt-get install libpq-dev` and `sudo apt-get install postgresql`.
 
  ## Database initialization:
  * Run Make install-dev
