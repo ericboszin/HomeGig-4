@@ -463,10 +463,10 @@
                   <select class="custom-select" name="user[skill]" id="user_skill">
                     <option value="Virtual assistant">Virtual assistant</option>
                     <option value="Writing and editing">Writing and editing</option>
-                    <option value="Graphic design"></option>
+                    <option value="Graphic design">Graphic design</option>
                     <option value="Spreadsheets">Spreadsheets</option>
                     <option value="Accounting and bookkeeping">Accounting and bookkeeping</option>
-                    <option value="Customer servcie">Customer service</option>
+                    <option value="Customer service">Customer service</option>
                     <option value="Sales">Sales</option>
                     <option value="Social media marketing">Social media marketing</option>
                     <option value="E-commerce">E-commerce</option>
@@ -501,14 +501,12 @@
       </div>
     </div>
   <script type="text/javascript">
-      $(document).ready(function(){
+    $(document).ready(function(){
       $("#user_role").on('change',function(){
         var selectedValue = $("#user_role").val();
-        if (selectedValue == "worker") 
-        {
+        if (selectedValue == "worker") {
           $("#select_skill").show();
-        }
-        else{
+        } else {
           $("#select_skill").hide();
         }
       });

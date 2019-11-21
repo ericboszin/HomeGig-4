@@ -1,87 +1,416 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Edit profile</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <%= render 'layouts/nav' %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="container mt-3">
+      <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Edit Profile</h1>
+      </div>
 
-  <%= link_to 'Notifications Settings', edit_setting_path(current_user)%>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 justify-content-centre">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
 
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                  <label for="user_first_name">First name</label>
+                  <input class="form-control" autofocus="autofocus" type="text" name="user[first_name]" id="user_first_name" value= <%= current_user.first_name%> >
+              </div>
 
-  
+              <div class="col-md-6 mb-3">
+                <label for="user_last_name">Last name</label>
+                <input class="form-control" autofocus="autofocus" type="text" name="user[last_name]" id="user_last_name" value= <%= current_user.last_name %> >
+              </div>
+            </div>
 
+            <div class="row">
+              <div class="col-md-12">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="user_country">Country</label>
+                  </div>
+                  <select class="custom-select" name="user[country]" id="user_country">
+                    <option value="AF">Afghanistan</option>
+                    <option value="AX">Åland Islands</option>
+                    <option value="AL">Albania</option>
+                    <option value="DZ">Algeria</option>
+                    <option value="AS">American Samoa</option>
+                    <option value="AD">Andorra</option>
+                    <option value="AO">Angola</option>
+                    <option value="AI">Anguilla</option>
+                    <option value="AQ">Antarctica</option>
+                    <option value="AG">Antigua and Barbuda</option>
+                    <option value="AR">Argentina</option>
+                    <option value="AM">Armenia</option>
+                    <option value="AW">Aruba</option>
+                    <option value="AU">Australia</option>
+                    <option value="AT">Austria</option>
+                    <option value="AZ">Azerbaijan</option>
+                    <option value="BS">Bahamas</option>
+                    <option value="BH">Bahrain</option>
+                    <option value="BD">Bangladesh</option>
+                    <option value="BB">Barbados</option>
+                    <option value="BY">Belarus</option>
+                    <option value="BE">Belgium</option>
+                    <option value="BZ">Belize</option>
+                    <option value="BJ">Benin</option>
+                    <option value="BM">Bermuda</option>
+                    <option value="BT">Bhutan</option>
+                    <option value="BO">Bolivia, Plurinational State of</option>
+                    <option value="BQ">Bonaire, Sint Eustatius and Saba</option>
+                    <option value="BA">Bosnia and Herzegovina</option>
+                    <option value="BW">Botswana</option>
+                    <option value="BV">Bouvet Island</option>
+                    <option value="BR">Brazil</option>
+                    <option value="IO">British Indian Ocean Territory</option>
+                    <option value="BN">Brunei Darussalam</option>
+                    <option value="BG">Bulgaria</option>
+                    <option value="BF">Burkina Faso</option>
+                    <option value="BI">Burundi</option>
+                    <option value="KH">Cambodia</option>
+                    <option value="CM">Cameroon</option>
+                    <option value="CA">Canada</option>
+                    <option value="CV">Cape Verde</option>
+                    <option value="KY">Cayman Islands</option>
+                    <option value="CF">Central African Republic</option>
+                    <option value="TD">Chad</option>
+                    <option value="CL">Chile</option>
+                    <option value="CN">China</option>
+                    <option value="CX">Christmas Island</option>
+                    <option value="CC">Cocos (Keeling) Islands</option>
+                    <option value="CO">Colombia</option>
+                    <option value="KM">Comoros</option>
+                    <option value="CG">Congo</option>
+                    <option value="CD">Congo, The Democratic Republic of the</option>
+                    <option value="CK">Cook Islands</option>
+                    <option value="CR">Costa Rica</option>
+                    <option value="CI">Côte d'Ivoire</option>
+                    <option value="HR">Croatia</option>
+                    <option value="CU">Cuba</option>
+                    <option value="CW">Curaçao</option>
+                    <option value="CY">Cyprus</option>
+                    <option value="CZ">Czech Republic</option>
+                    <option value="DK">Denmark</option>
+                    <option value="DJ">Djibouti</option>
+                    <option value="DM">Dominica</option>
+                    <option value="DO">Dominican Republic</option>
+                    <option value="EC">Ecuador</option>
+                    <option value="EG">Egypt</option>
+                    <option value="SV">El Salvador</option>
+                    <option value="GQ">Equatorial Guinea</option>
+                    <option value="ER">Eritrea</option>
+                    <option value="EE">Estonia</option>
+                    <option value="ET">Ethiopia</option>
+                    <option value="FK">Falkland Islands (Malvinas)</option>
+                    <option value="FO">Faroe Islands</option>
+                    <option value="FJ">Fiji</option>
+                    <option value="FI">Finland</option>
+                    <option value="FR">France</option>
+                    <option value="GF">French Guiana</option>
+                    <option value="PF">French Polynesia</option>
+                    <option value="TF">French Southern Territories</option>
+                    <option value="GA">Gabon</option>
+                    <option value="GM">Gambia</option>
+                    <option value="GE">Georgia</option>
+                    <option value="DE">Germany</option>
+                    <option value="GH">Ghana</option>
+                    <option value="GI">Gibraltar</option>
+                    <option value="GR">Greece</option>
+                    <option value="GL">Greenland</option>
+                    <option value="GD">Grenada</option>
+                    <option value="GP">Guadeloupe</option>
+                    <option value="GU">Guam</option>
+                    <option value="GT">Guatemala</option>
+                    <option value="GG">Guernsey</option>
+                    <option value="GN">Guinea</option>
+                    <option value="GW">Guinea-Bissau</option>
+                    <option value="GY">Guyana</option>
+                    <option value="HT">Haiti</option>
+                    <option value="HM">Heard Island and McDonald Islands</option>
+                    <option value="VA">Holy See (Vatican City State)</option>
+                    <option value="HN">Honduras</option>
+                    <option value="HK">Hong Kong</option>
+                    <option value="HU">Hungary</option>
+                    <option value="IS">Iceland</option>
+                    <option value="IN">India</option>
+                    <option value="ID">Indonesia</option>
+                    <option value="IR">Iran, Islamic Republic of</option>
+                    <option value="IQ">Iraq</option>
+                    <option value="IE">Ireland</option>
+                    <option value="IM">Isle of Man</option>
+                    <option value="IL">Israel</option>
+                    <option value="IT">Italy</option>
+                    <option value="JM">Jamaica</option>
+                    <option value="JP">Japan</option>
+                    <option value="JE">Jersey</option>
+                    <option value="JO">Jordan</option>
+                    <option value="KZ">Kazakhstan</option>
+                    <option value="KE">Kenya</option>
+                    <option value="KI">Kiribati</option>
+                    <option value="KP">Korea, Democratic People's Republic of</option>
+                    <option value="KR">Korea, Republic of</option>
+                    <option value="KW">Kuwait</option>
+                    <option value="KG">Kyrgyzstan</option>
+                    <option value="LA">Lao People's Democratic Republic</option>
+                    <option value="LV">Latvia</option>
+                    <option value="LB">Lebanon</option>
+                    <option value="LS">Lesotho</option>
+                    <option value="LR">Liberia</option>
+                    <option value="LY">Libya</option>
+                    <option value="LI">Liechtenstein</option>
+                    <option value="LT">Lithuania</option>
+                    <option value="LU">Luxembourg</option>
+                    <option value="MO">Macao</option>
+                    <option value="MK">Macedonia, Republic of</option>
+                    <option value="MG">Madagascar</option>
+                    <option value="MW">Malawi</option>
+                    <option value="MY">Malaysia</option>
+                    <option value="MV">Maldives</option>
+                    <option value="ML">Mali</option>
+                    <option value="MT">Malta</option>
+                    <option value="MH">Marshall Islands</option>
+                    <option value="MQ">Martinique</option>
+                    <option value="MR">Mauritania</option>
+                    <option value="MU">Mauritius</option>
+                    <option value="YT">Mayotte</option>
+                    <option value="MX">Mexico</option>
+                    <option value="FM">Micronesia, Federated States of</option>
+                    <option value="MD">Moldova, Republic of</option>
+                    <option value="MC">Monaco</option>
+                    <option value="MN">Mongolia</option>
+                    <option value="ME">Montenegro</option>
+                    <option value="MS">Montserrat</option>
+                    <option value="MA">Morocco</option>
+                    <option value="MZ">Mozambique</option>
+                    <option value="MM">Myanmar</option>
+                    <option value="NA">Namibia</option>
+                    <option value="NR">Nauru</option>
+                    <option value="NP">Nepal</option>
+                    <option value="NL">Netherlands</option>
+                    <option value="NC">New Caledonia</option>
+                    <option value="NZ">New Zealand</option>
+                    <option value="NI">Nicaragua</option>
+                    <option value="NE">Niger</option>
+                    <option value="NG">Nigeria</option>
+                    <option value="NU">Niue</option>
+                    <option value="NF">Norfolk Island</option>
+                    <option value="MP">Northern Mariana Islands</option>
+                    <option value="NO">Norway</option>
+                    <option value="OM">Oman</option>
+                    <option value="PK">Pakistan</option>
+                    <option value="PW">Palau</option>
+                    <option value="PS">Palestine, State of</option>
+                    <option value="PA">Panama</option>
+                    <option value="PG">Papua New Guinea</option>
+                    <option value="PY">Paraguay</option>
+                    <option value="PE">Peru</option>
+                    <option value="PH">Philippines</option>
+                    <option value="PN">Pitcairn</option>
+                    <option value="PL">Poland</option>
+                    <option value="PT">Portugal</option>
+                    <option value="PR">Puerto Rico</option>
+                    <option value="QA">Qatar</option>
+                    <option value="RE">Réunion</option>
+                    <option value="RO">Romania</option>
+                    <option value="RU">Russian Federation</option>
+                    <option value="RW">Rwanda</option>
+                    <option value="BL">Saint Barthélemy</option>
+                    <option value="SH">Saint Helena, Ascension and Tristan da Cunha</option>
+                    <option value="KN">Saint Kitts and Nevis</option>
+                    <option value="LC">Saint Lucia</option>
+                    <option value="MF">Saint Martin (French part)</option>
+                    <option value="PM">Saint Pierre and Miquelon</option>
+                    <option value="VC">Saint Vincent and the Grenadines</option>
+                    <option value="WS">Samoa</option>
+                    <option value="SM">San Marino</option>
+                    <option value="ST">Sao Tome and Principe</option>
+                    <option value="SA">Saudi Arabia</option>
+                    <option value="SN">Senegal</option>
+                    <option value="RS">Serbia</option>
+                    <option value="SC">Seychelles</option>
+                    <option value="SL">Sierra Leone</option>
+                    <option value="SG">Singapore</option>
+                    <option value="SX">Sint Maarten (Dutch part)</option>
+                    <option value="SK">Slovakia</option>
+                    <option value="SI">Slovenia</option>
+                    <option value="SB">Solomon Islands</option>
+                    <option value="SO">Somalia</option>
+                    <option value="ZA">South Africa</option>
+                    <option value="GS">South Georgia and the South Sandwich Islands</option>
+                    <option value="SS">South Sudan</option>
+                    <option value="ES">Spain</option>
+                    <option value="LK">Sri Lanka</option>
+                    <option value="SD">Sudan</option>
+                    <option value="SR">Suriname</option>
+                    <option value="SJ">Svalbard and Jan Mayen</option>
+                    <option value="SZ">Swaziland</option>
+                    <option value="SE">Sweden</option>
+                    <option value="CH">Switzerland</option>
+                    <option value="SY">Syrian Arab Republic</option>
+                    <option value="TW">Taiwan</option>
+                    <option value="TJ">Tajikistan</option>
+                    <option value="TZ">Tanzania, United Republic of</option>
+                    <option value="TH">Thailand</option>
+                    <option value="TL">Timor-Leste</option>
+                    <option value="TG">Togo</option>
+                    <option value="TK">Tokelau</option>
+                    <option value="TO">Tonga</option>
+                    <option value="TT">Trinidad and Tobago</option>
+                    <option value="TN">Tunisia</option>
+                    <option value="TR">Turkey</option>
+                    <option value="TM">Turkmenistan</option>
+                    <option value="TC">Turks and Caicos Islands</option>
+                    <option value="TV">Tuvalu</option>
+                    <option value="UG">Uganda</option>
+                    <option value="UA">Ukraine</option>
+                    <option value="AE">United Arab Emirates</option>
+                    <option value="GB">United Kingdom</option>
+                    <option value="UM">United States Minor Outlying Islands</option>
+                    <option value="US">United States</option>
+                    <option value="UY">Uruguay</option>
+                    <option value="UZ">Uzbekistan</option>
+                    <option value="VU">Vanuatu</option>
+                    <option value="VE">Venezuela, Bolivarian Republic of</option>
+                    <option value="VN">Viet Nam</option>
+                    <option value="VG">Virgin Islands, British</option>
+                    <option value="VI">Virgin Islands, U.S.</option>
+                    <option value="WF">Wallis and Futuna</option>
+                    <option value="EH">Western Sahara</option>
+                    <option value="YE">Yemen</option>
+                    <option value="ZM">Zambia</option>
+                    <option value="ZW">Zimbabwe</option>
+                  </select>
+                </div>
+              </div>
+            </div>
 
+            <div class="row">
+              <div class="col mb-3">
+                <label for="user_phone">Phone number</label>
+                <input class="form-control" autofocus="autofocus" autocomplete="phone" value=<%= current_user.phone %> type="text" value="" name="user[phone]" id="user_phone">
+              </div>
+            </div>
 
-  <div class="field">
-      <%= f.label :first_name %><br />
-      <%= f.text_field :first_name, autofocus: true, value: current_user.first_name  %>
-  </div>
+            <div class="row">
+              <div class="col mb-3">
+                <label for="user_email">Email</label>
+                <input class="form-control" autofocus="autofocus" autocomplete="email" value=<%= current_user.email %> type="email" value="" name="user[email]" id="user_email">
+              </div>
+            </div>
 
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true, value: current_user.last_name %>
-  </div>
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+            <% end %>
 
-  <div class="field">
-    <%= f.label :birthday %><br />
-    <%= f.date_select :birthday, autofocus: true, :start_year => 1900, value: current_user.birthday %>
-  </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <a class="btn btn-primary" data-toggle="collapse" href="#change_pass" role="button" aria-expanded="false" aria-controls="change_pass">
+                  Change password
+                </a>
+              </div>
+            </div>
 
-  <div class="field">
-    <%= f.label :country %><br />
-    <%= f.country_select :country%>
-  </div>
+            <div class="collapse" id="change_pass">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="user_password">Change password</label>
+                    <input class="form-control" autocomplete="new-password" type="password" name="user[password]" id="user_password" placeholder="6 characters min.">
+                </div>
 
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone, autofocus: true, value: current_user.phone %>
-  </div>
+                <div class="col-md-6 mb-3">
+                  <label for="user_password_confirmation">Confirm new password</label>
+                  <input class="form-control" autocomplete="new-password" type="password" name="user[password_confirmation]" id="user_password_confirmation" placeholder="6 characters min.">
+                </div>
+              </div>
+            </div>
 
+            <% if current_user.role == "worker" %>
+              <div class="row" id="select_skill">
+                <div class="col-md-12">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="user_skill">Skill</label>
+                    </div>
+                    <select class="custom-select" name="user[skill]" id="user_skill">
+                      <option value="Virtual assistant">Virtual assistant</option>
+                      <option value="Writing and editing">Writing and editing</option>
+                      <option value="Graphic design">Graphic design</option>
+                      <option value="Spreadsheets">Spreadsheets</option>
+                      <option value="Accounting and bookkeeping">Accounting and bookkeeping</option>
+                      <option value="Customer service">Customer service</option>
+                      <option value="Sales">Sales</option>
+                      <option value="Social media marketing">Social media marketing</option>
+                      <option value="E-commerce">E-commerce</option>
+                      <option value="Web development" selected="selected">Web development</option>
+                      <option value="Web design">Web design</option></select>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            <% end %>
 
+            <div class="row">
+              <div class="col-md-12">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">About me</span>
+                  </div>
+                  <textarea id="user_aboutme" class="form-control" aria-label="About me" name="user[aboutme]"><%= current_user.aboutme %></textarea>
+                </div>
+              </div>
+            </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, value: current_user.email %>
-  </div>
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                  <label for="user_password">Password</label>
+                  <input class="form-control" autocomplete="current-password" type="password" name="user[current_password]" id="user_current_password" placeholder="Current password needed to confirm your changes">
+              </div>
+            </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+            <div class="row">
+              <div class="col-md-3"></div>
+              <div class="col-md-6">
+                <input class="btn btn-primary btn-block" type="submit" name="commit" value="Update" data-disable-with="Update">
+              </div>
+            </div>
+      
+          <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
+          <div class="container mt-3">
+            <div class="row">
+              <div class="col-md-3"></div>
+              <div class="col-md-6 text-center">
+                  <%= button_to "Cancel account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-danger btn-sm"%>
+              </div>
+            </div>
+          </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Skills" %><br />
-    <%= f.text_area :skill, autofocus: true, :cols => 30, :rows => 10, value: current_user.skill %>
-  </div>
-
-  <div class="field">
-    <%= f.label "About Me" %><br />
-    <%= f.text_area :aboutme, autofocus: true, :cols => 30, :rows => 10, value: current_user.aboutme %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      let country = "<%= current_user.country %>";
+      $("select#user_country").val(country); 
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
