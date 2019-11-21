@@ -15,15 +15,21 @@
         <a class="nav-link" href="#">Report</a>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" hrf="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Profile
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/d/users/edit">Edit profile</a>
-                <div class="dropdown-divider"></div>
-                <a>
-                    <%= link_to 'Sign out', destroy_user_session_path(@user), method: :delete, class:"dropdown-item" %>
-                </a>
+              <a>
+                <%= link_to 'Notifications Settings', edit_setting_path(current_user), class:"dropdown-item"%>
+              </a>
+              <a>
+                <%= link_to 'View profile', user_path(current_user), method: :get, class:"dropdown-item" %>
+              </a>
+              <a class="dropdown-item" href="/d/users/edit">Edit profile</a>
+              <div class="dropdown-divider"></div>
+              <a>
+                <%= link_to 'Sign out', destroy_user_session_path(@user), method: :delete, class:"dropdown-item" %>
+              </a>
             </div>
         </li>
     </ul>
