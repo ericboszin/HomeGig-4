@@ -1,25 +1,59 @@
-<h2>Change your password</h2>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+    <div class="container mt-3">
+      <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Change your password</h1>
+      </div>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 justify-content-centre">
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+            <%= f.hidden_field :reset_password_token %>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+            <div class="collapse" id="change_pass">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="user_password">Change password</label>
+                    <input class="form-control" autocomplete="new-password" type="password" name="user[password]" id="user_password" placeholder="6 characters min.">
+                </div>
 
-<%= render "devise/shared/links" %>
+                <div class="col-md-6 mb-3">
+                  <label for="user_password_confirmation">Confirm new password</label>
+                  <input class="form-control" autocomplete="new-password" type="password" name="user[password_confirmation]" id="user_password_confirmation" placeholder="6 characters min.">
+                </div>
+              </div>
+            </div>
+
+            <div class="actions">
+              <input class="btn btn-primary btn-block" type="submit" name="commit" value="Change password" data-disable-with="Change password">
+            </div>
+          <% end %>
+
+          <div class="text-center mb-4">
+            <%= render "devise/shared/links" %>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+      </div>
+    </div>
+    <script src="" async defer></script>
+  </body>
+</html>
