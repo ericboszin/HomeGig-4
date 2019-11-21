@@ -60,9 +60,9 @@
   </div>
 
 
-  <div class="table-responsive overflow: scroll text-overflow: ellipsis" style="height: 250px max-width: 2000px">
+  <div class="table-responsive text-overflow: ellipsis w-auto ">
 
-  <table class="table table-bordered table-striped table-hover text-center mb-0">
+  <table class="table table-bordered table-striped table-hover text-center w-auto mb-0">
     <thead>
       <tr>
         <th scope="col">Title</th>
@@ -81,9 +81,9 @@
     </thead>
     <tbody>
       <% @jobs.each do |job| %>
-      <tr style="height: 25px">
-      <td style="max-width: 300px; text-overflow: ellipsis"><a href=<%=job_path(job)%>><%= job.title %></td>
-      <td style="max-width: 500px; 
+      <tr style="height: 25px" onclick="location.href='<%=job_path(job)%>'">
+      <td style="max-width: 300px; text-overflow: ellipsis;"><%= job.title %></td>
+      <td style="max-width: 600px; 
           overflow: hidden; 
           text-overflow: ellipsis;
           white-space: nowrap; 
