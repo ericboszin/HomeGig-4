@@ -16,6 +16,10 @@ make start-secure:
 make heroku-login:
 	heroku login
 
+### Link repository to heroku:
+make heroku-link-repo:
+	heroku git:remote -a home-gig-4
+
 ### deploys master branch /home_gig_4 directory only
 make heroku-deploy:
 	cd .. && git subtree push --prefix home_gig_4 heroku master
