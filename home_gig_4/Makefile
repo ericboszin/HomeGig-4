@@ -11,3 +11,15 @@ make start:
 # start https server
 make start-secure:
 	rails s -b 'ssl://localhost:3000?key=config/localhost.key&cert=config/localhost.crt'
+
+### Adding heroku deployment commands:
+make heroku-login:
+	heroku login
+
+### deploys master branch /home_gig_4 directory only
+make heroku-deploy:
+	git subtree push --prefix home_gig_4 heroku master
+
+### runs db migration inside heroku cluster
+make heroku-migrate:
+	heroku run rake db:migrate
