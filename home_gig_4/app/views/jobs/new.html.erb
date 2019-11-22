@@ -25,6 +25,7 @@
 <![endif]-->
 <div class="container">
   <div class="text-center mb-4">
+    <%= render 'layouts/alerts' %>
     <h1 class="h3 mb-3 font-weight-normal">Add a Job</h1>
   </div>
   <%= bootstrap_form_with scope: :job, url: jobs_path, local: true do |form| %>

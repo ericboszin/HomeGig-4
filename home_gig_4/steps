@@ -1,7 +1,0 @@
-for mac:
-
-install postgres from link (https://postgresapp.com)
-run brew install postgresql
-open postgres
-execute bundle exec rake db:create
-run make install-dev

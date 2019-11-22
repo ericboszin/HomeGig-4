@@ -27,6 +27,7 @@
 <div class="container">
   <% job_owner = User.find(@job.user_id) %>
   <div class="text-center mb-4">
+    <%= render 'layouts/alerts' %>
     <h1 class="h3 mb-3 font-weight-normal">Job Description</h1>
   </div>
 

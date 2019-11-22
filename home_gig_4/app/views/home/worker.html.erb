@@ -9,7 +9,7 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -17,34 +17,64 @@
     <![endif]-->
 
     <%= render 'layouts/nav' %>
+    <div class="container mt-3">
+      <div class="text-center mb-4">
+        <%= render 'layouts/alerts' %>
+        <h1 class="h3 mb-3 font-weight-normal">Welcome <%=current_user.first_name%>!</h1>
+      </div>
 
-    <h1>Listing Bids</h1>
-    <table>
-      <tr>
-        <th>Job</th>
-        <th>Contractor</th>
-      </tr>
+      <div class="row justify-content-center">
+        <div class="col-2 mb-3">
+          <a class="btn btn-primary btn-block" href= <%= jobs_explore_path %> role="button">
+            Explore jobs
+          </a>
+        </div>
+      </div>
 
-      <% @bids.each do |bid| %>
-        <tr>
-          <td></td>
-          <td></td>
-          <td><%= bid.job.title%></td>
-          <td><%= bid.job.description%></td>
-          <td><%= bid.description %></td>
-          <td><%= bid.amount %></td>
-          <td></td>
-          <td><%= link_to 'Show Job', [bid.job] %></td>
-          <td><%= link_to 'Edit', edit_job_bid_path(bid.job, bid) %></td>
-          <td><%= link_to 'Delete Bid', [bid.job, bid],
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </table>
-    
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 justify-content-centre">
+          <% if @bids.present? %>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Job</th>
+                  <th scope="col">Bid amount</th>
+                  <th scope="col">Start date</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @bids.each do |bid| %>
+                  <tr>
+                    <td><%= bid.job.title %></td>
+                    <td><%= number_to_currency(bid.amount) %></td>
+                    <td><%= bid.starting_date.to_date %></td>
+                    <td><%= link_to edit_job_bid_path(bid.job, bid) do %>
+                        <i class="fas fa-cog"></i>
+                      <% end %>
+                    </td>
+                    <td><%= link_to job_bid_path(bid.job, bid.id),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } do %>
+                          <i class="fas fa-trash"></i>
+                        <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <p class="lead text-center">
+              You have no jobs yet! Click "Explore jobs" to see all available jobs 
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
