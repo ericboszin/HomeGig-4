@@ -18,8 +18,12 @@ make heroku-login:
 
 ### deploys master branch /home_gig_4 directory only
 make heroku-deploy:
-	git subtree push --prefix home_gig_4 heroku master
+	cd .. && git subtree push --prefix home_gig_4 heroku master
 
 ### runs db migration inside heroku cluster
 make heroku-migrate:
 	heroku run rake db:migrate
+
+### done only once to set servers master key
+make heroku-set-masterkey:
+	heroku config:set RAILS_MASTER_KEY=`cat config/master.key`
