@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
 
-default from: 'notifications@homegig.io'
+default from: 'no-reply@homegig.com'
  
   def welcome_email
     @user = params[:user]
