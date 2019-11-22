@@ -26,6 +26,40 @@
       <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8 justify-content-centre">
+        <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 justify-content-centre">
+          <% if @jobs.present? %>
+          <div class="mb-4">
+            <h4 class="h4 mb-3 font-weight-normal">Available jobs</h4>
+          </div>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Title</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @jobs.each do |job| %>
+                  <tr onclick="location.href='<%=job_path(job)%>'">
+                    <td style="cursor: pointer;" ><%= job.title %></td>
+                    <td style="cursor: pointer;"><%= job.description %></td>
+                    <td style="cursor: pointer;"><%= number_to_currency(job.price) %></td>
+                    <td style="cursor: pointer;"><%= job.status %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <p class="lead text-center">
+              You have no jobs yet! Click "Add job" to create a new one 
+            </p>
+          <% end %>
+        </div>
+      </div>
       
       </div>
     </div>
@@ -34,27 +68,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
-
-
-
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Price</th>
-    <th>Status</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-  <% @jobs.each do |job| %>
-    <tr>
-      <td><%= job.title %></td>
-      <td><%= job.description %></td>
-      <td><%= job.price %></td>
-      <td><%= job.status %></td>
-      <td><%= link_to 'Show', job_path(job) %></td>
-  <% end %>
-</table>
