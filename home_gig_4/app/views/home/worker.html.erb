@@ -41,16 +41,22 @@
                   <th scope="col">Job</th>
                   <th scope="col">Bid amount</th>
                   <th scope="col">Start date</th>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
+                  <th scope="col">Bid accepted</th>
+                  <th scope="col">Edit</th>
+                  <th scope="col">Delete</th>
                 </tr>
               </thead>
               <tbody>
                 <% @bids.each do |bid| %>
                   <tr>
-                    <td><%= bid.job.title %></td>
+                    <td style="cursor: pointer;" onclick="location.href='<%=job_path(bid.job)%>'"><%= bid.job.title %></td>
                     <td><%= number_to_currency(bid.amount) %></td>
                     <td><%= bid.starting_date.to_date %></td>
+                    <% if bid.selected > 0 %>
+                      <td>Yes</td>
+                    <% else %>
+                      <td>No</td>
+                    <% end %>
                     <td><%= link_to edit_job_bid_path(bid.job, bid) do %>
                         <i class="fas fa-cog"></i>
                       <% end %>

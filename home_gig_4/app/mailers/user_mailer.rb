@@ -61,6 +61,12 @@ default from: 'no-reply@homegig.com'
     mail(to: @bidder.email, subject: 'A job you bid for has been cancelled.')
   end
 
+  def job_deleted_email
+    @user = params[:user]
+    @job = params[:job]
+    mail(to: @user.email, subject: 'You have successfully deleted your job.')
+  end
+
   def review_posted_email
     @owner = params[:owner]
     @job = params[:job]
