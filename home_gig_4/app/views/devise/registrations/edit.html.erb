@@ -19,6 +19,7 @@
 
     <div class="container mt-3">
       <div class="text-center mb-4">
+        <%= render 'layouts/alerts' %>
         <h1 class="h3 mb-3 font-weight-normal">Edit Profile</h1>
       </div>
 
@@ -379,7 +380,7 @@
 
             <div class="row">
               <div class="col-md-12 mb-3">
-                  <label for="user_password">Password</label>
+                  <label for="user_current_password">Password</label>
                   <input class="form-control" autocomplete="current-password" type="password" name="user[current_password]" id="user_current_password" placeholder="Current password needed to confirm your changes">
               </div>
             </div>

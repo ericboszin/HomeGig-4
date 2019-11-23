@@ -26,14 +26,14 @@ class JobsController < ApplicationController
                 if current_user.setting.job_created
                     UserMailer.with(user: User.find(@job.user_id), job: @job).job_created_email.deliver_now
                 end
-                redirect_to jobs_path
+                redirect_to home_owner_path
             else
                 flash[:warning]= "Error: Could not create job"
                 render 'new'
             end
         else
             flash[:warning]= "Error: workers cannot create jobs"
-            redirect_to jobs_path
+            redirect_to home_owner_path
         end
     end
 

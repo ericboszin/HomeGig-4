@@ -11,6 +11,13 @@ user.email = 'adm@admin.com'
 user.password = '123123'
 user.password_confirmation = '123123'
 user.admin = true
+user.first_name = 'Adm'
+user.last_name = 'Bam'
+user.country = 'CA'
+user.birthday = '06/06/1996'
+user.phone = '00000000000'
+user.aboutme = 'hello'
+user.role = :owner
 user.skip_confirmation!
 user.save!
 
@@ -19,6 +26,12 @@ user.email = 'test1@test.com'
 user.password = '123123'
 user.password_confirmation = '123123'
 user.role = :owner
+user.first_name = 'Adm'
+user.last_name = 'Bam'
+user.country = 'CA'
+user.phone = '00000000000'
+user.birthday = '06/06/1996'
+user.aboutme = 'hello'
 user.skip_confirmation!
 user.save!
 
@@ -27,6 +40,12 @@ user.email = 'test2@test.com'
 user.password = '123123'
 user.password_confirmation = '123123'
 user.role = :worker
+user.first_name = 'Adm'
+user.last_name = 'Bam'
+user.country = 'CA'
+user.birthday = '06/06/1996'
+user.phone = '00000000000'
+user.aboutme = 'hello'
 user.skip_confirmation!
 user.save!
 
@@ -35,9 +54,35 @@ user.email = 'test3@test.com'
 user.password = '123123'
 user.password_confirmation = '123123'
 user.role = :owner
+user.first_name = 'Adm'
+user.last_name = 'Bam'
+user.birthday = '06/06/1996'
+user.country = 'CA'
+user.phone = '00000000000'
+user.aboutme = 'hello'
 user.skip_confirmation!
 user.save!
 
-job =  Job.create([{title: 'Yard Word', price:'10', description:'clean the yard', user_id: '1'},
-                            {title: 'Floor Word', price: '7', description:'clean the floor', user_id: '2'},
-                            {title: 'Frontend word', price: '20', description: 'design and build a website', user_id: '3'}])
+job = Job.new
+job.title = 'Yard Work'
+job.price = '10'
+job.description = 'clean the yard'
+job.user_id = '1'
+job.status = 'available'
+job.save!
+
+job2 = Job.new
+job2.title = 'Floor Work'
+job2.price = '7'
+job2.description = 'clean the floor'
+job2.user_id = '2'
+job.status = 'available'
+job.save!
+
+job2 = Job.new
+job2.title = 'Frontend Work'
+job2.price = '20'
+job2.description = 'design and build a website'
+job2.user_id = '3'
+job.status = 'available'
+job.save!

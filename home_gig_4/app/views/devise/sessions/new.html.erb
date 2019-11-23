@@ -16,20 +16,29 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="container text-center mt-3">
-      <div class="row">
-        <div class="col mb-3">
-          <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <div class="container mt-3">
+      <div class="text-center mb-4">
+        <%= render 'layouts/alerts' %>
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      </div>
 
-          <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin"}) do |f| %>
-            <div class="field">
-              <%= f.label :email, 'Email Address', class: 'sr-only' %>
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "user@homegig.com", class: 'form-control' %>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 justify-content-centre">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+            <div class="row">
+              <div class="col mb-3">
+                <label for="user_email">Email</label>
+                <input class="form-control" autofocus="autofocus" autocomplete="email" placeholder="user@homegig.com" type="email" value="" name="user[email]" id="user_email">
+              </div>
             </div>
 
-            <div class="field">
-              <%= f.label :password, 'Password', class: 'sr-only' %><br />
-              <%= f.password_field :password, autocomplete: "current-password", placeholder: "password", class: 'form-control' %>
+            <div class="row">
+              <div class="col mb-3">
+                  <label for="user_password">Password</label>
+                  <input class="form-control" autocomplete="current-password" type="password" name="user[password]" id="user_password" placeholder="password">
+              </div>
             </div>
 
             <% if devise_mapping.rememberable? %>
@@ -39,12 +48,18 @@
               </div>
             <% end %>
 
-            <div class="actions">
-              <input class="btn btn-primary btn-block" type="submit" name="commit" value="Sign in" data-disable-with="Sign in">
+            <div class="row">
+              <div class="col-md-4 mb-3"></div>
+              <div class="col-md-4 mb-3">
+                <input class="btn btn-primary btn-block" type="submit" name="commit" value="Sign in" data-disable-with="Sign in">
+              </div>
             </div>
           <% end %>
 
-          <%= render "devise/shared/links" %>
+          <div class="text-center mb-4">
+            <%= render "devise/shared/links" %>
+            <%= render 'layouts/alerts' %>
+          </div>
         </div>
       </div>
     </div>

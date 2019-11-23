@@ -11,6 +11,6 @@
     <%= form.select(:rating, Review.ratings.values.map { |rating| [rating, rating] }) %>
   </p>
   <p>
-    <%= form.submit class: "btn btn-block btn-secondary" %>
+    <%= form.submit class: "btn btn-block btn-primary" %>
   </p>
 <% end %>
