@@ -26,14 +26,14 @@ class JobsController < ApplicationController
                 if current_user.setting.job_created
                     UserMailer.with(user: User.find(@job.user_id), job: @job).job_created_email.deliver_now
                 end
-                redirect_to home_owner_path
+                redirect_to root_path
             else
                 flash[:warning]= "Error: Could not create job"
                 render 'new'
             end
         else
             flash[:warning]= "Error: workers cannot create jobs"
-            redirect_to home_owner_path
+            redirect_to root_path
         end
     end
 
@@ -53,7 +53,7 @@ class JobsController < ApplicationController
             end
         else
             flash[:warning]= "Error: workers cannot update jobs"
-            redirect_to jobs_path
+            redirect_to root_path
         end
     end
 
@@ -71,10 +71,10 @@ class JobsController < ApplicationController
             else
             flash[:warning]= "Error: user not authorized to delete job"
             end
-            redirect_to jobs_path
+            redirect_to root_path
         else
             flash[:warning]= "Error: workers cannot update jobs"
-            redirect_to jobs_path
+            redirect_to root_path
         end
     end
 
@@ -100,11 +100,11 @@ class JobsController < ApplicationController
                 else
                     flash[:warning]= "Error: user not authorized to accept bid"
                 end
-                redirect_to jobs_path
+                redirect_to job_path(@job)
             end
         else
             flash[:warning]= "Error: workers cannot accept bids"
-            redirect_to jobs_path
+            redirect_to job_path(@job)
         end
     end
 
@@ -128,10 +128,10 @@ class JobsController < ApplicationController
             else
                 flash[:warning]= "Error: user not authorized to accept bid"
             end
-            redirect_to jobs_path
+            redirect_to root_path
         else
             flash[:warning]= "Error: workers cannot complete jobs"
-            redirect_to jobs_path
+            redirect_to root_path
         end
     end
 
@@ -155,10 +155,10 @@ class JobsController < ApplicationController
             else
                 flash[:warning]= "Error: user not authorized to accept bid"
             end
-            redirect_to jobs_path
+            redirect_to root_path
         else
             flash[:warning]= "Error: workers cannot cancel jobs"
-            redirect_to jobs_path
+            redirect_to root_path
         end
     end
 

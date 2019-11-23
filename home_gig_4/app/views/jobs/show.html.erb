@@ -68,7 +68,7 @@
       </div>
     </div>
   <% end %>
-  <% if @job.status != 'started' %>
+  <% if @job.status != 'started' && job_owner == current_user  %>
     <div class="row">
       <div class="col-md-3 mb-3"></div>
       <div class="col-md-6 mb-3">
@@ -167,7 +167,7 @@
       <div class="row">
         <div class="col-md-4 mb-3"></div>
         <div class="col-md-2 mb-3">
-          <%= button_to 'Back', jobs_path, method: :get, class: "btn btn-dark btn-block" %>
+          <%= button_to 'Back', root_path, method: :get, class: "btn btn-dark btn-block" %>
         </div>
         <div class="col-md-2 mb-3">
           <%= button_to 'Edit Job', edit_job_path(@job), method: :get, class: "btn btn-secondary btn-block" %>
@@ -177,7 +177,7 @@
       <div class="row">
         <div class="col-md-4 mb-3"></div>
         <div class="col-md-4 mb-3">
-          <%= button_to 'Back', jobs_path, method: :get, class: "btn btn-dark btn-block" %>
+          <%= button_to 'Back', jobs_explore_path, method: :get, class: "btn btn-dark btn-block" %>
         </div>
       </div>
     <% end %>
