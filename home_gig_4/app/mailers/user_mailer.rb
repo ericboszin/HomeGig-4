@@ -1,12 +1,6 @@
 class UserMailer < ApplicationMailer
 
 default from: 'no-reply@homegig.com'
- 
-  def welcome_email
-    @user = params[:user]
-    @url  = 'http://example.com/login'
-    mail(to: @user.email, subject: 'Welcome to My Awesome Site')
-  end
 
   def bid_created_email
     @user = params[:user]
