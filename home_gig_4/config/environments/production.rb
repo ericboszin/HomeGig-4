@@ -60,6 +60,10 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "home_gig_4_production"
 
+  # Setting up Stripe environment variables
+  config.stripe.secret_key  = Rails.application.credentials.stripe[:production][:secret_key]
+  config.stripe.publishable_key = Rails.application.credentials.stripe[:production][:publishable_key]
+  
   config.action_mailer.perform_caching = false
 
   config.action_mailer.default_url_options = { :host => 'home-gig-4.herokuapp.com'}
