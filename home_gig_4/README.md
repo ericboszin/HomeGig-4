@@ -36,4 +36,19 @@ Things you may want to cover:
  * Run `Make start` or `rails server` to start the app.
 
  ## Databse Management:
- * Download and install `pgAdmin` in your machine, and follow this [tutorial](http://www.postgresqltutorial.com/connect-to-postgresql-database/) 
+ * Download and install `pgAdmin` in your machine, and follow this [tutorial](http://www.postgresqltutorial.com/connect-to-postgresql-database/)
+
+ ## PGAmdmin Connection:
+ * Login to the Heroku account and navigate to the [Data](https://data.heroku.com/) Menu
+ * Click on the DataBase Container and navigate to the `Settings` Menu
+ * Under `Administration - Database Credentials` click on `View Credentials`. You'll need those credentials for setting up a connection in `PGAdmin`
+ * In `PGAdmin` select `Add New Server`. Under `General` input `home_gig_heroku` for the Name field.
+ * Under `Connection`:
+    * `Host`: `ec2-184-73-176-11.compute-1.amazonaws.com`
+    * `Maintanance/Database`: `d1360lmkpg20el`
+    * `Username`: *Look at credentials in Heroku Dashboard
+    * `Password`: *Look at credentials in Heroku Dashboard
+    * Select `save Password` checkbox
+* Finally, Under `Advanced`:
+    * `DB Restriction`: d1360lmkpg20el
+* Save and create the server
