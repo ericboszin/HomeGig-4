@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   end
 
   def owner
-  	@jobs = Job.where(user_id: current_user.id)
+    @jobs = Job.where(user_id: current_user.id)
   end
 
   def worker
