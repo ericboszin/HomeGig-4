@@ -27,6 +27,7 @@ resources :users, :only =>[:show]
 
   resources :reports
   resources :settings
+  resources :billing
 
 
 
