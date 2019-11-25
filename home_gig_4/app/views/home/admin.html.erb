@@ -1,25 +1,69 @@
-<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+<!DOCTYPE html>
 
-<h1>Listing Reports</h1>
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-  </tr>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>sign up</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <% @reports.each do |report| %>
-    <tr>
-      <td><%= report.title %></td>
-      <td><%= report.description %></td>
-      <td><%= link_to 'Show', report %></td>
-      <td><%= link_to 'Edit', edit_report_path(report) %></td>
-      <td><%= link_to 'Delete', report,
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-</table>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
+  </head>
 
+  <body>
+    <%= render 'layouts/nav' %>
+    <div class="container mt-3">
+      <div class="text-center mb-4">
+        <%= render 'layouts/alerts' %>
+        <h1 class="h3 mb-3 font-weight-normal">Customer Reports </h1>
+      </div>
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 justify-content-centre">
+          <% if @reports.present? %>
+          <div class="mb-4">
+            <h4 class="h4 mb-3 font-weight-normal">Reports</h4>
+          </div>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Title</th>
+                  <th scope="col">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @reports.each do |report| %>
+                  <tr>
+                    <td style="cursor: pointer;" onclick="location.href='<%=report_path(report)%>'"><%= report.title %></td>
+                    <td style="cursor: pointer;" onclick="location.href='<%=report_path(report)%>'"><%= report.description %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <p class="lead text-center">
+              There are no reports.
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'layouts/footer' %>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
 
 
