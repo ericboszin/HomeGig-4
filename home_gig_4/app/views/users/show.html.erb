@@ -1,152 +1,159 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>User profile</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
-  </head>
-  <body>
-  
-    <%= render "layouts/nav" %>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>User profile</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+</head>
+<body>
 
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+<%= render "layouts/nav" %>
 
-    <div class="container mt-3">
-      <div class="text-center mb-4">
-        <%= render 'layouts/alerts' %>
-        <h1 class="h3 mb-3 font-weight-normal">User Profile</h1>
-      </div>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a>
+  to improve your experience.</p>
+<![endif]-->
 
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 justify-content-centre">
-          <% if user_signed_in? %>
+<div class="container mt-3">
+  <div class="text-center mb-4">
+    <%= render 'layouts/alerts' %>
+    <h1 class="h3 mb-3 font-weight-normal">User Profile</h1>
+  </div>
 
-            <div class="row">
-              <div class="col-md-2 mb-4">
-                <h5 class="h5 mb-3 font-weight-normal">Account type</h5>
-              </div>
-              <div class="col-md-10 justify-content-centre">
-                <p class="lead">
-                  <%= @user.role %>
-                </p>
-              </div>
-            </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 justify-content-centre">
+      <% if user_signed_in? %>
 
-            <div class="row">
-              <div class="col-md-2 mb-4">
-                <h5 class="h5 mb-3 font-weight-normal">Name</h5>
-              </div>
-              <div class="col-md-10 justify-content-centre">
-                <p class="lead">
-                  <%= @user.first_name %>
-                  <%= @user.last_name %>
-                </p>
-              </div>
-            </div>
-
-            <% if current_user == @user %>
-              <div class="row">
-                <div class="col-md-2 mb-4">
-                  <h5 class="h5 mb-3 font-weight-normal">Birthday</h5>
-                </div>
-                <div class="col-md-10 justify-content-centre">
-                  <p class="lead">
-                    <%= @user.birthday %>
-                  </p>
-                </div>
-              </div>
-            <% end %>
-
-            <div class="row">
-              <div class="col-md-2 mb-4">
-                <h5 class="h5 mb-3 font-weight-normal">Country</h5>
-              </div>
-              <div class="col-md-10 justify-content-centre">
-                <p class="lead">
-                  <%= @user.country_name %>
-                </p>
-              </div>
-            </div>
-           
-            <div class="row">
-              <div class="col-md-2 mb-4">
-                <h5 class="h5 mb-3 font-weight-normal">Phone number</h5>
-              </div>
-              <div class="col-md-10 justify-content-centre">
-                <p class="lead">
-                  <%= @user.phone %>
-                </p>
-              </div>
-            </div>
-            
-            <div class="row">
-              <div class="col-md-2 mb-4">
-                <h5 class="h5 mb-3 font-weight-normal">E-mail</h5>
-              </div>
-              <div class="col-md-10 justify-content-centre">
-                <p class="lead">
-                  <%= @user.email %>
-                </p>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-2 mb-4">
-                <h5 class="h5 mb-3 font-weight-normal">Skill</h5>
-              </div>
-              <div class="col-md-10 justify-content-centre">
-                <p class="lead">
-                  <%= @user.skill %>
-                </p>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-2 mb-4">
-                <h5 class="h5 mb-3 font-weight-normal">About me</h5>
-              </div>
-              <div class="col-md-10 justify-content-centre">
-                <p class="lead">
-                  <%= @user.aboutme %>
-                </p>
-              </div>
-            </div>
-
-            <% if @user.role == "worker" %>
-              <div class="row">
-                <div class="col-md-2 mb-4">
-                  <h5 class="h5 mb-3 font-weight-normal">Reviews</h1>
-                </div>
-                <div class="col-md-8 justify-content-centre">
-                    <% Review.where(worker_id: @user.id).each do |reviews| %>
-                      <p class="lead">
-                        Job: <%= link_to reviews.job.title, (reviews.job) %> </br>
-                        Created at: <%= reviews.created_at.to_date %> </br>
-                        Rating: <%= reviews.rating %> </br>
-                        Comments: <%= reviews.text %> </br>
-                        <div class="dropdown-divider"></div>
-                      </p>
-                    <% end %>
-                </div>
-              </div>
-            <% end %>
-          <% else %>
-            <%= redirect_to home_index %>
-          <% end %>
+        <div class="row">
+          <div class="col-md-2 mb-4">
+            <h5 class="h5 mb-3 font-weight-normal">Account type</h5>
+          </div>
+          <div class="col-md-10 justify-content-centre">
+            <p class="lead">
+              <%= @user.role %>
+            </p>
+          </div>
         </div>
-      </div>
+
+        <div class="row">
+          <div class="col-md-2 mb-4">
+            <h5 class="h5 mb-3 font-weight-normal">Name</h5>
+          </div>
+          <div class="col-md-10 justify-content-centre">
+            <p class="lead">
+              <%= @user.first_name %>
+              <%= @user.last_name %>
+            </p>
+          </div>
+        </div>
+
+        <% if current_user == @user %>
+          <div class="row">
+            <div class="col-md-2 mb-4">
+              <h5 class="h5 mb-3 font-weight-normal">Birthday</h5>
+            </div>
+            <div class="col-md-10 justify-content-centre">
+              <p class="lead">
+                <%= @user.birthday %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="row">
+          <div class="col-md-2 mb-4">
+            <h5 class="h5 mb-3 font-weight-normal">Country</h5>
+          </div>
+          <div class="col-md-10 justify-content-centre">
+            <p class="lead">
+              <%= @user.country_name %>
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2 mb-4">
+            <h5 class="h5 mb-3 font-weight-normal">Phone number</h5>
+          </div>
+          <div class="col-md-10 justify-content-centre">
+            <p class="lead">
+              <%= @user.phone %>
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2 mb-4">
+            <h5 class="h5 mb-3 font-weight-normal">E-mail</h5>
+          </div>
+          <div class="col-md-10 justify-content-centre">
+            <p class="lead">
+              <%= @user.email %>
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2 mb-4">
+            <h5 class="h5 mb-3 font-weight-normal">Skill</h5>
+          </div>
+          <div class="col-md-10 justify-content-centre">
+            <p class="lead">
+              <%= @user.skill %>
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2 mb-4">
+            <h5 class="h5 mb-3 font-weight-normal">About me</h5>
+          </div>
+          <div class="col-md-10 justify-content-centre">
+            <p class="lead">
+              <%= @user.aboutme %>
+            </p>
+          </div>
+        </div>
+
+        <% if @user.role == "worker" %>
+          <div class="row">
+            <div class="col-md-2 mb-4">
+              <h5 class="h5 mb-3 font-weight-normal">Reviews</h5>
+            </div>
+            <div class="col-md-8 justify-content-centre">
+              <% Review.where(worker_id: @user.id).each do |reviews| %>
+                <p class="lead">
+                  Job: <%= link_to reviews.job.title, (reviews.job) %> </br>
+                  Created at: <%= reviews.created_at.to_date %> </br>
+                  Rating: <%= reviews.rating %> </br>
+                  Comments: <%= reviews.text %> </br>
+                <div class="dropdown-divider"></div>
+                </p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <%= redirect_to home_index %>
+      <% end %>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+  </div>
+</div>
+<%= render 'layouts/footer' %>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
 </html>

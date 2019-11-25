@@ -10,72 +10,70 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Edit report</title>
+  <title>User profile</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="">
 </head>
 <body>
+
 <%= render "layouts/nav" %>
-<%= render "layouts/alerts" %>
 
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a>
   to improve your experience.</p>
 <![endif]-->
 
-<div class="container">
+<div class="container mt-3">
   <div class="text-center mb-4">
     <%= render 'layouts/alerts' %>
-    <h1 class="h3 mb-3 font-weight-normal">Edit report</h1>
+    <h1 class="h3 mb-3 font-weight-normal">About Us</h1>
   </div>
 
-  <%= bootstrap_form_with(model: @report, local: true) do |form| %>
-    <% if @report.errors.any? %>
-      <div id="error_explanation">
-        <%= pluralize(@report.errors.count, "error") %> prohibited this review from being saved:
-        <ul>
-          <% @report.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="row">
-      <div class="col mb-3">
-        <%= form.text_field :title, label: "Report Title" %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col mb-3">
-        <%= form.text_area :description %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col mb-3">
-        <%= form.submit class: "btn btn-block btn-success" %>
-      </div>
-    </div>
-
-    <% end %>
   <div class="row">
-    <div class="col">
-      <%= button_to 'Cancel', report_path(@report), method: :get, class: "btn btn-block btn-danger" %>
+    <div class="col-md-2"></div>
+    <div class="col-md-8 justify-content-centre lead">
+      <%= bootstrap_form_with(url: "/contact/form", method: "post") do |f| %>
+        <div class="row">
+          <div class="col-md-3 mb-3"></div>
+          <div class="col-md-6 mb-3">
+            <%= f.text_field :first_name, label: "First Name" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 mb-3"></div>
+          <div class="col-md-6 mb-3">
+            <%= f.text_field :last_name, label: "Last Name" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 mb-3"></div>
+          <div class="col-md-6 mb-3">
+            <%= f.email_field :email, label: "Email" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 mb-3"></div>
+          <div class="col-md-6 mb-3">
+            <%= f.text_area :comment, label: "Comment" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 mb-3"></div>
+          <div class="col-md-3 mb-3">
+            <%= f.submit "Send Message", class: "btn btn-block btn-primary" %>
+          </div>
+          <div class="col-md-3 mb-3">
+            <%= button_to 'Cancel', home_owner_path, method: :get, class: "btn btn-block btn-danger" %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
-
 <%= render 'layouts/footer' %>
-
-<script src="" async defer></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 </body>
 </html>
-
-

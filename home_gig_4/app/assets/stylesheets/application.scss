@@ -16,3 +16,13 @@
 @import "bootstrap";
 @import "rails_bootstrap_forms";
 
+html {
+  height: 100% !important;
+}
+
+body {
+  min-height: 100% !important;
+  flex-direction: column!important;
+  display: flex!important;
+  overflow-y: scroll;
+}

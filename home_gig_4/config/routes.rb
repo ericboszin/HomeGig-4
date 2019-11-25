@@ -5,16 +5,24 @@ Rails.application.routes.draw do
   get 'home/admin'
   get 'jobs/explore'
 
-devise_for :users, :path_prefix => 'd'
-resources :users, :only =>[:show]
+  get '/about', to: 'static#about'
+  get '/contactus', to: 'static#about'
+  get '/faq', to: 'static#faq'
+  get '/privacy', to: 'static#privacy'
+  get '/sitemap', to: 'static#sitemap'
+  get '/tos', to: 'static#tos'
+
+
+  devise_for :users, :path_prefix => 'd'
+  resources :users, :only => [:show]
 #match '/users/:id',     to: 'users#show',       via: 'get'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  # get 'jobs/index'
-  # get 'reviews/index'
+# For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+# get 'jobs/index'
+# get 'reviews/index'
 
   resources :jobs do
-  	resources :bids do
-  	  patch 'accept'
+    resources :bids do
+      patch 'accept'
       delete 'reject'
       patch 'revert_bid'
     end
@@ -22,13 +30,13 @@ resources :users, :only =>[:show]
     patch 'accept_bids'
     patch 'cancel_job'
     get 'cost'
-  	resources :reviews
+    resources :reviews
   end
 
   resources :reports
   resources :settings
+  resources :billing
 
 
-
-root :to => 'passthrough#index'
+  root :to => 'passthrough#index'
 end

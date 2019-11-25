@@ -1,52 +1,81 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>View bid</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
-  </head>
-  <body>
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bids</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+</head>
+<body>
+<%= render "layouts/nav" %>
+<div class="container">
+  <!--[if lt IE 7]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a>
+    to improve your experience.</p>
+  <![endif]-->
+  <div class="text-center mb-4">
+    <%= render 'layouts/alerts' %>
+    <h1 class="h3 mb-3 font-weight-normal">List of All Bids</h1>
+  </div>
 
-    <p>
-      <strong>Description:</strong>
-      <%= @bid.description %>
-    </p>
+  <div class="row">
+    <div class="col-md-3 mb-3"></div>
+    <div class="col-md-6 mb-3">
+      <p><strong>Description: </strong><%= @bid.description %></p>
+    </div>
+  </div>
 
-    <p>
-      <strong>Amount</strong>
-      <%= @bid.amount %>
-    </p>
+  <div class="row">
+    <div class="col-md-3 mb-3"></div>
+    <div class="col-md-6 mb-3">
+      <p><strong>Bid Amount: </strong>$<%= @bid.amount %></p>
+    </div>
+  </div>
 
-     <p>
-      <strong>Is Bid Selected</strong>
-      <%= @bid.selected %>
-    </p>
-
-    <p>
-      <strong>Starting Date</strong>
-      <%= @bid.starting_date %>
-    </p>
-
-    <p>
-      <strong>Duration</strong>
-      <%= @bid.duration %>
-    </p>
+  <div class="row">
+    <div class="col-md-3 mb-3"></div>
+    <div class="col-md-6 mb-3">
+      <p class="text-capitalize"><strong>Starting Date: </strong><%= @bid.starting_date %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 mb-3"></div>
+    <div class="col-md-6 mb-3">
+      <p class="text-capitalize"><strong>Duration: </strong><%= @bid.duration %> days</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 mb-3"></div>
     <% if current_user == User.find(@bid.user_id) %>
-      <%= link_to 'Delete Bid', [@bid.job, @bid],
-                 method: :delete,
-                 data: { confirm: 'Are you sure?' } %>
-      <% end %>
-    <%= link_to 'All bids', job_bids_path(@job) %>
+      <div class="col-md-2 mb-3">
+        <%= button_to 'Delete Bid', [@bid.job, @bid],
+                      method: :delete,
+                      data: {confirm: 'Are you sure?'},  class: "btn btn-block btn-danger" %>
+      </div>
+      <div class="col-md-2 mb-3">
+    <% else %>
+      <div class="col-md-4 mb-3">
+    <% end %>
+    <%= button_to 'Back', job_path(@job), :method => :get, class: "btn btn-block btn-dark" %>
+    </div>
+    </div>
 
-    <script src="" async defer></script>
-  </body>
+  </div>
+</div>
+<%= render 'layouts/footer' %>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
 </html>

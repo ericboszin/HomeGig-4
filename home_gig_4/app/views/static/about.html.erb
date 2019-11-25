@@ -10,72 +10,60 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Edit report</title>
+  <title>User profile</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="">
 </head>
 <body>
+
 <%= render "layouts/nav" %>
-<%= render "layouts/alerts" %>
 
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a>
   to improve your experience.</p>
 <![endif]-->
 
-<div class="container">
+<div class="container mt-3">
   <div class="text-center mb-4">
     <%= render 'layouts/alerts' %>
-    <h1 class="h3 mb-3 font-weight-normal">Edit report</h1>
+    <h1 class="h3 mb-3 font-weight-normal">About Us</h1>
   </div>
 
-  <%= bootstrap_form_with(model: @report, local: true) do |form| %>
-    <% if @report.errors.any? %>
-      <div id="error_explanation">
-        <%= pluralize(@report.errors.count, "error") %> prohibited this review from being saved:
-        <ul>
-          <% @report.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="row">
-      <div class="col mb-3">
-        <%= form.text_field :title, label: "Report Title" %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col mb-3">
-        <%= form.text_area :description %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col mb-3">
-        <%= form.submit class: "btn btn-block btn-success" %>
-      </div>
-    </div>
-
-    <% end %>
   <div class="row">
-    <div class="col">
-      <%= button_to 'Cancel', report_path(@report), method: :get, class: "btn btn-block btn-danger" %>
+    <div class="col-md-2"></div>
+    <div class="col-md-8 justify-content-centre lead">
+      <div class="row">
+        Welcome to HomeGig, your number one source for all Remote Work. We're dedicated to giving you the very best
+        support, with a focus on transparency, hard work, and efficiency.
+      </div>
+      <br>
+      <div class="row">
+        Founded in 2019, HomeGig has come a long way from its beginnings in ECE444. When
+        it first started out, the drive to develop an intuitive platform for contracted works drove them to create a
+        community so that HomeGig can offer you
+        efficient and robust services. We now serve customers all over the world, and are thrilled that we're able to
+        turn our passion into this website.
+      </div>
+      <br>
+      <div class="row">
+        We hope you enjoy our products as much as we enjoy offering them to you. If you have any questions
+        or
+        comments, please don't hesitate to <%= link_to "contact us", "/contactus" %>.
+      </div>
+      <br>
+      <div class="row">
+        Sincerely,
+      </div>
+      <div class="row">
+        HomeGig Team
+      </div>
     </div>
   </div>
 </div>
-
 <%= render 'layouts/footer' %>
-
-<script src="" async defer></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 </body>
 </html>
-
-
