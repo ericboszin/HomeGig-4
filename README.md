@@ -59,6 +59,8 @@ Project Repository for ECE444F Software Engineering
   Devise is used for user authentication and authorization. A user cannot access the app without a valid account. At signup   a user specifies their role, job owner or worker. The user's home page, permissible actions and views depend on the user     role. Admin accounts are created manually and seeded into the database.
 
   ### Payments:
+  
+  ### Emails/Notifications:
 
 
 
