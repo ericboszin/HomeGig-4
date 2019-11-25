@@ -5,7 +5,13 @@ Rails.application.routes.draw do
   get 'home/admin'
   get 'jobs/explore'
 
-  get '/:page', to: 'static#show'
+  get '/about', to: 'static#about'
+  get '/contactus', to: 'static#about'
+  get '/faq', to: 'static#faq'
+  get '/privacy', to: 'static#privacy'
+  get '/sitemap', to: 'static#sitemap'
+  get '/tos', to: 'static#tos'
+
 
   devise_for :users, :path_prefix => 'd'
   resources :users, :only => [:show]
