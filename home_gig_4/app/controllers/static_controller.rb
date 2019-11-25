@@ -1,26 +1,26 @@
 class StaticController < ApplicationController
   def about
-    render about_path
+    render 'about'
   end
 
   def contactus
-    render contactus_path
+    render 'contactus'
   end
 
   def faq
-    render faq_path
+    render 'faq'
   end
 
   def privacy
-    render privacy_path
+    render 'privacy'
   end
 
   def sitemap
-    render sitemap_path
+    render 'sitemap'
   end
 
   def tos
-    render tos_path
+    render 'tos'
   end
 
 
