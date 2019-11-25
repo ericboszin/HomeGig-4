@@ -42,35 +42,36 @@
     <% end %>
 
     <div class="row">
-      <div class="col mb-3">
+      <div class="col-md-3 mb-3"></div>
+      <div class="col-md-6 mb-3">
         <%= form.text_field :title, label: "Job Title" %>
       </div>
     </div>
 
     <div class="row">
-      <div class="col mb-3">
+      <div class="col-md-3 mb-3"></div>
+      <div class="col-md-6 mb-3">
         <%= form.text_area :description %>
       </div>
     </div>
 
     <div class="row">
-      <div class="col mb-3">
+      <div class="col-md-3 mb-3"></div>
+      <div class="col-md-6 mb-3">
         <%= form.number_field :price, prepend: "$" %>
       </div>
     </div>
 
     <div class="row">
-      <div class="col mb-3">
+      <div class="col-md-4 mb-3"></div>
+      <div class="col-md-2 mb-3">
         <%= form.submit class: "btn btn-block btn-success" %>
       </div>
+      <div class="col-md-2 mb-3">
+        <%= button_to 'Cancel', job_path(@job), method: :get, class: "btn btn-block btn-danger" %>
+      </div>
     </div>
-
   <% end %>
-  <div class="row">
-    <div class="col">
-      <%= button_to 'Cancel', job_path(@job), method: :get, class: "btn btn-block btn-danger" %>
-    </div>
-  </div>
 </div>
 <%= render 'layouts/footer' %>
 
