@@ -1,6 +1,7 @@
 # HomeGig-4
 Project Repository for ECE444F Software Engineering 
 
+## Setup:
 
 ## Models:
   ### Users:
