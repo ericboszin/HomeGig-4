@@ -29,7 +29,7 @@
           <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
             <%= f.hidden_field :reset_password_token %>
 
-            <div class="collapse" id="change_pass">
+            <div class="row" id="change_pass">
               <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="user_password">Change password</label>
