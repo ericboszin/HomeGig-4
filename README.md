@@ -1,12 +1,23 @@
 # HomeGig-4
 Project Repository for ECE444F Software Engineering 
 
-## Setup:
-
 ## Models:
   ### Users:
 
   There are three types of users of the app: job owners, job workers, and admins. The user model contains various pieces of   information about the user, such as name and date of birth. The user type is specified through a 'role' attribute and an     'admin' attribute. A user has many jobs, reports, and one setting. A user also has many bids and reviews through jobs.
+  
+    #### Atrributes:
+      * email
+      * encrypted_password
+      * first_name
+      * last_name
+      * birthday
+      * country
+      * phone
+      * aboutme
+      * role (owner/worker)
+      * skill (Only applicable for worker. Example web development.)
+      * admin (true/false)
 
   ### Jobs:
 
