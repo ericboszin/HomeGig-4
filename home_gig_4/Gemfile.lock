@@ -91,6 +91,8 @@ GEM
       countries (~> 3.0)
       sort_alphabetical (~> 1.0)
     crass (1.0.5)
+    css_parser (1.7.0)
+      addressable
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -103,6 +105,7 @@ GEM
     ffi (1.11.1-x64-mingw32)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    htmlentities (4.3.4)
     i18n (1.7.0)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
@@ -139,6 +142,13 @@ GEM
     pg (1.1.4)
     pg (1.1.4-x64-mingw32)
     popper_js (1.14.5)
+    premailer (1.11.1)
+      addressable
+      css_parser (>= 1.6.0)
+      htmlentities (>= 4.0.0)
+    premailer-rails (1.10.3)
+      actionmailer (>= 3)
+      premailer (~> 1.7, >= 1.7.9)
     public_suffix (4.0.1)
     puma (3.12.1)
     rack (2.0.7)
@@ -270,6 +280,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   pg
   popper_js (~> 1.14.5)
+  premailer-rails
   puma (~> 3.11)
   rails (~> 6.0.0)
   sass-rails (~> 5)
