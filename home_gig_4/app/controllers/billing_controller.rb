@@ -1,4 +1,7 @@
 class BillingController < ApplicationController
-    def index
+    def new
+    end
+
+    def charge
     end
 end

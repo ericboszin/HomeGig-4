@@ -35,7 +35,8 @@ Rails.application.routes.draw do
 
   resources :reports
   resources :settings
-  resources :billing
+  resources :billing, :only => [:new, :create]
+  post 'charge', to: 'billing#create', as: :charge
 
 
   root :to => 'passthrough#index'
