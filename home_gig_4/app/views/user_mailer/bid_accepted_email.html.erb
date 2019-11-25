@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
+
+    <%= render "layouts/email" %>
     <h1>Your bid has been accepted for <%= @job.title %></h1>
     <p>
       Your bid has been accepted by <%= link_to @owner.first_name , (@owner) %> </br>
- <br>
+    <br>
     </p>
     <p>
       To see this job, just follow this link: <%= link_to "View Job" , (@job) %>.
