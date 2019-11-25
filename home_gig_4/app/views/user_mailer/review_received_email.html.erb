@@ -25,17 +25,17 @@
                                         
                                         
     <p>
-      You have successfully posted a review for the following:<br>
-      Job: <%= link_to "View Job" , (@job) %>.<br>
-      <h2> Review: </h2>
+      You have received the following review:<br>
+      
       <p>
         <h4>Rating:</h4> 
         <%= @review.rating %> <br>
         <h4>Text: </h4>
         
-        <%= @review.text %>
+        <%= @review.text %> <br>
+        <h3>To see this job, follow this link:</h3>
       </p>
- <br>
+ 
     </p>
 
                   
@@ -56,25 +56,3 @@
 
 
 
-
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <h1>You have received a review.</h1>
-    <p>
-      You have successfully posted a review for the following:<br>
-      Job: <%= link_to "View Job" , (@job) %>.<br>
-      <h2> Review: </h2>
-      <p>
-        Rating: <%= @review.rating %> <br>
-        Text: <%= @review.text %>
-      </p>
- <br>
-    </p>
-    
-  </body>
-</html>
