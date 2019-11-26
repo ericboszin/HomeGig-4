@@ -18,11 +18,10 @@ class BillingController < ApplicationController
         @bid = @job.bids.find(bid_id)
 
         charge = Stripe::Charge.create({
-            amount: (@bid.amount.to_i),
+            amount: (@bid.amount.to_i)*100,
             currency: 'usd',
             description: 'Example charge',
             source: token,
         })
     end
-    
 end
