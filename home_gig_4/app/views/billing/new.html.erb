@@ -212,18 +212,18 @@
 
         var form = document.getElementById('payment-form');
         form.addEventListener('submit', function(event) {
-        event.preventDefault();
+            event.preventDefault();
 
-        stripe.createToken(card).then(function(result) {
-            if (result.error) {
-                var errorElement = document.getElementById('card-errors');
-                errorElement.textContent = result.error.message;
-            } else {
-                stripeTokenHandler(result.token);
-            }
-        });
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    stripeTokenHandler(result.token);
+                }
+            });
         });  
-    
+
         function stripeTokenHandler(token) {
             var form = document.getElementById('payment-form');
             var hiddenInput = document.createElement('input');
@@ -232,7 +232,6 @@
             hiddenInput.setAttribute('value', token.id);
             form.appendChild(hiddenInput);
 
-            alert("Created a token with value: "+token.id)
             form.submit();
         }   
     </script>
