@@ -3,9 +3,37 @@
 # This model initially had no columns defined. If you add columns to the
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+
+# Owners
+one:
+  email: test5@test.com
+  first_name: Hello
+  last_name: There
+  birthday: 04/02/2019
+  country: Canada
+  phone: 5762391745
+  aboutme: HELLOOO
+  role: owner
+
+# Workers
+two:
+  email: test2@test.com
+  first_name: Hello2
+  last_name: There2
+  birthday: 04/02/2019
+  country: Canada
+  phone: 5762391743
+  aboutme: HELLOOO2
+  role: worker
+
+three:
+  email: test3@test.com
+  first_name: Hello3
+  last_name: There3
+  birthday: 04/02/2019
+  country: Canada
+  phone: 5762391744
+  aboutme: HELLOOO3
+  role: worker
+
+

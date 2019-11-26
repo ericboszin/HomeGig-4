@@ -1,11 +1,36 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# Bids by the first user
 one:
-  description: MyString
-  amount: 1.5
+  description: Job 1 Bid
+  amount: 20
   job: one
+  user_id: two
+  duration: 15
+  starting_date: 23/10/2019
 
 two:
   description: MyString
-  amount: 1.5
+  amount: 400
   job: two
+  user_id: two
+  duration: 20
+  starting_date: 23/10/2019
+
+
+#Bids by the second user
+three:
+  description: Job 1 Bid
+  amount: 10
+  job: one
+  user_id: three
+  duration: 10
+  starting_date: 23/10/2019
+
+four:
+  description: MyString
+  amount: 300
+  job: two
+  user_id: three
+  duration: 30
+  starting_date: 23/10/2019

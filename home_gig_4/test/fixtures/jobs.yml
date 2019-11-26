@@ -3,11 +3,13 @@
 one:
   title: MyString
   description: MyText
-  price: 1.5
+  price: 20
   status: MyText
+  user: one
 
 two:
   title: MyString
   description: MyText
-  price: 1.5
+  price: 500
   status: MyText
+  user: one
