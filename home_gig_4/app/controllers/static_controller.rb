@@ -8,7 +8,7 @@ class StaticController < ApplicationController
   end
 
   def faq
-    render 'faq'
+    render 'FAQ'
   end
 
   def privacy
@@ -21,6 +21,10 @@ class StaticController < ApplicationController
 
   def tos
     render 'tos'
+  end
+
+  def message
+    UserMailer.with(first_name: params['first_name'], last_name: params['last_name'], email: params['email'], comment:params['comment']).contact_us_email.deliver_now
   end
 
 

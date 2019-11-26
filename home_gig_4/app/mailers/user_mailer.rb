@@ -2,6 +2,14 @@ class UserMailer < ApplicationMailer
 
 default from: 'no-reply@homegig.com'
 
+  def contact_us_email
+    @first_name = params[:first_name]
+    @last_name = params[:last_name]
+    @email = params[:email]
+    @comment = params[:comment]
+    mail(to: 'contactus@homegig.com', subject: "#{@first_name} #{@last_name} sent you a message")
+  end
+
   def bid_created_email
     @user = params[:user]
     @job = params[:job]

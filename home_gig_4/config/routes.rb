@@ -6,12 +6,13 @@ Rails.application.routes.draw do
   get 'jobs/explore'
 
   get '/about', to: 'static#about'
-  get '/contactus', to: 'static#about'
-  get '/faq', to: 'static#faq'
+  get '/contactus', to: 'static#contactus'
+  get '/FAQ', to: 'static#faq'
   get '/privacy', to: 'static#privacy'
   get '/sitemap', to: 'static#sitemap'
   get '/tos', to: 'static#tos'
 
+  post '/contact/form', to: 'static#message'
 
   devise_for :users, :path_prefix => 'd'
   resources :users, :only => [:show]
