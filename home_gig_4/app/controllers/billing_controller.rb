@@ -23,5 +23,21 @@ class BillingController < ApplicationController
             description: 'Example charge',
             source: token,
         })
+
+        @user = User.find(@job.user_id)
+        if @job.status == "cancelled" || @job.status == "completed"
+          flash[:warning] = "Job has already been marked completed or it has been cancelled"
+          redirect_to job_path(@job)
+        end
+        if current_user == @user
+          @bid.selected = 1
+          @bid.save
+          if User.find(@bid.user_id).setting.bid_created
+            UserMailer.with(user: User.find(@bid.user_id), job: @job, owner: User.find(current_user.id)).bid_accepted_email.deliver_now
+          end
+        else
+          flash[:warning] = "Error: user not authorized to accept bid"
+        end
+        redirect_to job_bids_path(job_id)
     end
 end
