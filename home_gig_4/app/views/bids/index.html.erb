@@ -97,7 +97,7 @@
                 <td><%= link_to 'Edit Bid', edit_job_bid_path(@job, bid) %></td>
               <% end %>
               <% if (bid.selected == 0 && current_user == User.find(@job.user_id)) %>
-                <td><%= link_to 'Accept Bid', job_bid_accept_path(@job, bid), :method => :patch, data: {confirm: 'Are you sure?'} %></td>
+                <td><%= link_to 'Accept Bid', new_billing_path(:jobId => @job.id, :bidId => bid.id), data: {confirm: 'Are you sure?'} %></td>
                 <td><%= link_to 'Reject Bid', job_bid_reject_path(@job, bid), method: :delete, data: {confirm: 'Are you sure?'} %></td>
               <% end %>
             </tr>
