@@ -174,7 +174,7 @@
                 <div id="card-errors"></div>
             </div>
             <button id="basic-photo-button">
-                Buy for $<span id="total">5</span>.00
+                Pay $<span id="total"><%= @bid.amount.to_i %></span>
             </button>
         </form>
     </body>
@@ -233,7 +233,16 @@
             hiddenInput.setAttribute('name', 'stripeToken');
             hiddenInput.setAttribute('value', token.id);
             form.appendChild(hiddenInput);
-
+            var hiddenJobId = document.createElement('input');
+            hiddenJobId.setAttribute('type', 'hidden');
+            hiddenJobId.setAttribute('name', 'jobId');
+            hiddenJobId.setAttribute('value', <%= @job.id %>);
+            form.appendChild(hiddenJobId);
+            var hiddenBidId = document.createElement('input');
+            hiddenBidId.setAttribute('type', 'hidden');
+            hiddenBidId.setAttribute('name', 'bidId');
+            hiddenBidId.setAttribute('value', <%= @bid.id %>);
+            form.appendChild(hiddenBidId);
             form.submit();
         }   
     </script>
