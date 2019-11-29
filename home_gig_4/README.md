@@ -32,7 +32,7 @@ Things you may want to cover:
  ## Database initialization:
  * Run `make install-dev`
  * If the above fails, run `gem install pg -v '1.1.4' --source 'https://rubygems.org/'`
- * Alternatively, you can run: `bundle install && yarn install` , followed by "rake db:create && rake db:migrate"
+ * Alternatively, you can run: `bundle install && yarn install` , followed by `rake db:create && rake db:migrate`
  * Run `Make start` or `rails server` to start the app.
 
  ## Databse Management:

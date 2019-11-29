@@ -91,6 +91,7 @@ class BidsController < ApplicationController
       redirect_to job_path(@job)
     elsif current_user == @user
       @bid.destroy
+      redirect_to root_path
     else
       flash[:warning] = "Error: user not authorized to delete bid"
       redirect_to job_path(@job)

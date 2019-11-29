@@ -4,13 +4,28 @@
       [User.find(bid.user_id).first_name + " " + User.find(bid.user_id).last_name, bid.user_id]
     }) %>
   </p>
+
+  <div class="form-group">
+    <%= form.text_area :text, label: "Add written review", placeholder: "What did you like about the worker's work? What did you dislike?" %>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text required" for="review_rating">Rating</label>
+        </div>
+        <select class="custom-select" name="review[rating]" id="review_rating">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+    </div>
+  </div>
   <p>
-    <%= form.text_field :text, label: "Add written review", placeholder: "What did you like about the worker's work? What did you dislike?" %>
-  </p>
-  <p class="field">
-    <%= form.select(:rating, Review.ratings.values.map { |rating| [rating, rating] }) %>
-  </p>
-  <p>
-    <%= form.submit class: "btn btn-block btn-primary" %>
+    <%= form.submit class: "btn btn-block btn btn-outline-primary" %>
   </p>
 <% end %>

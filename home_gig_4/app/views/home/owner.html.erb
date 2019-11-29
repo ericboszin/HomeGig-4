@@ -34,7 +34,7 @@
   <div class="container mt-3">
     <div class="text-center mb-4">
       <%= render 'layouts/alerts' %>
-      <h1 class="h3 mb-3 font-weight-normal">Welcome <%= current_user.first_name %>!</h1>
+      <h1 class="h3 mb-3 font-weight-normal">Welcome <%= current_user.first_name.capitalize %>!</h1>
     </div>
 
     <div class="row justify-content-center">
@@ -67,7 +67,7 @@
               <tr>
                 <td style="cursor: pointer;" onclick="location.href='<%=job_path(job)%>'"><%= job.title %></td>
                 <td style="cursor: pointer;" onclick="location.href='<%=job_path(job)%>'"><%= number_to_currency(job.price) %></td>
-                <td style="cursor: pointer;" onclick="location.href='<%=job_path(job)%>'"><%= job.status %></td>
+                <td style="cursor: pointer;" onclick="location.href='<%=job_path(job)%>'"><%= job.status.capitalize %></td>
                 <td>
                   <%= link_to edit_job_path(job) do %>
                     <i class="fas fa-cog"></i>
