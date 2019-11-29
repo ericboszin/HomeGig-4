@@ -173,7 +173,9 @@
 
                 <div id="card-errors"></div>
             </div>
-            <button>Submit Payment</button>
+            <button id="basic-photo-button">
+                Pay $<span id="total"><%= @bid.amount.to_i %></span>
+            </button>
         </form>
     </body>
     <script type="text/javascript">
@@ -212,18 +214,18 @@
 
         var form = document.getElementById('payment-form');
         form.addEventListener('submit', function(event) {
-        event.preventDefault();
+            event.preventDefault();
 
-        stripe.createToken(card).then(function(result) {
-            if (result.error) {
-                var errorElement = document.getElementById('card-errors');
-                errorElement.textContent = result.error.message;
-            } else {
-                stripeTokenHandler(result.token);
-            }
-        });
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    stripeTokenHandler(result.token);
+                }
+            });
         });  
-    
+
         function stripeTokenHandler(token) {
             var form = document.getElementById('payment-form');
             var hiddenInput = document.createElement('input');
@@ -231,8 +233,16 @@
             hiddenInput.setAttribute('name', 'stripeToken');
             hiddenInput.setAttribute('value', token.id);
             form.appendChild(hiddenInput);
-
-            alert("Created a token with value: "+token.id)
+            var hiddenJobId = document.createElement('input');
+            hiddenJobId.setAttribute('type', 'hidden');
+            hiddenJobId.setAttribute('name', 'jobId');
+            hiddenJobId.setAttribute('value', <%= @job.id %>);
+            form.appendChild(hiddenJobId);
+            var hiddenBidId = document.createElement('input');
+            hiddenBidId.setAttribute('type', 'hidden');
+            hiddenBidId.setAttribute('name', 'bidId');
+            hiddenBidId.setAttribute('value', <%= @bid.id %>);
+            form.appendChild(hiddenBidId);
             form.submit();
         }   
     </script>
