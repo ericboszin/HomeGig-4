@@ -96,11 +96,9 @@
                     <tr>
                       <th scope="col">Name</th>
                       <th scope="col">Bid Amount</th>
-                      <% if @job.status == 'completed' %>
-                        <th scope="col">Rating</th>
-                        <th scope="col">Edit Review</th>
-                        <th scope="col">Delete Review</th>
-                      <% end %>
+                      <th scope="col">Rating</th>
+                      <th scope="col">Edit Review</th>
+                      <th scope="col">Delete Review</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -133,6 +131,7 @@
                     <% end %>
                   </tbody>
                 </table>
+                <br>
               </div>
             </div>
             <% if @job.status == 'completed' %>
@@ -149,7 +148,6 @@
                   </div>
                 </div>
               <% end %>
-            <% end %>
             <% elsif @job.status == 'started' %>
               <div class="row">
                 <div class="col-md-2 mb-3"></div>
@@ -160,19 +158,19 @@
                   <%= button_to 'Cancel Job', job_cancel_job_path(@job), :method => :patch, data: {confirm: 'Are you sure you want to cancel job?'}, class: "btn btn-block btn-danger" %>
                 </div>
               </div>
-              <br>
             <% else %>
               <p class="lead text-center">
                 Workers will be shown once job is started
               </p>
             <% end %>
+          <% end %>
 
-            <div class="row">
-              <div class="col-md-3 mb-3"></div>
-              <div class="col-md-6 mb-3">
-                <%= button_to 'Back', home_owner_path, method: :get, class: "btn btn-primary btn-block" %>
-              </div>
+          <div class="row">
+            <div class="col-md-3 mb-3"></div>
+            <div class="col-md-6 mb-3">
+              <%= button_to 'Back', home_owner_path, method: :get, class: "btn btn-primary btn-block" %>
             </div>
+          </div>
         <% elsif job_owner != current_user %>
           <div class="row">
             <div class="col-md-2 mb-4">
