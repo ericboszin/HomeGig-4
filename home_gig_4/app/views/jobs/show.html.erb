@@ -109,8 +109,8 @@
                           <td style="cursor: pointer;" onclick="location.href='<%=user_path(@worker)%>'"><%= @worker.first_name %> <%= @worker.last_name %></td>
                           <td><%= number_to_currency(bid.amount) %></td>
                           <% if bid.reviewed %>
-                            <% @review = @job.reviews.where(worker_id: @worker.id) %>
-                            <td><%= @review.rating %></td>
+                            <% @review = Review.where(worker_id: @worker.id, job_id: @job.id).first %>
+                            <td><%= @review.rating%></td>
                             <td><%= link_to edit_job_review_path(@job, @review.id) do %>
                               <i class="fas fa-cog"></i>
                               <% end %>
