@@ -1,0 +1,57 @@
+[
+  {
+    "id": "Two",
+    "question": "What is an Owner?",
+    "answer": "An Owner is an individual that submits jobs, they are not able to work on jobs yet!"
+  },
+  {
+    "id": "Three",
+    "question": "What is a Worker?",
+    "answer": "A Worker is an individual bids on jobs and works on them if their bids are accepted."
+  },
+  {
+    "id": "Four",
+    "question": "What are Bids?",
+    "answer": "Bids are where workers can display why they should take the job, they provide a competitive pricing, the owner can pick one or more bids to fulfil the job he's submitted."
+  },
+  {
+    "id": "Five",
+    "question": "How do I know who's working on my job?",
+    "answer": "When your job is started, the owner will be able to view the workers of the job when viewing the job page."
+  },
+  {
+    "id": "Six",
+    "question": "What happens if the job is canceled?",
+    "answer": "When the job is canceled, the owner will be charged a partial amount depending on the amount of work that has been done and the amount of time that has elapsed."
+  },
+  {
+    "id": "Seven",
+    "question": "As a worker when is payment received?",
+    "answer": "Payment is received by the workers on the completion of the job."
+  },
+  {
+    "id": "Eight",
+    "question": "As an Owner when is payment due?",
+    "answer": "Payment is due when the owner starts a job."
+  },
+  {
+    "id": "Nine",
+    "question": "What happens if payment is not processed?",
+    "answer": "The job remains available till the funds are processed."
+  },
+  {
+    "id": "Ten",
+    "question": "What if I accept a new bid after starting a job?",
+    "answer": "The added costs are charged to your card and the status of the job remains started."
+  },
+  {
+    "id": "Eleven",
+    "question": "How do I add a review of a worker?",
+    "answer": "When the job is completed, an owner can add a review in the job page."
+  },
+  {
+    "id": "Twelve",
+    "question": "What do I do if I think an owner gave me an unfair review?",
+    "answer": "Using the report button, report your issue to HomeGig and one of our esteemed customer service representatives will investigate your claim promptly."
+  }
+]

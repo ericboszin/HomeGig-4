@@ -8,6 +8,7 @@ class StaticController < ApplicationController
   end
 
   def faq
+    @data = File.read(Rails.root.join("public", "faq.json"))
     render 'FAQ'
   end
 

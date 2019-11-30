@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>User profile</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+</head>
+<body>
+
+<%= render "layouts/nav" %>
+
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a>
+  to improve your experience.</p>
+<![endif]-->
+
+<div class="container mt-3">
+  <div class="text-center mb-4">
+    <%= render 'layouts/alerts' %>
+    <h1 class="h3 mb-3 font-weight-normal">Frequently Asked Questions</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 justify-content-centre lead">
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h3 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                What is HomeGig and how does it work?
+              </button>
+            </h3>
+          </div>
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              HomeGig, your number one source for all Remote Work. We're dedicated to giving you the very best support,
+              with a focus on transparency, hard work, and efficiency.
+              <ul>
+                <li>Owners create a job, put in the amount of money you envision this job costs.</li>
+                <li>Workers are going to competitively bid on the project.</li>
+                <li>The owner accepts one or more bids, these workers will then be working together on delivering your
+                  job.
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+        <% questions = JSON.parse(@data) %>
+        <% questions.each do |question| %>
+          <% if question['id'] == 'One' %>
+            <% txt = 'show' %>
+          <% else %>
+            <% txt = '' %>
+          <% end %>
+          <div class="card">
+            <div class="card-header" id="heading<%= question['id'] %>">
+              <h3 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<%= question['id'] %>" aria-expanded="true" aria-controls="collapse<%= question['id'] %>">
+                  <%= question['question'] %>
+                </button>
+              </h3>
+            </div>
+            <div id="collapse<%= question['id'] %>" class="collapse <%= txt %>" aria-labelledby="heading<%= question['id'] %>" data-parent="#accordion">
+              <div class="card-body">
+                <%= question['answer'] %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<%= render 'layouts/footer' %>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
