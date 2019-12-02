@@ -29,5 +29,8 @@ class StaticController < ApplicationController
     redirect_to(root_path)
   end
 
+  def not_found
+    render 'error'
+  end
 
 end

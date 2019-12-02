@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get '/sitemap', to: 'static#sitemap'
   get '/tos', to: 'static#tos'
 
+  # 404 Page
+  get '/error', to: 'static#not_found'
+
   post '/contact/form', to: 'static#message'
 
   devise_for :users, :path_prefix => 'd'
@@ -45,4 +48,5 @@ Rails.application.routes.draw do
 
 
   root :to => 'passthrough#index'
+  get '*path' => redirect('/error')
 end

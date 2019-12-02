@@ -27,17 +27,39 @@
 <div class="container mt-3">
   <div class="text-center mb-4">
     <%= render 'layouts/alerts' %>
-    <h1 class="h3 mb-3 font-weight-normal">Error 404</h1>
   </div>
-
-  <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8 justify-content-centre lead">
-      <div class="row">
-        <h4>Can't find page</h4>
-        <%= link_to "Home", root_path %>
+  <div class="row" style="height: 50%">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 justify-content-centre lead align-items-center">
+      <div class="row align-middle">
+        <div class="col-md-12">
+          <div class="error-template">
+            <div class="row">
+              <h1 class="display-2">Oops!</h1>
+            </div>
+            <div class="row">
+              <h2 class="display-4">404 Not Found</h2>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="error-details">
+                Sorry, an error has occured, Page not found! Don't worry we've already reported the problem to our team
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="error-actions">
+                <a href="/" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                  Go Home
+                </a><a href="/contactus" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-envelope"></span>
+                Contact Support </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="col-md-4"></div>
   </div>
 </div>
 <%= render 'layouts/footer' %>
