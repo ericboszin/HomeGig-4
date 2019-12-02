@@ -19,6 +19,7 @@ class ReportsController < ApplicationController
     
   def create
     @report = current_user.reports.build(report_params)
+    @report.status = "unresolved"
     if @report.save
       redirect_to reports_path
     else
@@ -52,6 +53,26 @@ class ReportsController < ApplicationController
       flash[:warning]= "Error: user not authorized to delete report"
     end
     redirect_to @report
+  end
+
+  def resolve
+    @report = Report.find(params[:report_id])
+    @report.status = "resolved"
+    if @report.save
+      redirect_to @report
+    else
+      flash[:warning]= "Error: Could not resolve report"
+    end
+  end
+
+  def unresolve
+    @report = Report.find(params[:report_id])
+    @report.status = "unresolved"
+    if @report.save
+      redirect_to @report
+    else
+      flash[:warning]= "Error: Could not unresolve report"
+    end
   end
 
   private

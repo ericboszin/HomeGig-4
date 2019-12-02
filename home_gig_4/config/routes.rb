@@ -34,7 +34,11 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
-  resources :reports
+  resources :reports do
+    patch 'resolve'
+    patch 'unresolve'
+  end
+  
   resources :settings
   resources :billing, :only => [:new, :create]
   post 'charge', to: 'billing#create', as: :charge

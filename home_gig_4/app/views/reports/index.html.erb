@@ -45,6 +45,7 @@
                 <tr>
                   <th scope="col">Title</th>
                   <th scope="col">Description</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Edit</th>
                   <th scope="col">Delete</th>
                 </tr>
@@ -54,6 +55,7 @@
                   <tr>
                     <td style="cursor: pointer;" onclick="location.href='<%=report_path(report)%>'"><%= report.title %></td>
                     <td style="cursor: pointer;" onclick="location.href='<%=report_path(report)%>'"><%= report.description %></td>
+                    <td style="cursor: pointer;" onclick="location.href='<%=report_path(report)%>'"><%= report.status %></td>
                     <td>
                       <%= link_to edit_report_path(report) do %>
                       <i class="fas fa-cog"></i>
