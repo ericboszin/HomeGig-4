@@ -14,6 +14,77 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+
+      .StripeElement {
+        box-sizing: border-box;
+
+        height: 40px;
+
+        padding: 10px 12px;
+
+        border: 1px solid transparent;
+        border-radius: 4px;
+        background-color: white;
+
+        box-shadow: 0 1px 3px 0 #e6ebf1;
+        -webkit-transition: box-shadow 150ms ease;
+        transition: box-shadow 150ms ease;
+      }
+
+      .StripeElement--focus {
+        box-shadow: 0 1px 3px 0 #cfd7df;
+      }
+
+      .StripeElement--invalid {
+        border-color: #fa755a;
+      }
+
+      .StripeElement--webkit-autofill {
+        background-color: #fefde5 !important;
+      }
+
+      .stripe-body {
+        background: #E6EBF1;
+        align-items: center;
+        min-height: 100%;
+        display: flex;
+        width: 100%;
+      }
+
+      .stripe-form {
+        width: 480px;
+        margin: 20px auto;
+      }
+
+      .stripe-button {
+        float: left;
+        display: block;
+        background: #666EE8;
+        color: white;
+        box-shadow: 0 7px 14px 0 rgba(49,49,93,0.10),
+                    0 3px 6px 0 rgba(0,0,0,0.08);
+        border-radius: 4px;
+        border: 0;
+        margin-top: 20px;
+        font-size: 15px;
+        font-weight: 400;
+        width: 100%;
+        height: 40px;
+        line-height: 38px;
+        outline: none;
+      }
+
+      .stipe-button:focus {
+          background: #555ABF;
+      }
+
+      .stripe-button:active {
+          background: #43458B;
+      }
+
+    </style>
   </head>
   <body>
     <%= render "layouts/nav" %>
@@ -49,7 +120,7 @@
                   <% @job.bids.each do |bid| %>
                     <tr>
                     <td style="cursor: pointer;"><%= bid.description %></td>
-                    <td style="cursor: pointer;"><%= number_to_currency(bid.amount) %></td>
+                    <td style="cursor: pointer;" id="bid-amount"><%= number_to_currency(bid.amount) %></td>
                     <% @worker = User.find(bid.user_id) %>
                     <td style="cursor: pointer;" onclick="location.href='<%=user_path(@worker)%>'">
                       <%= @worker.first_name.capitalize %> <%= @worker.last_name.capitalize %>
@@ -57,7 +128,7 @@
                     <td style="cursor: pointer;"><%= bid.starting_date.to_date %></td>
                     <td style="cursor: pointer;"><%= bid.duration %> days </td>
                     <% if bid.selected == 0 %>
-                      <td><%= link_to new_billing_path(:jobId => @job.id, :bidId => bid.id), data: {confirm: 'Are you sure?'} do%>
+                      <td><%= link_to job_bid_accept_path(@job, bid), :method => :patch, data: {confirm: 'Are you sure?'} do%>
                         <i class="fas fa-check"></i>
                         <% end %>
                       </td>
@@ -97,7 +168,129 @@
       </div>
     </div>
 
+    <!-- Payment Form modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="modal-button">
+      Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content stripe-body">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Pay with Stripe</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            
+            <form action="/charge" method="post" id="payment-form" class="stripe-form">
+              <div>
+                  <label for="card-element">
+                      Credit or debit card
+                  </label>
+                  <div id="card-element">
+                  </div>
+
+                  <div id="card-errors"></div>
+              </div>
+              <!-- Default checked -->
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultChecked2">
+                <label class="custom-control-label" for="defaultChecked2">Save Payment Method</label>
+              </div>
+              <button id="basic-photo-button" class="stripe-button">
+                  Pay $<span id="payment-total"><%= $5%></span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <script type="text/javascript">
+    var stripe = Stripe('pk_test_ko3ONCjH2JuLX6R1ORwsqSGl001ynohQxa');
+
+    var elements = stripe.elements();
+
+    var style = {
+        base: {
+            color: '#32325d',
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: 'antialiased',
+            fontSize: '16px',
+            '::placeholder': {
+            color: '#aab7c4'
+            }
+        },
+        invalid: {
+            color: '#fa755a',
+            iconColor: '#fa755a'
+        }
+    };
+
+    var card = elements.create('card', {style: style});
+
+    card.mount('#card-element');
+
+    card.addEventListener('change', function(event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
+    });
+
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        stripe.createToken(card).then(function(result) {
+            if (result.error) {
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+                stripeTokenHandler(result.token);
+            }
+        });
+    });  
+
+    function stripeTokenHandler(token) {
+        var form = document.getElementById('payment-form');
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripeToken');
+        hiddenInput.setAttribute('value', token.id);
+        form.appendChild(hiddenInput);
+        var hiddenJobId = document.createElement('input');
+        hiddenJobId.setAttribute('type', 'hidden');
+        hiddenJobId.setAttribute('name', 'jobId');
+        hiddenJobId.setAttribute('value', <%= @job.id %>);
+        form.appendChild(hiddenJobId);
+
+        form.submit();
+    }
+
+    function addToTotalAmount() {
+      var total = 0
+      <% @job.bids.each do |bid| %>
+        <% if bid.selected == 1 %>
+          console.log("hello")
+          total = total + <%= bid.amount%>
+        <% end %>
+      <% end %>
+      console.log(total)
+      $('#payment-total').html(total)
+    }
+    $("#modal-button").click(addToTotalAmount);
+    
+  </script>
+
   <%= render 'layouts/footer' %>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
