@@ -84,6 +84,10 @@
           background: #43458B;
       }
 
+      .modal-backdrop {
+        height: 100%;
+      }
+
     </style>
   </head>
   <body>
@@ -161,23 +165,18 @@
     <div class="row">
       <div class="col-md-4 mb-3"></div>
       <div class="col-md-2 mb-3">
-        <%= button_to 'Confirm Bids', job_accept_bids_path(@job), :method => :patch, data: {confirm: 'Are you sure?'}, class: "btn btn-block btn-primary" %>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="modal-button">
+          Confirm Bids
+        </button>
       </div>
       <div class="col-md-2 mb-3">
         <%= button_to 'Back', job_path(@job), :method => :get, class: "btn btn-block btn-dark" %>
       </div>
     </div>
-
-    <!-- Payment Form modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="modal-button">
-      Launch demo modal
-    </button>
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content stripe-body">
-
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Pay with Stripe</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -186,7 +185,6 @@
           </div>
 
           <div class="modal-body">
-            
             <form action="/charge" method="post" id="payment-form" class="stripe-form">
               <div>
                   <label for="card-element">
@@ -197,7 +195,7 @@
 
                   <div id="card-errors"></div>
               </div>
-              <!-- Default checked -->
+              <!-- Default unchecked -->
               <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="defaultChecked2">
                 <label class="custom-control-label" for="defaultChecked2">Save Payment Method</label>
@@ -258,7 +256,7 @@
                 stripeTokenHandler(result.token);
             }
         });
-    });  
+    });
 
     function stripeTokenHandler(token) {
         var form = document.getElementById('payment-form');
@@ -288,7 +286,6 @@
       $('#payment-total').html(total)
     }
     $("#modal-button").click(addToTotalAmount);
-    
   </script>
 
   <%= render 'layouts/footer' %>
