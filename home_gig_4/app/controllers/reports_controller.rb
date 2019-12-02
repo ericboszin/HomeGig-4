@@ -33,7 +33,7 @@ class ReportsController < ApplicationController
     user = User.find(@report.user_id)
     if current_user == user
       if @report.update(report_params)
-        redirect_to @report
+        redirect_to @reports
       else
         flash[:warning] = "Error: Could update report"
         render 'edit'
@@ -59,7 +59,7 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:report_id])
     @report.status = "resolved"
     if @report.save
-      redirect_to @report
+      redirect_to @reports
     else
       flash[:warning]= "Error: Could not resolve report"
     end
@@ -69,7 +69,7 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:report_id])
     @report.status = "unresolved"
     if @report.save
-      redirect_to @report
+      redirect_to @reports
     else
       flash[:warning]= "Error: Could not unresolve report"
     end
