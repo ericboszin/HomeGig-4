@@ -168,7 +168,7 @@
 <div class="row">
               <div class="col-md-3 mb-3"></div>
               <div class="col-md-6 mb-3">
-                <% if current_user == job_owner %>
+                <% if current_user == job_owner && (@job.status == 'available' || @job.status == 'started')%>
         
 
               <p> <%= button_to 'Edit Job', edit_job_path(@job), class: "btn btn-block btn-primary", :method => :get %></p>
