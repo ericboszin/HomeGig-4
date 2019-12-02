@@ -29,19 +29,7 @@
       <% job_owner = User.find(@job.user_id) %>
       <h1 class="h3 mb-3 font-weight-normal">Job Description</h1>
     </div>
-    <div class="row">
-    <div class="col-md-10"></div>
-    <div class="col-md-2">
-      <% if current_user == job_owner %>
-        
-
-              <p> <%= button_to 'Edit Job', edit_job_path(@job), class: "btn btn-block btn-primary", :method => :get %></p>
-            
-                  
-      <% end %>
-
-    </div>
-    </div>
+    
 
     <div class="row">
       <div class="col-md-2"></div>
@@ -177,7 +165,19 @@
               </p>
             <% end %>
           <% end %>
+<div class="row">
+              <div class="col-md-3 mb-3"></div>
+              <div class="col-md-6 mb-3">
+                <% if current_user == job_owner %>
+        
 
+              <p> <%= button_to 'Edit Job', edit_job_path(@job), class: "btn btn-block btn-primary", :method => :get %></p>
+            
+                  
+      <% end %>
+
+              </div>
+            </div>
           <div class="row">
             <div class="col-md-3 mb-3"></div>
             <div class="col-md-6 mb-3">
@@ -217,12 +217,14 @@
                 </div>
               </div>
             <% end %>
+
             <div class="row">
               <div class="col-md-3 mb-3"></div>
               <div class="col-md-6 mb-3">
                 <%= button_to 'Back', home_worker_path, method: :get, class: "btn btn-primary btn-block" %>
               </div>
             </div>
+
           <% end %>
         <% end %>
       </div>
