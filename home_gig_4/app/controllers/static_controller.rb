@@ -25,7 +25,8 @@ class StaticController < ApplicationController
   end
 
   def message
-    UserMailer.with(first_name: params['first_name'], last_name: params['last_name'], email: params['email'], comment:params['comment']).contact_us_email.deliver_now
+    UserMailer.with(first_name: params['first_name'], last_name: params['last_name'], email: params['email'], comment: params['comment']).contact_us_email.deliver_now
+    redirect_to(root_path)
   end
 
 
