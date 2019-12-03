@@ -60,6 +60,13 @@ class BillingController < ApplicationController
                   transfer_group: @job.title,
                 })
 
+                # store charge_id into bids, for future payment of other half
+                if charge.id
+                  @bid = Bid.find(_bid.id)
+                  @bid.stripe_charge_id = charge.id
+                  @bid.save
+                end
+
 
                 @bidder = User.find(_bid.user_id)
                 if @bidder.setting.job_started

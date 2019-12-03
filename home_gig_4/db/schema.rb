@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_03_022101) do
+ActiveRecord::Schema.define(version: 2019_12_03_123813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_022101) do
     t.datetime "starting_date"
     t.integer "duration"
     t.boolean "reviewed"
+    t.string "stripe_charge_id"
     t.index ["job_id"], name: "index_bids_on_job_id"
   end
 
