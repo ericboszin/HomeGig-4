@@ -31,6 +31,13 @@ default from: 'no-reply@homegig.com'
     mail(to: @user.email, subject: 'Your accepted bid has been reverted.')
   end
 
+  def bid_updated_email
+    @user = params[:user]
+    @job = params[:job]
+    @owner = params[:owner]
+    mail(to: @owner.email, subject: 'A bid for your job has been updated.')
+  end
+
   def job_created_email
     @user = params[:user]
     @job = params[:job]
