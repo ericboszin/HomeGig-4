@@ -59,6 +59,10 @@ Project Repository for ECE444F Software Engineering
   Devise is used for user authentication and authorization. A user cannot access the app without a valid account. At signup   a user specifies their role, job owner or worker. The user's home page, permissible actions and views depend on the user     role. Admin accounts are created manually and seeded into the database.
 
   ### Payments:
+  * Payments will be perform via Stripe's API integration.
+  * Payments can be optionally store bu the user at the moment of its first payment. Payment information won't be stored in our application's databse. We will rather generate a Stripe User Id and attach to the user.
+  * Once an owner accepts a bid. A payment is automatically triggered to our application's stripe dashboard. We then wire a payment to the user equal to half of the total bidding amount after 10% service fee deduction.
+  * Second half of patment will be automatically sent to worker upon job completion.
   
   ### Emails/Notifications:
   Users will receive confirmation emails for sign up and password reset.  
