@@ -12,9 +12,6 @@ class BidsController < ApplicationController
   end
 
   def edit
-    if @job.status != 'available'
-      flash[:warning] = "Error: You can't edit a bid if the job isn't available"
-    end
     @bid = @job.bids.find(params[:id])
   end
 

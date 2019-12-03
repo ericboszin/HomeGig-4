@@ -31,40 +31,45 @@
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8 justify-content-centre">
+      <% if @job.status == 'available' %>
+        <%= bootstrap_form_with(model: [@job, @bid], local: true) do |form| %>
+          <% if @bid.errors.any? %>
+            <div id="error_explanation">
+              <%= pluralize(@bid.errors.count, "error") %> prohibited this bid from being saved:
+              <ul>
+                <% @bid.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
-      <%= bootstrap_form_with(model: [@job, @bid], local: true) do |form| %>
-        <% if @bid.errors.any? %>
-          <div id="error_explanation">
-            <%= pluralize(@bid.errors.count, "error") %> prohibited this bid from being saved:
-            <ul>
-              <% @bid.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
-            </ul>
+          <div class="form-group">
+            <%= form.text_area :description, help: "Please type in the work you will be doing" %>
+          </div>
+          <div class="row">
+            <div class="col mb-3">
+              <%= form.number_field :amount, prepend: "$", help: "Total payment expected at the end of the job" %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mb-3">
+              <%= form.number_field :duration, help: "Duration should be in days", append: "days" %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mb-3">
+              <%= form.date_select :starting_date, help: "Date you're expected to start working on job" %>
+            </div>
+          </div>
+
+          <div class="actions">
+            <%= form.submit class: "btn btn-block btn-primary" %>
           </div>
         <% end %>
-
-        <div class="form-group">
-          <%= form.text_area :description, help: "Please type in the work you will be doing" %>
-        </div>
-        <div class="row">
-          <div class="col mb-3">
-            <%= form.number_field :amount, prepend: "$", help: "Total payment expected at the end of the job" %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col mb-3">
-            <%= form.number_field :duration, help: "Duration should be in days", append: "days" %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col mb-3">
-            <%= form.date_select :starting_date, help: "Date you're expected to start working on job" %>
-          </div>
-        </div>
-
-        <div class="actions">
-          <%= form.submit class: "btn btn-block btn-primary" %>
+      <% else %>
+        <div class="row flex">
+          <h3 class="display-4 mx-auto">Job has already started!</h3>
         </div>
       <% end %>
       <br>
