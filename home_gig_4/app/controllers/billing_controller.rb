@@ -51,17 +51,16 @@ class BillingController < ApplicationController
                   })
                 end
 
-                # Pay to bidder half of the bid
-                Stripe::Transfer.create({
-                  amount: ((((_bid.amount.to_i)*100) * 0.90) / 2).to_i,
-                  currency: 'cad',
-                  destination: 'acct_1Fl6NwFrf7aauqSp',
-                  source_transaction: charge.id,
-                  transfer_group: @job.title,
-                })
-
                 # store charge_id into bids, for future payment of other half
                 if charge.id
+                  # Pay to bidder half of the bid amount
+                  Stripe::Transfer.create({
+                    amount: ((((_bid.amount.to_i)*100) * 0.90) / 2).to_i,
+                    currency: 'cad',
+                    destination: 'acct_1Fl6NwFrf7aauqSp',
+                    source_transaction: charge.id,
+                    transfer_group: @job.title,
+                  })
                   @bid = Bid.find(_bid.id)
                   @bid.stripe_charge_id = charge.id
                   @bid.save
