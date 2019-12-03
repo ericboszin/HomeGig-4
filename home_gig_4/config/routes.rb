@@ -43,9 +43,7 @@ Rails.application.routes.draw do
     patch 'unresolve'
   end
   
-  resources :settings do
-    get '*path' => redirect('/error')
-  end
+  resources :settings
   resources :billing, :only => [:new, :create]
   post 'charge', to: 'billing#create', as: :charge
 

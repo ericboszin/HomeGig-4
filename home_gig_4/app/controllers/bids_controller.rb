@@ -74,7 +74,7 @@ class BidsController < ApplicationController
       elsif @bid.update(bid_params)
 
         if current_user.notification
-            UserMailer.with(user: User.find(@job.user_id), job: @job).job_edited_email.deliver_now
+            UserMailer.with(user: User.find(@job.user_id), job: @job, edit: @user).job_edited_email.deliver_now
         end
         redirect_to job_path(@job)
       else

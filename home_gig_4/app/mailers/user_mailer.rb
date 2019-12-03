@@ -43,6 +43,12 @@ default from: 'no-reply@homegig.com'
     mail(to: @user.email, subject: 'You have successfully edited your job.')
   end
 
+  def bid_edited_email
+    @user = params[:user]
+    @job = params[:job]
+    mail(to: @user.email, subject: 'A bid has been updated')
+  end
+
   def job_started_email
     @user = params[:user]
     @job = params[:job]
