@@ -3,178 +3,189 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Edit review</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Edit review</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="">
+</head>
+<body>
 			<!--[if lt IE 7]>
 					<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-			<![endif]-->
+				<![endif]-->
 
-			<%= render 'layouts/nav' %>
+				<%= render 'layouts/nav' %>
 
-			<div class="container mt-3">
-				<div class="text-center mb-4">
-					<%= render 'layouts/alerts' %>
-					<h1 class="h3 mb-3 font-weight-normal">Edit notifications</h1>
-				</div>
+				<div class="container mt-3">
+					<div class="text-center mb-4">
+						<%= render 'layouts/alerts' %>
+						<h1 class="h3 mb-3 font-weight-normal">Edit notifications</h1>
+					</div>
 
-				<div class="row">
-					<div class="col-md-4"></div>
-					<div class="col-md-4 justify-content-centre">
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4 justify-content-centre">
 
 
-						<%= form_with(model: [ @user, @setting ], local: true) do |form| %>
+							<%= form_with(model: [ @user, @setting ], local: true) do |form| %>
 							<% if current_user.role =='worker'%>
-								<div class="row">
-										<div class="col-md-6">
-											<p class="lead">
-												<%= form.label :bid_accepted %>
-											</p>
-										</div>
-										<div class="col-md-6 text-right">
-											<%= form.check_box :bid_accepted, value: :bid_accepted %>
-										</div>
+							<div class="row">
+								<div class="col-md-6">
+									<p class="lead">
+										<%= form.label :bid_accepted %>
+									</p>
 								</div>
+								<div class="col-md-6 text-right">
+									<%= form.check_box :bid_accepted, value: :bid_accepted %>
+								</div>
+							</div>
 
-								<div class="row">
-										<div class="col-md-6">
-											<p class="lead">
-												<%= form.label :bid_reverted %>
-											</p>
-										</div>
-										<div class="col-md-6 text-right">
-											<%= form.check_box :bid_reverted, value: :bid_accepted %>
-										</div>	
+							<div class="row">
+								<div class="col-md-6">
+									<p class="lead">
+										<%= form.label :bid_reverted %>
+									</p>
 								</div>
-								
-								<div class="row">
-										<div class="col-md-6">
-											<p class="lead">
-												<%= form.label :job_started %>
-											</p>
-										</div>
-										<div class="col-md-6 text-right">
-											<%= form.check_box :job_started, value: :job_started %>
-										</div>	
-								</div>
-								
-								<div class="row">
-										<div class="col-md-6">
-											<p class="lead">
-												<%= form.label :job_completed %>
-											</p>
-										</div>
-										<div class="col-md-6 text-right">
-											<%= form.check_box :job_completed, value: :job_completed %>
-										</div>	
-								</div>
+								<div class="col-md-6 text-right">
+									<%= form.check_box :bid_reverted, value: :bid_accepted %>
+								</div>	
+							</div>
 
-								<div class="row">
-										<div class="col-md-6">
-											<p class="lead">
-												<%= form.label :job_cancelled %>
-											</p>
-										</div>
-										<div class="col-md-6 text-right">
-											<%= form.check_box :job_cancelled, value: :job_cancelled %>
-										</div>	
+							<div class="row">
+								<div class="col-md-6">
+									<p class="lead">
+										<%= form.label :job_started %>
+									</p>
 								</div>
+								<div class="col-md-6 text-right">
+									<%= form.check_box :job_started, value: :job_started %>
+								</div>	
+							</div>
 
-								<div class="row">
-										<div class="col-md-6">
-											<p class="lead">
-												<%= form.label :review_received %>
-											</p>
-										</div>
-										<div class="col-md-6 text-right">
-											<%= form.check_box :review_received, value: :review_received %>
-										</div>	
+							<div class="row">
+								<div class="col-md-6">
+									<p class="lead">
+										<%= form.label :job_completed %>
+									</p>
 								</div>
+								<div class="col-md-6 text-right">
+									<%= form.check_box :job_completed, value: :job_completed %>
+								</div>	
+							</div>
+
+							<div class="row">
+								<div class="col-md-6">
+									<p class="lead">
+										<%= form.label :job_cancelled %>
+									</p>
+								</div>
+								<div class="col-md-6 text-right">
+									<%= form.check_box :job_cancelled, value: :job_cancelled %>
+								</div>	
+							</div>
+
+							<div class="row">
+								<div class="col-md-6">
+									<p class="lead">
+										<%= form.label :review_received %>
+									</p>
+								</div>
+								<div class="col-md-6 text-right">
+									<%= form.check_box :review_received, value: :review_received %>
+								</div>	
+							</div>
 
 							<% elsif current_user.role == 'owner' %> 
 
-								<div class="row">
-										<div class="col-md-6">
-											<p class="lead">
-												<%= form.label :bid_created %>
-											</p>
-										</div>
-										<div class="col-md-6 text-right">
-											<%= form.check_box :bid_created, value: :bid_created %>
-										</div>	
+							<div class="row">
+								<div class="col-md-6">
+									<p class="lead">
+										<%= form.label :bid_created %>
+									</p>
 								</div>
-								
-								<div class="row">
-									<div class="col-md-6">
-										<p class="lead">
-											<%= form.label :job_created %>
-										</p>
-									</div>
-									<div class="col-md-6 text-right">
-										<%= form.check_box :job_created, value: :job_created %>
-									</div>
-								</div>
+								<div class="col-md-6 text-right">
+									<%= form.check_box :bid_created, value: :bid_created %>
+								</div>	
+							</div>
 
-								<div class="row">
-										<div class="col-md-6">
-											<p class="lead">
-											<%= form.label :job_edited %>
-											</p>
-										</div>
-										<div class="col-md-6 text-right">
-										<%= form.check_box :job_edited, value: :job_edited %>
-										</div>	
+							<div class="row">
+								<div class="col-md-6">
+									<p class="lead">
+										<%= form.label :bid_updated %>
+									</p>
 								</div>
+								<div class="col-md-6 text-right">
+									<%= form.check_box :bid_updated, value: :bid_updated %>
+								</div>	
+							</div>
 
-								<div class="row">
-										<div class="col-md-6">
-											<p class="lead">
-												<%= form.label :job_deleted %>
-											</p>
-										</div>
-										<div class="col-md-6 text-right">
-											<%= form.check_box :job_deleted, value: :job_deleted %>
-										</div>	
+							<div class="row">
+								<div class="col-md-6">
+									<p class="lead">
+										<%= form.label :job_created %>
+									</p>
 								</div>
+								<div class="col-md-6 text-right">
+									<%= form.check_box :job_created, value: :job_created %>
+								</div>
+							</div>
 
-								<div class="row">
-										<div class="col-md-6">
-											<p class="lead">
-												<%= form.label :review_posted %>
-											</p>
-										</div>
-										<div class="col-md-6 text-right">
-											<%= form.check_box :review_posted, value: :review_posted %>
-										</div>	
+							<div class="row">
+								<div class="col-md-6">
+									<p class="lead">
+										<%= form.label :job_edited %>
+									</p>
 								</div>
+								<div class="col-md-6 text-right">
+									<%= form.check_box :job_edited, value: :job_edited %>
+								</div>	
+							</div>
 
-								<div class="row">
-										<div class="col-md-6">
-											<p class="lead">
-												<%= form.label :review_edited %>
-											</p>
-										</div>
-										<div class="col-md-6 text-right">
-											<%= form.check_box :review_edited, value: :review_edited %>
-										</div>	
+							<div class="row">
+								<div class="col-md-6">
+									<p class="lead">
+										<%= form.label :job_deleted %>
+									</p>
 								</div>
+								<div class="col-md-6 text-right">
+									<%= form.check_box :job_deleted, value: :job_deleted %>
+								</div>	
+							</div>
+
+							<div class="row">
+								<div class="col-md-6">
+									<p class="lead">
+										<%= form.label :review_posted %>
+									</p>
+								</div>
+								<div class="col-md-6 text-right">
+									<%= form.check_box :review_posted, value: :review_posted %>
+								</div>	
+							</div>
+
+							<div class="row">
+								<div class="col-md-6">
+									<p class="lead">
+										<%= form.label :review_edited %>
+									</p>
+								</div>
+								<div class="col-md-6 text-right">
+									<%= form.check_box :review_edited, value: :review_edited %>
+								</div>	
+							</div>
 							<% end %>
 							<div class="actions">
 								<input class="btn btn-primary btn-block" type="submit" name="commit" value="Update" data-disable-with="Update">
 							</div>
-						<% end %>
+							<% end %>
+						</div>
 					</div>
 				</div>
-			</div>
-      <%= render 'layouts/footer' %>
-			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    </body>
-</html>
+				<%= render 'layouts/footer' %>
+				<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+				<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+			</body>
+			</html>

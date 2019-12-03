@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   end
 
   resources :reports do
+    get '*path' => redirect('/error')
     patch 'resolve'
     patch 'unresolve'
   end
@@ -48,5 +49,8 @@ Rails.application.routes.draw do
 
 
   root :to => 'passthrough#index'
+  get '/404' => redirect('/error')
+  get '/422' => redirect('/error')
+  get '/500' => redirect('/error')
   get '*path' => redirect('/error')
 end
