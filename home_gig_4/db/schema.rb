@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_123813) do
   create_table "bids", force: :cascade do |t|
     t.string "description"
     t.float "amount"
-    t.integer "job_id", null: false
+    t.bigint "job_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_123813) do
   create_table "reviews", force: :cascade do |t|
     t.string "text"
     t.integer "rating"
-    t.integer "job_id", null: false
+    t.bigint "job_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
