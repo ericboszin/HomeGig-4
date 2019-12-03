@@ -495,8 +495,25 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-check mb-3">
+              <input class="form-check-input" type="checkbox" value="" id="tos">
+              <label class="form-check-label" for="tos">I agree to HomeGig's <%= link_to "Terms of Services", tos_path, target: :_blank %></label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-check mb-3">
+              <input class="form-check-input" type="checkbox" value="" id="priv">
+              <label class="form-check-label" for="priv">I agree to HomeGig's <%= link_to "Privacy Policy", privacy_path, target: :_blank %></label>
+            </div>
+          </div>
+        </div>
+
         <div class="actions">
-          <input class="btn btn-primary btn-block" type="submit" name="commit" value="Sign up" data-disable-with="Sign up">
+          <input class="btn btn-primary btn-block" type="submit" name="commit" value="Sign up" data-disable-with="Sign up" onclick="validate()">
         </div>
       <% end %>
 
@@ -518,6 +535,17 @@
             }
         });
     });
+    function validate() {
+        var tos = document.getElementById("tos");
+        var priv = document.getElementById("priv");
+        if (!tos.checked && !priv.checked) {
+            alert("You neeed to agree with both the Terms of Services and the Privacy Policy to continue.");
+        } else if (!tos.checked) {
+            alert("You need to agree with the Terms of Services to continue.");
+        } else if (!priv.checked) {
+            alert("You need to agree with the Privacy Policy to continue.");
+        }
+    }
 </script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -29,24 +29,32 @@ Rails.application.routes.draw do
       patch 'accept'
       delete 'reject'
       patch 'revert_bid'
+      get '*path' => redirect('/error')
     end
     patch 'complete_job'
     patch 'accept_bids'
     patch 'cancel_job'
+    get '*path' => redirect('/error')
     get 'cost'
     resources :reviews
   end
 
   resources :reports do
+    get '*path' => redirect('/error')
     patch 'resolve'
     patch 'unresolve'
   end
   
-  resources :settings
+  resources :settings do
+    get '*path' => redirect('/error')
+  end
   resources :billing, :only => [:new, :create]
   post 'charge', to: 'billing#create', as: :charge
 
 
   root :to => 'passthrough#index'
+  get '/404' => redirect('/error')
+  get '/422' => redirect('/error')
+  get '/500' => redirect('/error')
   get '*path' => redirect('/error')
 end

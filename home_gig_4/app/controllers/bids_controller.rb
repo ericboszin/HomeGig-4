@@ -162,6 +162,7 @@ class BidsController < ApplicationController
 
   def get_job
     @job = Job.find(params[:job_id])
+
   end
 
   def job_owner
