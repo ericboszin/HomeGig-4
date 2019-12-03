@@ -35,15 +35,14 @@ class BillingController < ApplicationController
                     })
                     @user.stripe_user_id = customer.id
                     @user.save
-                  else
-                    token = params[:stripeToken]
-                    charge = Stripe::Charge.create({
-                      amount: (_bid.amount.to_i)*100,
-                      currency: 'usd',
-                      description: 'Example charge',
-                      source: token,
-                    })
                   end
+                  token = params[:stripeToken]
+                  charge = Stripe::Charge.create({
+                    amount: (_bid.amount.to_i)*100,
+                    currency: 'usd',
+                    description: 'Example charge',
+                    source: token,
+                  })
                 else
                   charge = Stripe::Charge.create({
                     amount: (_bid.amount.to_i)*100,
@@ -51,6 +50,15 @@ class BillingController < ApplicationController
                     customer: @user.stripe_user_id,
                   })
                 end
+
+                # Pay to bidder half of the bid
+                Stripe::Transfer.create({
+                  amount: ((((_bid.amount.to_i)*100) * 0.90) / 2).to_i,
+                  currency: 'cad',
+                  destination: 'acct_1Fl6NwFrf7aauqSp',
+                  source_transaction: charge.id,
+                  transfer_group: @job.title,
+                })
 
 
                 @bidder = User.find(_bid.user_id)
