@@ -29,12 +29,10 @@ Rails.application.routes.draw do
       patch 'accept'
       delete 'reject'
       patch 'revert_bid'
-      get '*path' => redirect('/error')
     end
     patch 'complete_job'
     patch 'accept_bids'
     patch 'cancel_job'
-    get '*path' => redirect('/error')
     get 'cost'
     resources :reviews
   end
