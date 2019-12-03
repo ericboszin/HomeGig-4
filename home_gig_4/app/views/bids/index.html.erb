@@ -161,24 +161,33 @@
         </div>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-md-4 mb-3"></div>
-      <div class="col-md-2 mb-3">
-        <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#exampleModal" id="modal-button">
-          Confirm Bids
-        </button>
+    
+    <% if @job.bids.present? %>
+      <div class="row">
+        <div class="col-md-4 mb-3"></div>
+        <div class="col-md-2 mb-3">
+          <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#exampleModal" id="modal-button">
+            Confirm Bids
+          </button>
+        </div>
+        <div class="col-md-2 mb-3">
+          <%= button_to 'Back', job_path(@job), :method => :get, class: "btn btn-block btn-primary" %>
+        </div>
       </div>
-      <div class="col-md-2 mb-3">
-        <%= button_to 'Back', job_path(@job), :method => :get, class: "btn btn-block btn-dark" %>
+    <% else %>
+      <div class="row">
+        <div class="col-md-5 mb-3"></div>
+        <div class="col-md-2 mb-3">
+          <%= button_to 'Back', job_path(@job), :method => :get, class: "btn btn-block btn-primary" %>
+        </div>
       </div>
-    </div>
+    <% end %>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content stripe-body">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Pay with Stripe</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Checkout</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -186,6 +195,7 @@
 
           <div class="modal-body">
             <form action="/charge" method="post" id="payment-form" class="stripe-form">
+              <% if current_user.stripe_user_id.nil? %>
               <div>
                   <label for="card-element">
                       Credit or debit card
@@ -197,9 +207,10 @@
               </div>
               <!-- Default unchecked -->
               <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="defaultChecked2">
+                <input type="checkbox" class="custom-control-input" id="defaultChecked2" value=false>
                 <label class="custom-control-label" for="defaultChecked2">Save Payment Method</label>
               </div>
+              <% end %>
               <button id="basic-photo-button" class="stripe-button">
                   Pay $<span id="payment-total"><%= $5%></span>
               </button>
@@ -215,48 +226,66 @@
 
     var elements = stripe.elements();
 
-    var style = {
-        base: {
-            color: '#32325d',
-            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-            fontSmoothing: 'antialiased',
-            fontSize: '16px',
-            '::placeholder': {
-            color: '#aab7c4'
-            }
-        },
-        invalid: {
-            color: '#fa755a',
-            iconColor: '#fa755a'
-        }
-    };
+    <% if current_user.stripe_user_id.nil? %>
+      var style = {
+          base: {
+              color: '#32325d',
+              fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+              fontSmoothing: 'antialiased',
+              fontSize: '16px',
+              '::placeholder': {
+              color: '#aab7c4'
+              }
+          },
+          invalid: {
+              color: '#fa755a',
+              iconColor: '#fa755a'
+          }
+      };
 
-    var card = elements.create('card', {style: style});
+      var card = elements.create('card', {style: style});
 
-    card.mount('#card-element');
-
-    card.addEventListener('change', function(event) {
+      card.mount('#card-element');
+      card.addEventListener('change', function(event) {
         var displayError = document.getElementById('card-errors');
         if (event.error) {
             displayError.textContent = event.error.message;
         } else {
             displayError.textContent = '';
         }
-    });
+      });
+    <% end %>
+
+
 
     var form = document.getElementById('payment-form');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        stripe.createToken(card).then(function(result) {
-            if (result.error) {
-                var errorElement = document.getElementById('card-errors');
-                errorElement.textContent = result.error.message;
-            } else {
-                stripeTokenHandler(result.token);
-            }
-        });
+        <% if current_user.stripe_user_id.nil? %>
+          stripe.createToken(card).then(function(result) {
+              if (result.error) {
+                  var errorElement = document.getElementById('card-errors');
+                  errorElement.textContent = result.error.message;
+              } else {
+                  stripeTokenHandler(result.token);
+              }
+          });
+        <% else %>
+          console.log("herllo woorld")
+          stripeSavedPaymentHandler();
+        <% end %>
     });
+
+    function stripeSavedPaymentHandler() {
+      var form = document.getElementById('payment-form');
+      var hiddenJobId = document.createElement('input');
+      hiddenJobId.setAttribute('type', 'hidden');
+      hiddenJobId.setAttribute('name', 'jobId');
+      hiddenJobId.setAttribute('value', <%= @job.id %>);
+      form.appendChild(hiddenJobId);
+      form.submit();
+    }
 
     function stripeTokenHandler(token) {
         var form = document.getElementById('payment-form');
@@ -270,6 +299,12 @@
         hiddenJobId.setAttribute('name', 'jobId');
         hiddenJobId.setAttribute('value', <%= @job.id %>);
         form.appendChild(hiddenJobId);
+        var hiddenSavePayment = document.createElement('input');
+        var savePaymentBool = document.getElementById('defaultChecked2').checked;
+        hiddenSavePayment.setAttribute('type', 'hidden');
+        hiddenSavePayment.setAttribute('name', 'savePaymentMethod');
+        hiddenSavePayment.setAttribute('value', savePaymentBool);
+        form.appendChild(hiddenSavePayment);
 
         form.submit();
     }

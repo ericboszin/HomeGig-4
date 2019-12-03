@@ -38,7 +38,6 @@ Rails.application.routes.draw do
   end
 
   resources :reports do
-    get '*path' => redirect('/error')
     patch 'resolve'
     patch 'unresolve'
   end

@@ -14,7 +14,7 @@ class BillingController < ApplicationController
         @job = Job.find(params[:jobId])
         @user = User.find(@job.user_id)
         Stripe.api_key =  "sk_test_cwl4g4GFYZaZ9dtfQ7BLWQyb00x6deRBFY"
-        token = params[:stripeToken]
+
         if @job.status == "cancelled" || @job.status == "completed"
           flash[:warning] = "Error: Cannot accept bids on a completed or cancelled job"
           redirect_to job_path(@job)
@@ -25,12 +25,47 @@ class BillingController < ApplicationController
               if (_bid.selected == 1) #Bid was selected
                 selected_bids = true
 
-                charge = Stripe::Charge.create({
-                  amount: (_bid.amount.to_i)*100,
-                  currency: 'usd',
-                  description: 'Example charge',
-                  source: token,
-                })
+                if @user.stripe_user_id.nil?
+                  if params[:savePaymentMethod]
+                    # Create a Customer:
+                    token = params[:stripeToken]
+                    customer = Stripe::Customer.create({
+                      source: token,
+                      email: @user.email,
+                    })
+                    @user.stripe_user_id = customer.id
+                    @user.save
+                  end
+                  token = params[:stripeToken]
+                  charge = Stripe::Charge.create({
+                    amount: (_bid.amount.to_i)*100,
+                    currency: 'usd',
+                    description: 'Example charge',
+                    source: token,
+                  })
+                else
+                  charge = Stripe::Charge.create({
+                    amount: (_bid.amount.to_i)*100,
+                    currency: 'usd',
+                    customer: @user.stripe_user_id,
+                  })
+                end
+
+                # store charge_id into bids, for future payment of other half
+                if charge.id
+                  # Pay to bidder half of the bid amount
+                  Stripe::Transfer.create({
+                    amount: ((((_bid.amount.to_i)*100) * 0.90) / 2).to_i,
+                    currency: 'cad',
+                    destination: 'acct_1Fl6NwFrf7aauqSp',
+                    source_transaction: charge.id,
+                    transfer_group: @job.title,
+                  })
+                  @bid = Bid.find(_bid.id)
+                  @bid.stripe_charge_id = charge.id
+                  @bid.save
+                end
+
 
                 @bidder = User.find(_bid.user_id)
                 if @bidder.setting.job_started

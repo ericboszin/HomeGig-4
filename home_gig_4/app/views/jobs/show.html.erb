@@ -165,19 +165,14 @@
               </p>
             <% end %>
           <% end %>
-<div class="row">
-              <div class="col-md-3 mb-3"></div>
-              <div class="col-md-6 mb-3">
-                <% if current_user == job_owner && (@job.status == 'available' || @job.status == 'started')%>
-        
-
-              <p> <%= button_to 'Edit Job', edit_job_path(@job), class: "btn btn-block btn-primary", :method => :get %></p>
-            
-                  
-      <% end %>
-
-              </div>
+          <% if current_user == job_owner && (@job.status == 'available' || @job.status == 'started')%>
+            <div class="row">
+                <div class="col-md-3 mb-3"></div>
+                <div class="col-md-6 mb-3">
+                  <%= button_to 'Edit Job', edit_job_path(@job), class: "btn btn-block btn-primary", :method => :get %>
+                </div>
             </div>
+          <% end %>
           <div class="row">
             <div class="col-md-3 mb-3"></div>
             <div class="col-md-6 mb-3">

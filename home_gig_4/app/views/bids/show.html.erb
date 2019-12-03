@@ -16,66 +16,81 @@
   <link rel="stylesheet" href="">
 </head>
 <body>
-<%= render "layouts/nav" %>
-<div class="container">
   <!--[if lt IE 7]>
   <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a>
     to improve your experience.</p>
   <![endif]-->
-  <div class="text-center mb-4">
-    <%= render 'layouts/alerts' %>
-    <h1 class="h3 mb-3 font-weight-normal">List of All Bids</h1>
-  </div>
+  <%= render "layouts/nav" %>
+  <div class="container">
+    <div class="text-center mb-4">
+      <%= render 'layouts/alerts' %>
+      <h1 class="h3 mb-3 font-weight-normal">Bid</h1>
+    </div>
+    
 
-  <div class="row">
-    <div class="col-md-3 mb-3"></div>
-    <div class="col-md-6 mb-3">
-      <p><strong>Description: </strong><%= @bid.description %></p>
-    </div>
-  </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8 justify-content-centre">
 
-  <div class="row">
-    <div class="col-md-3 mb-3"></div>
-    <div class="col-md-6 mb-3">
-      <p><strong>Bid Amount: </strong>$<%= @bid.amount %></p>
-    </div>
-  </div>
+        <div class="row">
+          <div class="col-md-2 mb-4">
+            <h5 class="h5 mb-3 font-weight-normal">Description</h5>
+          </div>
+          <div class="col-md-10 justify-content-centre">
+            <p class="lead">
+              <%= @bid.description %>
+            </p>
+          </div>
+        </div>
 
-  <div class="row">
-    <div class="col-md-3 mb-3"></div>
-    <div class="col-md-6 mb-3">
-      <p class="text-capitalize"><strong>Starting Date: </strong><%= @bid.starting_date %></p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-3 mb-3"></div>
-    <div class="col-md-6 mb-3">
-      <p class="text-capitalize"><strong>Duration: </strong><%= @bid.duration %> days</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4 mb-3"></div>
-    <% if current_user == User.find(@bid.user_id) %>
-      <div class="col-md-2 mb-3">
-        <%= button_to 'Delete Bid', [@bid.job, @bid],
-                      method: :delete,
-                      data: {confirm: 'Are you sure?'},  class: "btn btn-block btn-danger" %>
+        <div class="row">
+          <div class="col-md-2 mb-4">
+            <h5 class="h5 mb-3 font-weight-normal">Bid amount</h5>
+          </div>
+          <div class="col-md-10 justify-content-centre">
+            <p class="lead">
+              <%= number_to_currency(@bid.amount) %>
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2 mb-4">
+            <h5 class="h5 mb-3 font-weight-normal">Starting date</h5>
+          </div>
+          <div class="col-md-10 justify-content-centre">
+            <p class="lead">
+              <%= @bid.starting_date.to_date %>
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2 mb-4">
+            <h5 class="h5 mb-3 font-weight-normal">Duration</h5>
+          </div>
+          <div class="col-md-10 justify-content-centre">
+            <p class="lead">
+              <%= @bid.duration %>
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-3"></div>
+            <div class="col-md-4 mb-3">
+              <%= button_to 'Back', home_worker_path, :method => :get, class: "btn btn-block btn-primary" %>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-md-2 mb-3">
-    <% else %>
-      <div class="col-md-4 mb-3">
-    <% end %>
-    <%= button_to 'Back', job_path(@job), :method => :get, class: "btn btn-block btn-dark" %>
     </div>
-    </div>
-
   </div>
-</div>
-<%= render 'layouts/footer' %>
+  <%= render 'layouts/footer' %>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
 </html>

@@ -124,6 +124,19 @@ class JobsController < ApplicationController
         @job.bids.each do |_bid|
           if (_bid.selected == 1) #Bid was selected
             @bidder = User.find(_bid.user_id)
+
+            # pay pending half of the bid amount
+            # Pay to bidder half of the bid
+            if _bid.stripe_charge_id
+              Stripe::Transfer.create({
+                amount: ((((_bid.amount.to_i)*100) * 0.90) / 2).to_i,
+                currency: 'cad',
+                destination: 'acct_1Fl6NwFrf7aauqSp',
+                source_transaction: _bid.stripe_charge_id,
+                transfer_group: @job.title,
+              })
+            end
+
             if @bidder.setting.job_completed
               UserMailer.with(user: User.find(@job.user_id), job: @job, bidder: @bidder).job_completed_email.deliver_now
             end
