@@ -54,14 +54,14 @@
                 <% @bids.each do |bid| %>
                   <tr>
                     <td style="cursor: pointer;" onclick="location.href='<%=job_path(bid.job)%>'"><%= bid.job.title %></td>
-                    <td><%= number_to_currency(bid.amount) %></td>
-                    <td><%= bid.starting_date.to_date %></td>
+                    <td style="cursor: pointer;" onclick="location.href='<%=job_bid_path(bid.job, bid)%>'"><%= number_to_currency(bid.amount) %></td>
+                    <td style="cursor: pointer;" onclick="location.href='<%=job_bid_path(bid.job, bid)%>'"><%= bid.starting_date.to_date %></td>
                     <% if bid.selected > 0 %>
-                      <td>Yes</td>
+                      <td style="cursor: pointer;" onclick="location.href='<%=job_bid_path(bid.job, bid)%>'">Yes</td>
                     <% else %>
-                      <td>No</td>
+                      <td style="cursor: pointer;" onclick="location.href='<%=job_bid_path(bid.job, bid)%>'">No</td>
                     <% end %>
-                    <td><%= bid.job.status.capitalize %></td>
+                    <td style="cursor: pointer;" onclick="location.href='<%=job_bid_path(bid.job, bid)%>'"><%= bid.job.status.capitalize %></td>
                     <td><%= link_to edit_job_bid_path(bid.job, bid) do %>
                         <i class="fas fa-cog"></i>
                       <% end %>
