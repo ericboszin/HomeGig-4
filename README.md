@@ -61,16 +61,17 @@ Project Repository for ECE444F Software Engineering
   ### Payments:
   
   ### Emails/Notifications:
-  Users will receive confirmation emails for sign up and password reset.
-  Owners can receive emails when:
+  Users will receive confirmation emails for sign up and password reset.  
+  Owners can receive emails when:  
    * they have created a job.
    * they have edited a job.
    * they have deleted a job.
    * their job has received a bid.
    * a bid of their job has been updated.
    * they have posted a review of a worker.
-   * they have edited a review of a worker. 
-  Workers can receive emails when:
+   * they have edited a review of a worker.  
+  
+  Workers can receive emails when:  
    * their bid has been accepted or reverted.
    * a job they bid for has been started, completed or cancelled.
    * they have received a review from a job owner.
