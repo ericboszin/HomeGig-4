@@ -67,9 +67,17 @@
             <%= form.submit class: "btn btn-block btn-primary" %>
           </div>
         <% end %>
-      <% else %>
+      <% elsif @job.status == 'started' %>
         <div class="row flex">
           <h3 class="display-4 mx-auto">Job has already started!</h3>
+        </div>
+      <% elsif @job.status == 'completed' %>
+        <div class="row flex">
+          <h3 class="display-4 mx-auto">Job has already been completed!</h3>
+        </div>
+      <% else %>
+        <div class="row flex">
+          <h3 class="display-4 mx-auto">Job has been deleted!</h3>
         </div>
       <% end %>
       <br>
