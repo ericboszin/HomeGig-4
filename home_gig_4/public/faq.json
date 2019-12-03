@@ -37,7 +37,7 @@
   {
     "id": "Nine",
     "question": "What happens if payment is not processed?",
-    "answer": "The job remains available till the funds are processed."
+    "answer": "The job remains available untill the funds are processed."
   },
   {
     "id": "Ten",
