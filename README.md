@@ -1,6 +1,8 @@
 # HomeGig-4
 Project Repository for ECE444F Software Engineering 
 
+Website is live [here](https://home-gig-4.herokuapp.com)
+
 ## Components:
 
   ### Users:
