@@ -3,6 +3,12 @@ Project Repository for ECE444F Software Engineering
 
 Website is live [here](https://home-gig-4.herokuapp.com)
 
+We leverages Trello boards for our tasks. We set deadlines for deliverables and assinged group memebrs to particular tasks.
+
+Communication was done via Slack: we had a channel for frontend, backend, and general.
+
+Overall we were successfuly in deploying our application, and hope you will find its features and appearance impressive!
+
 ## Components:
 
   ### Users:
